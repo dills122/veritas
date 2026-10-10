@@ -1,6 +1,13 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { mkdtemp, mkdir, realpath, rm, writeFile } from 'node:fs/promises';
+import {
+  mkdtemp,
+  mkdir,
+  realpath,
+  rm,
+  stat,
+  writeFile,
+} from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { afterEach, expect, it } from 'vitest';
@@ -146,4 +153,47 @@ it('tells users to update after editing locked configuration', async () => {
   const result = await human(project, 'plan');
   expect(result.code).toBe(2);
   expect(result.stderr).toContain('veritas update');
+});
+
+it('leaves no runtime directories behind after a failed init', async () => {
+  const base = await root(),
+    project = join(base, 'project');
+  await mkdir(project);
+  const result = await human(
+    project,
+    'init',
+    '--source',
+    '../missing',
+    '--profile',
+    'company/baseline',
+    '--targets',
+    'codex',
+  );
+  expect(result.code).toBe(4);
+  await expect(stat(join(project, '.veritas'))).rejects.toMatchObject({
+    code: 'ENOENT',
+  });
+});
+
+it('does not call manifest-owned files unmanaged when re-initializing', async () => {
+  const base = await root(),
+    lib = await library(base),
+    project = join(base, 'project');
+  await mkdir(project);
+  const args = [
+    '--source',
+    lib,
+    '--profile',
+    'company/baseline',
+    '--targets',
+    'codex',
+  ];
+  expect((await human(project, 'init', ...args)).code).toBe(0);
+  expect((await human(project, 'sync')).code).toBe(0);
+  await rm(join(project, 'veritas.yaml'));
+  await rm(join(project, 'veritas.lock.json'));
+  const again = await human(project, 'init', ...args);
+  expect(again.code).toBe(0);
+  expect(again.stderr).not.toContain('GUIDANCE_UNMANAGED');
+  expect((await human(project, 'check')).code).toBe(0);
 });

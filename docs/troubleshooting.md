@@ -7,7 +7,7 @@ error OUTPUT_CONFLICT AGENTS.md: Existing output is unmanaged; ...
   Copy wanted content into your library or local additions, then ...
 ```
 
-Find the code below. Exit codes: `0` success, `1` `check` found drift, `2` invalid input or configuration, `3` conflict, `4` operational failure, `5` busy or incomplete transaction. Add `--json` for machine-readable diagnostics. Veritas never writes anything when a command fails, except an interrupted write that `veritas recover` can finish or roll back.
+Find the code below. Exit codes: `0` success, `1` `check` found drift, `2` invalid input or configuration, `3` conflict, `4` operational failure, `5` busy or incomplete transaction. Add `--json` for machine-readable diagnostics. New to the terms (library, profile, manifest)? See the [glossary](glossary.md). Veritas never writes anything when a command fails, except an interrupted write that `veritas recover` can finish or roll back.
 
 **Safety model in one paragraph.** Veritas only changes files it can prove it generated. If a path already exists and Veritas did not create it, or it was edited after Veritas created it, Veritas stops and tells you. There is deliberately no `--force`. The fix is always to move the content you care about into your library (or local additions) so Veritas generates it, then let Veritas own the path.
 
@@ -139,7 +139,7 @@ Another Veritas process is writing, or a previous run was killed mid-write. Firs
 veritas recover
 ```
 
-Recovery validates every affected file and either finishes or rolls back the write. If recovery refuses because a file changed externally, resolve that file first; do not delete `.veritas/manifest.json` or the journal. A lock that remains after recovery needs manual owner investigation; see [recover interrupted writes](user-guide.md#recover-interrupted-writes).
+Recovery validates every affected file and either finishes or rolls back the write. If recovery refuses because a file changed externally, resolve that file first; do not delete the ownership manifest (`.veritas/manifest.json`) or the journal. A lock that remains after recovery needs manual owner investigation; see [recover interrupted writes](user-guide.md#recover-interrupted-writes).
 
 ## Using Veritas in CI
 
@@ -147,7 +147,7 @@ Recovery validates every affected file and either finishes or rolls back the wri
 veritas check --project .
 ```
 
-Exit `0` means generated files match the lock and manifest. Exit `1` means drift: run `veritas sync` locally and commit the result. Exit `3` means someone hand-edited a generated file. `check` never fetches or changes pins.
+Exit `0` means generated files match the lock and ownership manifest. Exit `1` means drift: run `veritas sync` locally and commit the result. Exit `3` means someone hand-edited a generated file. `check` never fetches or changes pins.
 
 A fresh CI checkout has no cache, so restore it first:
 

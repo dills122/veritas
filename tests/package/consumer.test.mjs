@@ -41,6 +41,7 @@ test('installed guides and examples have reachable relative documentation links'
     'docs/user-guide.md',
     'docs/compatibility.md',
     'docs/troubleshooting.md',
+    'docs/glossary.md',
     'examples/README.md',
   ]) {
     const document = join(packageRoot, path);

@@ -1,11 +1,12 @@
 import { execFile } from 'node:child_process';
+import { rmdir } from 'node:fs/promises';
 import { promisify } from 'node:util';
 import { Command, CommanderError } from 'commander';
 import { relative, resolve, sep } from 'node:path';
 import { stringify } from 'yaml';
 import { VERSION } from '../index.js';
 import { parseProjectConfig } from '../config/parse.js';
-import { gitLocatorProblem } from '../config/schemas.js';
+import { gitLocatorProblem, manifestSchema } from '../config/schemas.js';
 import { error, sortDiagnostics, VeritasError } from '../diagnostics/index.js';
 import { canonicalJson, sha256 } from '../model/hash.js';
 import type {
@@ -19,7 +20,7 @@ import { apply } from '../sync/apply.js';
 import { writeControls } from '../sync/control.js';
 import { acquireLock, assertNoIncompleteTransaction } from '../sync/lock.js';
 import type { LockLease } from '../sync/lock.js';
-import { observe } from '../sync/observe.js';
+import { observe, readObservedFile } from '../sync/observe.js';
 import { inventoryGuidance, plan } from '../sync/plan.js';
 import { recover } from '../sync/recover.js';
 import {
@@ -131,6 +132,31 @@ async function runtimeIgnoreWarnings(project: string): Promise<Diagnostic[]> {
     ];
   }
 }
+/** Paths an existing valid manifest already owns; unreadable or corrupt manifests own nothing. */
+async function manifestOwnedPaths(project: string): Promise<Set<string>> {
+  try {
+    const read = await readObservedFile(project, '.veritas/manifest.json');
+    if (read.state.kind !== 'file' || !read.bytes) return new Set();
+    const parsed = manifestSchema.safeParse(
+      JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(read.bytes)),
+    );
+    return parsed.success
+      ? new Set(parsed.data.artifacts.map((artifact) => artifact.path))
+      : new Set();
+  } catch {
+    return new Set();
+  }
+}
+/** A failed init must not leave empty runtime directories; non-recursive so real state is never removed. */
+async function removeEmptyRuntime(project: string): Promise<void> {
+  for (const path of ['.veritas/runtime', '.veritas']) {
+    try {
+      await rmdir(resolve(project, path));
+    } catch {
+      return;
+    }
+  }
+}
 async function initialize(
   project: string,
   options: Options,
@@ -195,16 +221,20 @@ async function initialize(
     compiled = await compileSnapshot(project, config, resolved.snapshot);
   const lock = makeLock(config, resolved.snapshot, resolved.resolvedCommit);
   const preview = await plan(project, compiled);
-  const guidance = (await inventoryGuidance(project, new Set(), compiled)).map(
-    (diagnostic) => ({
-      ...diagnostic,
-      outputCollision: preview.operations.some(
-        (operation) =>
-          operation.kind === 'conflict' &&
-          operation.path === diagnostic.source?.path,
-      ),
-    }),
-  );
+  const guidance = (
+    await inventoryGuidance(
+      project,
+      await manifestOwnedPaths(project),
+      compiled,
+    )
+  ).map((diagnostic) => ({
+    ...diagnostic,
+    outputCollision: preview.operations.some(
+      (operation) =>
+        operation.kind === 'conflict' &&
+        operation.path === diagnostic.source?.path,
+    ),
+  }));
   await storeSnapshot(project, resolved.snapshot);
   const ignoreWarnings = await runtimeIgnoreWarnings(project);
   await writeControls(
@@ -339,13 +369,18 @@ async function execute(
   if (command === 'init' || command === 'update') {
     await assertNoIncompleteTransaction(project);
     const lease = await acquireLock(project);
+    let failed = false;
     try {
       await assertNoIncompleteTransaction(project, lease);
       return command === 'init'
         ? await initialize(project, options, lease)
         : await update(project, options, lease);
+    } catch (cause) {
+      failed = true;
+      throw cause;
     } finally {
       await lease.release();
+      if (failed && command === 'init') await removeEmptyRuntime(project);
     }
   }
   if (command === 'recover') {

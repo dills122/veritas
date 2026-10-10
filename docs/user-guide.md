@@ -1,6 +1,6 @@
 # Veritas user guide
 
-Hitting an error? See the [troubleshooting guide](troubleshooting.md) for every diagnostic code and its fix.
+Unfamiliar term? See the [glossary](glossary.md). Hitting an error? See the [troubleshooting guide](troubleshooting.md) for every diagnostic code and its fix.
 
 Veritas compiles a complete output set before planning writes. This guide describes `0.1.0-rc.0`. The original locally packed CLI walkthrough passed on macOS with Node 24; [TASK-015 evidence](https://github.com/dills122/veritas/blob/v0.1.0-rc.0/docs/evidence/TASK-015.md) records its commands, outcomes and limits.
 
@@ -155,11 +155,11 @@ Restore verifies the existing digest and leaves lock bytes unchanged. Local rest
 
 ## Preserve ownership and migrate existing content
 
-`.veritas/manifest.json` records generated paths, hashes, executable intent, source identities and consumers. Matching a valid recorded state permits replacement/deletion; edited managed files conflict. Identical unmanaged bytes still conflict.
+The ownership manifest, `.veritas/manifest.json`, records generated paths, hashes, executable intent, source identities and consumers. Matching a valid recorded state permits replacement/deletion; edited managed files conflict. Identical unmanaged bytes still conflict.
 
 The [troubleshooting guide](troubleshooting.md#output_conflict) walks through migrating an existing `AGENTS.md` or skill step by step. Preserve backups or version-controlled copies of existing guidance. Convert reviewed content into canonical upstream/local entries and retain complete skill support files. Inspect validation and desired content before removing or relocating colliding original paths. Then plan and sync into available paths. There is no force, implicit adoption, automatic migration or bulk-overwrite mode.
 
-Commit configuration, source lock, deterministic manifest, local additions and generated artifacts together. Exclude `.veritas/runtime/` from version control: cache, lock, stage and recovery state are machine-local. Extra unmanaged files inside skill directories are not removed as stale content.
+Commit configuration, source lock, deterministic ownership manifest, local additions and generated artifacts together. Exclude `.veritas/runtime/` from version control: cache, lock, stage and recovery state are machine-local. Extra unmanaged files inside skill directories are not removed as stale content.
 
 ## Recover interrupted writes
 
@@ -169,7 +169,7 @@ Mutators use an exclusive repository-local lock. Prepared transactions preserve 
 veritas recover --project /path/to/consumer
 ```
 
-Recovery validates all affected files before acting. A committed manifest or source lock and matching after-state allow cleanup; source initialization/update commit through the source lock. A consistent uncommitted transaction allows rollback of recorded before/after states. External edits, unsafe paths, corrupt journals or inconsistent controls block recovery and preserve evidence. Resolve the exact conflict; do not erase the manifest or journal to make the command appear clean.
+Recovery validates all affected files before acting. A committed ownership manifest or source lock and matching after-state allow cleanup; source initialization/update commit through the source lock. A consistent uncommitted transaction allows rollback of recorded before/after states. External edits, unsafe paths, corrupt journals or inconsistent controls block recovery and preserve evidence. Resolve the exact conflict; do not erase the manifest or journal to make the command appear clean.
 
 There is no `recover --unlock` or automatic stale-lock stealing in this candidate. A remaining lock requires manual owner investigation: preserve the exact lock, journal, stages and backups; establish the originating process identity and abandonment independently; recheck that the lock is unchanged before removing only that verified abandoned lock. Then run normal recovery. A PID or nonce alone cannot prove abandonment, and a missing PID check does not certify process identity or exclude PID reuse. Live, ambiguous or reused-PID ownership stays blocked. Do not recursively remove runtime state. [TASK-011 evidence](https://github.com/dills122/veritas/blob/v0.1.0-rc.0/docs/evidence/TASK-011.md) records injected-failure recovery and the unverified process-death/PID-reuse limits; this candidate provides no certified automatic abandonment procedure. Removing a lock does not authorize overriding file conflicts.
 
@@ -193,7 +193,7 @@ When sync refuses a conflicted plan, its result retains the original conflict di
 | Exit | Meaning                                                    |
 | ---- | ---------------------------------------------------------- |
 | 0    | Success; an ordinary changing plan also succeeds           |
-| 1    | Check found output/manifest drift                          |
+| 1    | Check found output/ownership-manifest drift                          |
 | 2    | Invalid content/configuration or unsupported compatibility |
 | 3    | Ownership conflict or unsafe path                          |
 | 4    | Source/cache/operational failure                           |

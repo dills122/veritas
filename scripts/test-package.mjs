@@ -46,6 +46,7 @@ try {
     'docs/user-guide.md',
     'docs/compatibility.md',
     'docs/troubleshooting.md',
+    'docs/glossary.md',
     'examples/README.md',
   ]);
   for (const path of [

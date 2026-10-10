@@ -27,7 +27,7 @@ your-library/                         your-repo/
 
 ## If something goes wrong
 
-Every error prints a stable code and, where possible, the fix. The [troubleshooting guide](docs/troubleshooting.md) explains each code, including how to bring an existing `AGENTS.md` or `CLAUDE.md` under Veritas management and how to run `check` in a fresh CI checkout (`veritas update --restore && veritas check`). Add `.veritas/runtime/` to `.gitignore`: it is machine-local cache and recovery state.
+Every error prints a stable code and, where possible, the fix. New to the terms? See the [glossary](docs/glossary.md). The [troubleshooting guide](docs/troubleshooting.md) explains each code, including how to bring an existing `AGENTS.md` or `CLAUDE.md` under Veritas management and how to run `check` in a fresh CI checkout (`veritas update --restore && veritas check`). Add `.veritas/runtime/` to `.gitignore`: it is machine-local cache and recovery state.
 
 ## Quick start
 
