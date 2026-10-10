@@ -1,0 +1,25 @@
+name: Bug report
+description: Report a reproducible CLI, compiler or synchronization failure.
+labels: [bug]
+body:
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Veritas version, Node/npm versions, OS, and harness version if relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Reproduction
+      description: Minimal configuration, source inputs and exact commands. Remove private paths and credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+      description: Include exit code and JSON diagnostics when possible.
+    validations:
+      required: true

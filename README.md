@@ -1,5 +1,7 @@
 # Veritas
 
+[![Verify](https://github.com/dills122/veritas/actions/workflows/ci.yml/badge.svg)](https://github.com/dills122/veritas/actions/workflows/ci.yml) [![Dependency audit](https://github.com/dills122/veritas/actions/workflows/security.yml/badge.svg)](https://github.com/dills122/veritas/actions/workflows/security.yml)
+
 Veritas compiles a reviewed library of steering and complete skills into repository guidance for Codex, Claude Code and Kiro. It pins upstream inputs, makes compatibility loss explicit, protects unmanaged or edited files, and supports reviewable plans and CI drift checks.
 
 The `0.1.0-rc.0` candidate follows the accepted [4–6-hour orchestration schedule](docs/orchestration-plan.md). Its locally packed CLI passed the documented workflow on macOS with Node 24, including pinned updates, cache restore, local additions and ownership protection. [Verification evidence](docs/evidence/TASK-015.md) records the checks and limits. No public npm installation or live harness certification is claimed.
@@ -37,4 +39,6 @@ python3 scripts/check-planning.py
 serena memories check
 ```
 
-The package is currently marked `UNLICENSED`; local packaging does not imply public distribution authorization.
+GitHub CI runs quality/unit checks, macOS and Linux integration/installed-package checks, the complete CLI examples and dependency audits. Candidate archives and checksums are retained as run artifacts. Dependabot proposes weekly dependency and pinned Action updates. See [repository setup](docs/github-setup.md) for release tagging and contribution checks.
+
+The package is currently marked `UNLICENSED`. This candidate is distributed through GitHub; no npm registry publication is configured.

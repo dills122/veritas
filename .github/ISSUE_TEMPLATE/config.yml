@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Usage and compatibility
+    url: https://github.com/dills122/veritas/blob/main/docs/user-guide.md
+    about: Read the workflow and compatibility limits before opening an issue.
+  - name: Private vulnerability report
+    url: https://github.com/dills122/veritas/security/advisories/new
+    about: Report security-sensitive details privately.

@@ -54,7 +54,7 @@ try {
   );
   await run(npm, [
     'install',
-    '--offline',
+    '--prefer-offline',
     '--ignore-scripts',
     '--no-audit',
     '--no-fund',
@@ -96,6 +96,10 @@ try {
   console.log(
     'Packed CLI, quiet core import, clean consumer and public declarations verified.',
   );
+  await run(process.execPath, [
+    join(root, 'examples/verify-cli.mjs'),
+    join(consumer, 'node_modules/.bin/veritas'),
+  ]);
 } finally {
   await rm(consumer, { recursive: true, force: true });
 }

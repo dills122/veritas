@@ -1,0 +1,17 @@
+name: Feature request
+description: Propose a bounded improvement with a concrete use case.
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem and use case
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed behavior and acceptance criteria
+      description: Describe the smallest useful change and how it would be verified.
+    validations:
+      required: true
