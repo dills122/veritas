@@ -123,7 +123,7 @@ targets: [claude, kiro-ide, kiro-cli]
 ---
 ```
 
-The id must match its declaration. Activation mode is `always`, `files`, `manual` or `auto`; files requires positive portable patterns. Optional targets explicitly restrict consumers. Auto uses the description for relevance. Native harness imports are not allowed in the body; ordinary Markdown links are references. Inline/fenced code can contain literal import examples.
+The id must match its declaration. Activation mode is `always`, `files`, `manual` or `auto`; files requires positive portable patterns. Brace groups such as `src/**/*.{ts,tsx}` are accepted and expanded into the equivalent plain patterns before compilation (at most 100 resulting patterns); negation, brackets and absolute paths are not supported. Optional targets explicitly restrict consumers. Auto uses the description for relevance. Native harness imports are not allowed in the body; ordinary Markdown links are references. Inline/fenced code can contain literal import examples.
 
 A skill directory matches its standard name and contains `SKILL.md` with name and description. Optional license, compatibility and string metadata are validated. All supporting files, binary assets, README/license content, executable intent and relative references travel with it. Veritas never runs companion scripts. Unknown metadata controls, advanced invocation/tool restrictions and native invocation sidecars fail explicitly in this candidate.
 

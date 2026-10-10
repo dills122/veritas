@@ -4,6 +4,7 @@ import { isMap, isSeq, parse, parseDocument, stringify } from 'yaml';
 import { identifierSchema, manifestSchema } from '../config/schemas.js';
 import { error } from '../diagnostics/index.js';
 import { PROFILES } from '../adapters/profiles/index.js';
+import { expandBraces } from '../model/paths.js';
 import { LIMITS, TARGET_IDS } from '../model/types.js';
 import type { Diagnostic } from '../model/types.js';
 import { parseLibrary } from '../parsing/library.js';
@@ -85,20 +86,6 @@ function splitTopLevel(text: string): string[] {
   }
   parts.push(current);
   return parts;
-}
-/** Veritas patterns have no braces; `*.{ts,tsx}` expands to the equivalent pair of patterns. */
-export function expandBraces(pattern: string): string[] {
-  const match = /\{([^{}]*)\}/u.exec(pattern);
-  if (!match) return [pattern];
-  return (match[1] ?? '')
-    .split(',')
-    .flatMap((alternative) =>
-      expandBraces(
-        pattern.slice(0, match.index) +
-          alternative +
-          pattern.slice(match.index + match[0].length),
-      ),
-    );
 }
 function patternList(value: unknown): string[] | undefined {
   const items = typeof value === 'string' ? splitTopLevel(value) : value;

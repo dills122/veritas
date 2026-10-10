@@ -141,6 +141,8 @@ Errors point at `file:line:column`. Common ones:
 | `YAML_INVALID`, `YAML_UNSUPPORTED` | Syntax error. Aliases, merge keys, custom tags and duplicate keys are not allowed. Fix the first reported error; later ones are often follow-ons. |
 | `PACKAGE_MISSING` | A declared skill directory has no `SKILL.md`, or the directory name does not match the declaration. |
 | `IDENTITY_MISMATCH` | Steering frontmatter `id` differs from its `veritas.library.yaml` declaration. |
+| `YAML_EMPTY` | The file exists but is empty. Restore it, or for a library manifest declare `schemaVersion: 1` with steering, skills and profiles. |
+| `LIBRARY_MANIFEST_MISSING` | The source root has no `veritas.library.yaml`. For Git sources the repository root is the library root; subdirectories cannot be sources. |
 | `PROFILE_UNKNOWN` | `--profile` names a profile the library does not declare. Use `namespace/profile` where the namespace is the source name in `veritas.yaml`. |
 | `NATIVE_IMPORT_UNSUPPORTED` | Steering contains a harness-native import such as `@file`. Use ordinary Markdown links, or put the text in a code block. |
 | `REFERENCE_MISSING`, `REFERENCE_UNSAFE` | A skill links to a file that does not exist or escapes the skill directory. |

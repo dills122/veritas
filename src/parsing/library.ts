@@ -73,7 +73,14 @@ export function parseLibrary(
   const manifestEntry = files.get('veritas.library.yaml');
   if (!manifestEntry)
     return failure([
-      error('LIBRARY_MANIFEST_MISSING', 'Snapshot has no veritas.library.yaml'),
+      {
+        ...error(
+          'LIBRARY_MANIFEST_MISSING',
+          'Snapshot has no veritas.library.yaml',
+        ),
+        remediation:
+          'The library root (the repository root for Git sources) must contain veritas.library.yaml; a subdirectory of a repository cannot be used as a source. Point --source at a directory that has it, or run `veritas init --scaffold` to create a starter library.',
+      },
     ]);
   const manifestText = decodeText(manifestEntry, {
     id: namespace,

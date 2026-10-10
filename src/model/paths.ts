@@ -102,3 +102,31 @@ export function matchPattern(pattern: string, path: string): boolean {
   }
   return match(0, 0);
 }
+
+const MAX_EXPANSION = 100;
+/**
+ * Expands `{a,b}` groups into the equivalent plain patterns. Unmatched braces,
+ * or an expansion above the pattern limit, return the input unchanged so
+ * validation rejects it; the cap also bounds work on hostile input.
+ */
+export function expandBraces(pattern: string): string[] {
+  const results: string[] = [];
+  function expand(text: string): boolean {
+    const match = /\{([^{}]*)\}/u.exec(text);
+    if (!match) {
+      results.push(text);
+      return results.length <= MAX_EXPANSION;
+    }
+    for (const alternative of (match[1] ?? '').split(','))
+      if (
+        !expand(
+          text.slice(0, match.index) +
+            alternative +
+            text.slice(match.index + match[0].length),
+        )
+      )
+        return false;
+    return true;
+  }
+  return expand(pattern) ? results : [pattern];
+}

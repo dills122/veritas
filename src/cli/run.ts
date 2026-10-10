@@ -150,13 +150,13 @@ async function runtimeIgnoreWarnings(project: string): Promise<Diagnostic[]> {
 }
 /** A failed init must not leave empty runtime directories; non-recursive so real state is never removed. */
 async function removeEmptyRuntime(project: string): Promise<void> {
-  for (const path of ['.veritas/runtime', '.veritas']) {
-    try {
-      await rmdir(resolve(project, path));
-    } catch {
-      return;
-    }
-  }
+  for (const path of [
+    '.veritas/runtime/git',
+    '.veritas/runtime/cache',
+    '.veritas/runtime',
+    '.veritas',
+  ])
+    await rmdir(resolve(project, path)).catch(() => undefined);
 }
 /** Diff from disk to generated content for replace and conflicting operations that have a readable file. */
 async function planDiffs(

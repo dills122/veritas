@@ -13,7 +13,7 @@ import {
 import { tmpdir } from 'node:os';
 import { join, resolve } from 'node:path';
 import { afterEach, expect, it } from 'vitest';
-import { expandBraces } from '../../../src/cli/adopt.js';
+import { expandBraces } from '../../../src/model/paths.js';
 const execute = promisify(execFile);
 const bin = resolve('dist/bin.js');
 const cleanups: string[] = [];
@@ -286,4 +286,54 @@ it('tells users how to recover from a held lock', async () => {
   const busy = await cli(root, 'sync');
   expect(busy.code).toBe(5);
   expect(busy.stderr).toContain('veritas recover');
+});
+
+it('accepts brace patterns in hand-written rules and caps hostile expansion', async () => {
+  const root = await scaffolded();
+  await write(
+    root,
+    '.veritas/library/steering/project-guidance.md',
+    '---\nid: project-guidance\ndescription: Braces\nactivation:\n  mode: files\n  patterns: ["src/**/*.{ts,tsx}"]\ntargets: [claude, kiro-ide]\n---\nTS only.\n',
+  );
+  expect((await cli(root, 'update')).code).toBe(0);
+  const plan = await cli(root, 'plan');
+  expect(plan.code).toBe(0);
+  const group = '{a,b}';
+  expect(expandBraces(group.repeat(40))).toEqual([group.repeat(40)]);
+  expect(expandBraces('{a,b}{c,d}')).toEqual(['ac', 'ad', 'bc', 'bd']);
+  await write(
+    root,
+    '.veritas/library/steering/project-guidance.md',
+    `---\nid: project-guidance\ndescription: Hostile\nactivation:\n  mode: files\n  patterns: ["${group.repeat(40)}"]\n---\nx\n`,
+  );
+  const hostile = await cli(root, 'update');
+  expect(hostile.code).toBe(2);
+  expect(hostile.stderr).toContain('Unsupported activation pattern');
+});
+
+it('explains an empty library manifest and a non-library Git root', async () => {
+  const root = await scaffolded();
+  await write(root, '.veritas/library/veritas.library.yaml', '');
+  const empty = await cli(root, 'update');
+  expect(empty.code).toBe(2);
+  expect(empty.stderr).toContain('YAML_EMPTY');
+  expect(empty.stderr).toContain('init --scaffold');
+  const missing = await project();
+  await mkdir(join(missing, 'lib'));
+  await mkdir(join(missing, 'p'));
+  const result = await cli(
+    join(missing, 'p'),
+    'init',
+    '--source',
+    '../lib',
+    '--profile',
+    'a/b',
+    '--targets',
+    'codex',
+  );
+  expect(result.stderr).toContain('LIBRARY_MANIFEST_MISSING');
+  expect(result.stderr).toContain('subdirectory of a repository');
+  await expect(stat(join(missing, 'p/.veritas'))).rejects.toMatchObject({
+    code: 'ENOENT',
+  });
 });
