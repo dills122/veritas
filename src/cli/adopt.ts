@@ -237,14 +237,18 @@ export async function adopt(
       'Edit that library directly, or add a project-local library.',
     );
 
-  const inputAbsolute = resolve(root, options.path);
+  // Like any CLI path argument, this is relative to the shell's directory, not the project root.
+  const inputAbsolute = resolve(options.path);
   const inputRel = relative(root, inputAbsolute).split(sep).join('/');
   if (
     !inputRel ||
     inputRel.startsWith('..') ||
     inputRel === '.git' ||
     inputRel.startsWith('.git/') ||
-    inputRel.startsWith('.veritas/runtime') ||
+    inputRel === '.veritas' ||
+    inputRel.startsWith('.veritas/') ||
+    inputRel === 'veritas.yaml' ||
+    inputRel === 'veritas.lock.json' ||
     inputRel === libraryRel ||
     inputRel.startsWith(`${libraryRel}/`)
   )
@@ -326,7 +330,9 @@ export async function adopt(
       throw fail(
         2,
         'ADOPT_ID_INVALID',
-        `'${id}' is not a valid id (lowercase letters, digits and single hyphens)`,
+        id
+          ? `'${id}' is not a valid id (lowercase letters, digits and single hyphens)`
+          : `Could not derive a name from ${inputRel}`,
         'Pass a valid name with --id.',
       );
     const heading = /^#\s+(.+)$/mu.exec(body)?.[1]?.trim();

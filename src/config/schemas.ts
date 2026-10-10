@@ -211,7 +211,7 @@ export const activationSchema = z.discriminatedUnion('mode', [
           .max(1024)
           .refine(
             (pattern) => !patternProblem(pattern),
-            'Unsupported activation pattern',
+            'Unsupported activation pattern: braces {a,b}, negation, brackets and absolute paths are not supported; list each pattern separately',
           ),
       )
       .min(1)

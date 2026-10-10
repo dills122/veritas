@@ -85,7 +85,7 @@ veritas adopt .claude/rules/testing.md
 veritas adopt .claude/skills/lint-fix          # a skill directory, with all supporting files
 ```
 
-The original is never modified. Adopt writes `steering/<id>.md` (or `skills/<name>/`) into the library, adds it to the manifest and the selected profile, and validates the result; if validation fails everything it wrote is rolled back.
+Paths are relative to your shell's directory, like any CLI argument. The original is never modified. Adopt writes `steering/<id>.md` (or `skills/<name>/`) into the library, adds it to the manifest and the selected profile, and validates the result; if validation fails everything it wrote is rolled back.
 
 - **Where it writes:** the `local` additions library if the project has one, otherwise the project-local source library (such as one created by `--scaffold`). It will not write to a Git source or a library outside the project.
 - **Names:** `--id <id>` overrides the derived name (`AGENTS.md` becomes `agents-guidance`). `--description <text>` overrides the description.

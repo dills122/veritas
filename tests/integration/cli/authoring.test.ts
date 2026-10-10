@@ -253,3 +253,37 @@ it('refuses to adopt generated, missing or colliding content', async () => {
     (await cli(root, 'adopt', 'docs/extra.md', '--id', 'extra-two')).code,
   ).toBe(0);
 });
+
+it('resolves adopt paths from the shell directory and refuses Veritas control files', async () => {
+  const root = await scaffolded();
+  await execute('git', ['init', '-q'], { cwd: root });
+  await write(root, 'sub/NOTES.md', '# Notes\nHello.\n');
+  await mkdir(join(root, 'sub/deep'), { recursive: true });
+  const fromSub = await cli(join(root, 'sub'), 'adopt', 'NOTES.md');
+  expect(fromSub.code).toBe(0);
+  await write(root, 'TWO.md', '# Two\nHi.\n');
+  expect(
+    (await cli(join(root, 'sub/deep'), 'adopt', '../../TWO.md')).code,
+  ).toBe(0);
+  for (const path of [
+    'veritas.yaml',
+    'veritas.lock.json',
+    '.veritas/library/veritas.library.yaml',
+  ]) {
+    const refused = await cli(root, 'adopt', path);
+    expect(refused.code).toBe(2);
+    expect(refused.stderr).toContain('ADOPT_PATH_INVALID');
+  }
+  await write(root, '___.md', '# x\n');
+  expect((await cli(root, 'adopt', '___.md')).stderr).toContain(
+    'Could not derive a name',
+  );
+});
+
+it('tells users how to recover from a held lock', async () => {
+  const root = await scaffolded();
+  await write(root, '.veritas/runtime/sync.lock', 'junk');
+  const busy = await cli(root, 'sync');
+  expect(busy.code).toBe(5);
+  expect(busy.stderr).toContain('veritas recover');
+});

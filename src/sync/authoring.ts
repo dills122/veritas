@@ -110,10 +110,13 @@ export async function rewriteFile(
   );
   try {
     await handle.writeFile(bytes);
-  } finally {
     await handle.close();
+    await rename(temp, target);
+  } catch (cause) {
+    await handle.close().catch(() => undefined);
+    await unlink(temp).catch(() => undefined);
+    throw cause;
   }
-  await rename(temp, target);
   return async () => {
     const restore = `${target}.veritas-restore`;
     const back = await open(
