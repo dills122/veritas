@@ -57,7 +57,7 @@ jobs:
       - run: npm run test:integration
       - name: Verify installed package, declarations and full CLI examples
         run: npm run test:package
-      - run: node examples/verify.mjs
+      - run: node examples/verify.mjs > artifacts/core-verification.json
       - name: Pack verified candidate and checksum
         run: |
           mkdir -p artifacts
@@ -70,7 +70,7 @@ jobs:
           path: |
             artifacts/*.tgz
             artifacts/SHA256SUMS
-            examples/verification.json
-            examples/cli-verification.json
+            artifacts/core-verification.json
+            artifacts/cli-verification.json
           if-no-files-found: error
           retention-days: 30
