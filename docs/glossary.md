@@ -59,6 +59,9 @@ library (steering + skills)  ──pinned by lock──▶  consumer repo  ─�
 | `check` | Read-only drift check for CI. |
 | `update` | Re-resolves the source and moves the lock. `--restore` rebuilds a missing cache. |
 | `recover` | Finishes or rolls back an interrupted write. |
+| `adopt` | Copies existing guidance into the project library as new files. Never touches the original. |
+| `init --scaffold` | Creates a starter library for the project and initializes it in one step. |
+| `plan --diff` / `check --diff` | Adds a unified diff for replaced and conflicting files. |
 
 ## Easy to confuse
 

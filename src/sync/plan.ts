@@ -277,7 +277,7 @@ export async function plan(
           current.kind === 'unsafe'
             ? 'Replace the link or special file with an ordinary file or remove it, then run plan.'
             : owned
-              ? `Run \`git diff -- ${path}\` to see the edit. Move wanted changes into your library or local additions; then delete or \`git checkout -- ${path}\` the file and run sync.`
+              ? `Run \`veritas plan --diff\` or \`git diff -- ${path}\` to see the edit. Move wanted changes into your library or local additions; then delete or \`git checkout -- ${path}\` the file and run sync.`
               : `Copy wanted content into your library or local additions, then rename or remove ${path} and run sync. See docs/troubleshooting.md#output_conflict.`,
         ),
       );

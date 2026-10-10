@@ -32,7 +32,7 @@ Defer hosted service, frontend, global/home-directory output, background monitor
 | REQ-012 | Safe library processing | No skill/config execution; traversal, symlinks, hardlinked local input files, unsafe modes, case collisions, and resource abuse fail |
 | REQ-013 | Initial distribution | One ESM CLI/core package; Node 24 and clean macOS consumer execution; Linux/Windows certification is follow-up |
 | REQ-014 | Evidence based compatibility | Versioned adapter profiles carry source URLs and status; release docs distinguish documentation-based output from observed harness loading |
-| REQ-015 | Usable adoption and authoring | Packaged guide and example library/project, collision inventory, local-edit workflow, adaptation bootstrap, update review and recovery instructions work from a clean consumer or clone |
+| REQ-015 | Usable adoption and authoring | Packaged guide and example library/project, collision inventory, local-edit workflow, adaptation bootstrap, update review and recovery instructions work from a clean consumer or clone. `init --scaffold` creates a project-local starter library; `adopt` copies existing steering or skills into the project library as new files without modifying the original; `plan`/`check --diff` show exact content differences; actionable remediation and a troubleshooting index cover every user-correctable diagnostic |
 
 ## Behavior boundaries
 

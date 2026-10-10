@@ -56,6 +56,44 @@ Later examples use `veritas` as shorthand for this installed executable. Use `"$
 
 The baseline example produces shared `AGENTS.md`, a Claude import route and complete skills in native directories. Kiro consumes the same baseline. Native conditional rules do not duplicate shared always-on text. A shadowing instruction file produces an explicit failure rather than a changed loading route.
 
+## Start without an existing library
+
+A single repository can keep its own guidance with no shared library:
+
+```sh
+veritas init --scaffold --targets codex,claude,kiro-ide
+```
+
+`--scaffold [dir]` creates a starter library in `.veritas/library` (or `dir`), writes `veritas.yaml` and the lock, and uses that library as the source under the namespace `repo` (profile `repo/baseline`). It refuses to run if the directory already exists and cannot be combined with `--source`, `--profile` or `--ref`. Edit `.veritas/library/steering/project-guidance.md`, then:
+
+```sh
+veritas update   # a local-path source is snapshotted; update picks up your edits
+veritas plan
+veritas sync
+```
+
+If you forget `update`, plan and check warn with `SOURCE_STALE` instead of silently using the old snapshot. Later, switch to a shared library by changing `sources` in `veritas.yaml` and running `veritas update`. See the [glossary](glossary.md) for the terms.
+
+## Adopt existing guidance
+
+Existing `AGENTS.md`, Kiro steering, Claude rules and skills never become managed by matching bytes. `veritas adopt` copies them into your project library as new files so Veritas can generate them:
+
+```sh
+veritas adopt AGENTS.md
+veritas adopt .kiro/steering/typescript.md
+veritas adopt .claude/rules/testing.md
+veritas adopt .claude/skills/lint-fix          # a skill directory, with all supporting files
+```
+
+The original is never modified. Adopt writes `steering/<id>.md` (or `skills/<name>/`) into the library, adds it to the manifest and the selected profile, and validates the result; if validation fails everything it wrote is rolled back.
+
+- **Where it writes:** the `local` additions library if the project has one, otherwise the project-local source library (such as one created by `--scaffold`). It will not write to a Git source or a library outside the project.
+- **Names:** `--id <id>` overrides the derived name (`AGENTS.md` becomes `agents-guidance`). `--description <text>` overrides the description.
+- **Activation mapping:** Kiro `inclusion` (`always`, `fileMatch` + `fileMatchPattern`, `manual`, `auto`) and Claude `paths:` are mapped to Veritas activation. Brace patterns such as `*.{ts,tsx}` become equivalent plain patterns. Files without frontmatter are `always`. Other frontmatter is refused rather than guessed.
+- **Targets:** a rule whose activation some targets cannot represent natively is restricted to the targets that can (for example `manual` to Kiro only). Adopt tells you which. Override with `--targets`, or widen deliberately with an [adaptation](#choose-conditional-compatibility-deliberately).
+
+After adopting, review the new file, delete or rename the original, run `veritas update` if the library is a local-path source, then `plan` and `sync`. Until the original is removed, plan reports `OUTPUT_CONFLICT` for it. Adopting content that is already generated fails with `ADOPT_ALREADY_MANAGED`.
+
 ## Add project-specific guidance
 
 Copy local additions into a new consumer before initialization:
@@ -174,6 +212,16 @@ Recovery validates all affected files before acting. A committed ownership manif
 There is no `recover --unlock` or automatic stale-lock stealing in this candidate. A remaining lock requires manual owner investigation: preserve the exact lock, journal, stages and backups; establish the originating process identity and abandonment independently; recheck that the lock is unchanged before removing only that verified abandoned lock. Then run normal recovery. A PID or nonce alone cannot prove abandonment, and a missing PID check does not certify process identity or exclude PID reuse. Live, ambiguous or reused-PID ownership stays blocked. Do not recursively remove runtime state. [TASK-011 evidence](https://github.com/dills122/veritas/blob/v0.1.0-rc.0/docs/evidence/TASK-011.md) records injected-failure recovery and the unverified process-death/PID-reuse limits; this candidate provides no certified automatic abandonment procedure. Removing a lock does not authorize overriding file conflicts.
 
 Representative injected interrupted-write recovery passed. Actual process kills, exhaustive crash permutations, automatic abandoned-lock removal and broad platform/power-loss durability are follow-up.
+
+## Review exact changes
+
+`plan --diff` and `check --diff` add a unified diff from each file on disk to the content Veritas would write, for replacements and conflicts:
+
+```sh
+veritas plan --diff
+```
+
+Binary files, files over 256 KiB and files over 2,000 lines are skipped with a note. With `--json`, each affected operation gains a `diff` string. Diff is read-only; it does not change what `sync` does.
 
 ## Structured output and exit codes
 

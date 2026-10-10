@@ -36,7 +36,7 @@ Package tests follow build. Do not treat no tests found or swallowed CLI failure
 | REQ-012 | TASK-003, TASK-004, TASK-005, TASK-010, TASK-011, TASK-013 | Path/symlink/hardlink/control attacks, forged journals, resource limits, execution canaries | Executed: TASK-003/004/005/010/011/013 |
 | REQ-013 | TASK-002, TASK-014 | Clean package consumer, Node 24 macOS; CI recipe retained | Executed: TASK-002; TASK-014 completed; [audit follow-up](evidence/end-user-audit-fixes.md) verifies installed documentation and public declarations |
 | REQ-014 | TASK-001, TASK-008, TASK-016 | Versioned profile records and qualified loading gaps | Executed: TASK-001/008/016; all live harnesses unverified |
-| REQ-015 | TASK-012, TASK-015 | Runnable docs/examples, collision inventory, local edit/update/recovery workflow | Executed: TASK-012/015; [audit follow-up](evidence/end-user-audit-fixes.md) verifies packaged examples and baseline-first adaptation setup |
+| REQ-015 | TASK-012, TASK-015 | Runnable docs/examples, collision inventory, local edit/update/recovery workflow | Executed: TASK-012/015; [audit follow-up](evidence/end-user-audit-fixes.md) verifies packaged examples and baseline-first adaptation setup; ergonomics, scaffold, adopt and diff covered by `tests/integration/cli/{ergonomics,authoring}.test.ts` and `tests/unit/cli/diff.test.ts` |
 
 TASK-017 integrates and reviews evidence for all requirements. The ledger's evidence paths reference exact results, rather than duplicating pass/fail claims in several narrative files. Update this table's evidence status only after recorded execution.
 

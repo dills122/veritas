@@ -6,7 +6,7 @@ import { relative, resolve, sep } from 'node:path';
 import { stringify } from 'yaml';
 import { VERSION } from '../index.js';
 import { parseProjectConfig } from '../config/parse.js';
-import { gitLocatorProblem, manifestSchema } from '../config/schemas.js';
+import { gitLocatorProblem } from '../config/schemas.js';
 import { error, sortDiagnostics, VeritasError } from '../diagnostics/index.js';
 import { canonicalJson, sha256 } from '../model/hash.js';
 import type {
@@ -35,6 +35,13 @@ import {
   resolveSource,
   unwrap,
 } from './pipeline.js';
+import { adopt, manifestOwnedPaths } from './adopt.js';
+import { unifiedDiff } from './diff.js';
+import {
+  checkInitArguments,
+  createScaffold,
+  SCAFFOLD_PROFILE,
+} from './scaffold.js';
 import { humanPlan, planSummary } from './human.js';
 
 type Options = {
@@ -47,6 +54,11 @@ type Options = {
   local?: string;
   localProfile?: string;
   restore?: boolean;
+  diff?: boolean;
+  scaffold?: string | boolean;
+  adoptPath?: string;
+  id?: string;
+  description?: string;
 };
 type Outcome = {
   exitCode: number;
@@ -79,7 +91,10 @@ function artifactData(result: CompileResult) {
     })),
   };
 }
-function planData(value: WritePlan) {
+function planData(
+  value: WritePlan,
+  diffs: ReadonlyMap<string, string> = new Map(),
+) {
   return {
     hasDrift: value.hasDrift,
     hasConflicts: value.hasConflicts,
@@ -89,6 +104,7 @@ function planData(value: WritePlan) {
       kind: operation.kind,
       path: operation.path,
       expectedBefore: operation.expectedBefore,
+      ...(diffs.has(operation.path) ? { diff: diffs.get(operation.path) } : {}),
       ...(operation.after
         ? {
             after: {
@@ -132,21 +148,6 @@ async function runtimeIgnoreWarnings(project: string): Promise<Diagnostic[]> {
     ];
   }
 }
-/** Paths an existing valid manifest already owns; unreadable or corrupt manifests own nothing. */
-async function manifestOwnedPaths(project: string): Promise<Set<string>> {
-  try {
-    const read = await readObservedFile(project, '.veritas/manifest.json');
-    if (read.state.kind !== 'file' || !read.bytes) return new Set();
-    const parsed = manifestSchema.safeParse(
-      JSON.parse(new TextDecoder('utf-8', { fatal: true }).decode(read.bytes)),
-    );
-    return parsed.success
-      ? new Set(parsed.data.artifacts.map((artifact) => artifact.path))
-      : new Set();
-  } catch {
-    return new Set();
-  }
-}
 /** A failed init must not leave empty runtime directories; non-recursive so real state is never removed. */
 async function removeEmptyRuntime(project: string): Promise<void> {
   for (const path of ['.veritas/runtime', '.veritas']) {
@@ -156,6 +157,27 @@ async function removeEmptyRuntime(project: string): Promise<void> {
       return;
     }
   }
+}
+/** Diff from disk to generated content for replace and conflicting operations that have a readable file. */
+async function planDiffs(
+  project: string,
+  value: WritePlan,
+): Promise<Map<string, string>> {
+  const diffs = new Map<string, string>();
+  for (const operation of value.operations) {
+    if (
+      (operation.kind !== 'replace' && operation.kind !== 'conflict') ||
+      !operation.after
+    )
+      continue;
+    const read = await readObservedFile(project, operation.path);
+    if (read.state.kind === 'file' && read.bytes)
+      diffs.set(
+        operation.path,
+        unifiedDiff(operation.path, read.bytes, operation.after.bytes),
+      );
+  }
+  return diffs;
 }
 async function initialize(
   project: string,
@@ -366,15 +388,56 @@ async function execute(
   project: string,
   options: Options,
 ): Promise<Outcome> {
-  if (command === 'init' || command === 'update') {
+  if (command === 'init' || command === 'update' || command === 'adopt') {
     await assertNoIncompleteTransaction(project);
     const lease = await acquireLock(project);
     let failed = false;
     try {
       await assertNoIncompleteTransaction(project, lease);
-      return command === 'init'
-        ? await initialize(project, options, lease)
-        : await update(project, options, lease);
+      if (command === 'update') return await update(project, options, lease);
+      if (command === 'adopt') {
+        const result = await adopt(project, {
+          path: options.adoptPath ?? '',
+          ...(options.id ? { id: options.id } : {}),
+          ...(options.description ? { description: options.description } : {}),
+          ...(options.targets ? { targets: options.targets } : {}),
+        });
+        return {
+          exitCode: 0,
+          diagnostics: result.diagnostics,
+          data: result.data,
+          human: result.human,
+        };
+      }
+      checkInitArguments(options);
+      if (options.scaffold === undefined)
+        return await initialize(project, options, lease);
+      const scaffold = await createScaffold(project, options.scaffold);
+      try {
+        const outcome = await initialize(
+          project,
+          {
+            ...options,
+            source: scaffold.directory,
+            profile: SCAFFOLD_PROFILE,
+          },
+          lease,
+        );
+        return {
+          ...outcome,
+          data: {
+            ...(outcome.data as object),
+            scaffold: { directory: scaffold.directory, files: scaffold.files },
+          },
+          human: [
+            `Created a starter library in ${scaffold.directory}. Edit ${scaffold.directory}/steering/project-guidance.md to set your guidance.`,
+            ...(outcome.human ?? []),
+          ],
+        };
+      } catch (cause) {
+        await scaffold.rollback();
+        throw cause;
+      }
     } catch (cause) {
       failed = true;
       throw cause;
@@ -448,6 +511,7 @@ async function execute(
     }
   }
   const value = await plan(project, await loadCompilation(project));
+  const diffs = options.diff ? await planDiffs(project, value) : new Map();
   return {
     exitCode: value.hasConflicts
       ? 3
@@ -455,8 +519,8 @@ async function execute(
         ? 1
         : 0,
     diagnostics: value.diagnostics,
-    data: planData(value),
-    human: humanPlan(command === 'check' ? 'check' : 'plan', value),
+    data: planData(value, diffs),
+    human: humanPlan(command === 'check' ? 'check' : 'plan', value, diffs),
   };
 }
 export async function run(args: readonly string[]): Promise<number> {
@@ -480,6 +544,7 @@ Example:
   veritas sync --project ./project
   veritas check --project ./project
 
+No shared library yet? veritas init --scaffold --targets codex,claude. Existing AGENTS.md or rules? veritas adopt <path>.
 Target IDs: codex, claude, kiro-ide, kiro-cli.
 Init requires a source, qualified library profile and targets; there are no defaults.
 Project selection defaults to the current Git root, then cwd. Use an existing directory.
@@ -521,13 +586,17 @@ Stuck? Every error carries a code and a fix hint; see docs/troubleshooting.md (a
     const child = program.command(name).description(description);
     if (name === 'init')
       child
-        .requiredOption(
+        .option(
           '--source <locator>',
           'Local library directory (relative or absolute) or HTTPS/SSH Git URL',
         )
-        .requiredOption(
+        .option(
           '--profile <selection>',
           'Qualified namespace/profile selection',
+        )
+        .option(
+          '--scaffold [dir]',
+          'Create a starter library (default .veritas/library) and use it as the source',
         )
         .requiredOption(
           '--targets <ids>',
@@ -539,6 +608,11 @@ Stuck? Every error carries a code and a fix hint; see docs/troubleshooting.md (a
         )
         .option('--local <path>', 'Project local library')
         .option('--local-profile <id>', 'Local profile', 'project');
+    if (name === 'plan' || name === 'check')
+      child.option(
+        '--diff',
+        'Show a unified diff from each file on disk to the generated content',
+      );
     if (name === 'update')
       child.option(
         '--restore',
@@ -554,6 +628,30 @@ Stuck? Every error carries a code and a fix hint; see docs/troubleshooting.md (a
       );
     });
   }
+  program
+    .command('adopt')
+    .description(
+      'Copy existing guidance (file or skill directory) into the project library; never touches the original',
+    )
+    .argument(
+      '<path>',
+      'Existing steering file or skill directory in the project',
+    )
+    .option('--id <id>', 'Name for the new steering rule or skill')
+    .option('--description <text>', 'Rule description (default: from the file)')
+    .option(
+      '--targets <ids>',
+      'Restrict the rule to these targets (default: those that support its activation mode)',
+    )
+    .action(async (path: string, _options: unknown, parsed: Command) => {
+      command = 'adopt';
+      const options = { ...parsed.optsWithGlobals<Options>(), adoptPath: path };
+      outcome = await execute(
+        'adopt',
+        await projectRoot(options.project),
+        options,
+      );
+    });
   try {
     if (!args.length) {
       program.outputHelp();

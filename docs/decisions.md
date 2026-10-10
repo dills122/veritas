@@ -16,6 +16,7 @@ These decisions define the implementation baseline. Change a decision before cha
 | DEC-010 | Fixture certification plus optional live evidence; accepted | Compiler correctness can be tested offline; runtime loading certification requires exact versions/settings and observable evidence |
 | DEC-011 | Content/mode hashing and portable paths; accepted | Executable assets and case-insensitive filesystems require more than string-content hashes |
 | DEC-012 | Source-independent filesystem writer; accepted | Sources, adapters, and CLI cannot bypass synchronization checks; shared control writes use the same safe primitives |
+| DEC-013 | Authoring helpers never adopt or overwrite; accepted | `init --scaffold` and `adopt` only create new files in a project-local library (exclusive create, rollback on failure) and rewrite its manifest after a byte-equality check. Originals stay untouched and unmanaged until the user removes them, so DEC-004 (no adoption/force option) still holds: copying content into a library is authoring, not ownership adoption. Rules are restricted to targets that natively support their activation instead of being broadened (DEC-008) |
 
 ## Stack selections
 

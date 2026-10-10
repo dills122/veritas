@@ -15,6 +15,7 @@ export function planSummary(value: WritePlan): string {
 export function humanPlan(
   command: 'plan' | 'sync' | 'check',
   value: WritePlan,
+  diffs: ReadonlyMap<string, string> = new Map(),
 ): readonly string[] {
   if (!value.hasConflicts && !value.hasDrift)
     return ['Generated files and manifest are up to date.'];
@@ -25,6 +26,7 @@ export function humanPlan(
           .filter((operation) => operation.kind !== 'unchanged')
           .map((operation) => `${operation.kind} ${operation.path}`)
       : []),
+    ...[...diffs.values()].flatMap((diff) => ['', diff]),
     ...(value.manifestChanged
       ? [
           command === 'sync' && !value.hasConflicts

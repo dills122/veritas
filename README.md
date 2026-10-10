@@ -31,6 +31,16 @@ Every error prints a stable code and, where possible, the fix. New to the terms?
 
 ## Quick start
 
+Starting a repository without a shared library? One command creates a starter library and initializes the project; `veritas adopt <file>` then pulls existing `AGENTS.md`, Kiro steering, Claude rules or skills into it without touching the originals:
+
+```sh
+veritas init --scaffold --targets codex,claude,kiro-ide
+veritas adopt AGENTS.md          # optional: bring existing guidance under management
+veritas update && veritas plan --diff && veritas sync
+```
+
+The walkthrough below uses a shared example library instead.
+
 Use Node 24 and npm 11. To try a provided candidate tarball, replace the absolute archive path below. The package includes the user guide and example library; npm installs its runtime dependencies without building Veritas or running imported scripts.
 
 ```sh

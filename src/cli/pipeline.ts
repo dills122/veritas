@@ -370,9 +370,42 @@ export async function loadCompilation(
   const { config } = await readConfig(project),
     { lock } = await readLock(project);
   assertLockMatches(config, lock);
-  return compileSnapshot(
+  const result = await compileSnapshot(
     project,
     config,
     await loadSnapshot(project, lock.source.treeDigest),
   );
+  const stale = await staleLocalSource(project, config, lock);
+  return stale
+    ? {
+        ...result,
+        diagnostics: sortDiagnostics([...result.diagnostics, stale]),
+      }
+    : result;
+}
+/** A local-path source is snapshotted at init/update; warn when its files have since changed. */
+async function staleLocalSource(
+  project: string,
+  config: ProjectConfig,
+  lock: { source: { kind: string; treeDigest: string } },
+): Promise<Diagnostic | undefined> {
+  const { namespace } = sourceSelection(config);
+  const descriptor = config.sources[namespace];
+  if (lock.source.kind !== 'local' || !descriptor || !('path' in descriptor))
+    return undefined;
+  try {
+    const live = await createLocalSnapshot(resolve(project, descriptor.path));
+    if (live.treeDigest === lock.source.treeDigest) return undefined;
+  } catch {
+    return undefined;
+  }
+  return {
+    ...error(
+      'SOURCE_STALE',
+      `Local source '${descriptor.path}' changed since it was locked; these results use the locked snapshot`,
+    ),
+    severity: 'warning',
+    remediation:
+      'Run `veritas update` to pick up your edits, then plan and sync.',
+  };
 }
