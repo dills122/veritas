@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 1,
+  "status": "input-catalogue-not-runtime-certification",
+  "cases": [
+    {
+      "id": "always",
+      "input": "canonical-library/steering/always.md",
+      "expectation": "One effective always route per intended consumer for all seven nonempty family subsets."
+    },
+    {
+      "id": "files",
+      "input": "canonical-library/steering/files.md",
+      "expectation": "Claude/Kiro native file gate; Codex unsupported absent exact files-to-always opt-in."
+    },
+    {
+      "id": "manual",
+      "input": "canonical-library/steering/manual.md",
+      "expectation": "Kiro manual; Codex/Claude unsupported."
+    },
+    {
+      "id": "auto",
+      "input": "canonical-library/steering/auto.md",
+      "expectation": "Kiro auto with id/name and description; Codex/Claude unsupported."
+    },
+    {
+      "id": "portable-skill",
+      "input": "canonical-library/skills/sample",
+      "expectation": "Retain all files, binary bytes, executable intent, and relative references; never execute script."
+    },
+    {
+      "id": "restricted-skill",
+      "input": "restricted-skill/sample",
+      "expectation": "Advanced invocation/tool controls and sidecar rejected explicitly in bounded RC, never stripped."
+    },
+    {
+      "id": "target-restriction",
+      "input": "canonical-library/steering/restricted.md",
+      "expectation": "Claude-only baseline excluded from shared AGENTS; native Claude placement."
+    },
+    {
+      "id": "shared-loading",
+      "input": "canonical-library",
+      "expectation": "Shared AGENTS only for compatible consumers; Claude explicit import, no native duplication; both Kiro surfaces coalesce only identical outputs."
+    },
+    {
+      "id": "unmanaged",
+      "input": "competitor-inputs/",
+      "expectation": "Existing AGENTS/CLAUDE output conflicts in Veritas even if bytes equal."
+    },
+    {
+      "id": "edited",
+      "input": "results.json",
+      "expectation": "Changes after ownership conflicts; preserve user bytes before writer starts."
+    },
+    {
+      "id": "shadowing",
+      "input": "catalogue.json",
+      "expectation": "Existing AGENTS.override.md or competing .claude/CLAUDE.md errors; nested/global content preserved and certification qualified."
+    },
+    {
+      "id": "patterns",
+      "input": "catalogue.json",
+      "expectation": "Extension/dotfile/case fixtures establish subset; negation/extglob/escape rejected."
+    }
+  ]
+}

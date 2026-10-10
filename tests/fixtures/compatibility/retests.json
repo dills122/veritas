@@ -1,0 +1,184 @@
+{
+  "rulesync-codex-only": {
+    "first": {
+      "argv": [
+        "/Users/dsteele/.nvm/versions/node/v24.18.0/bin/node",
+        "/private/tmp/veritas-task001/tools/node_modules/rulesync/dist/cli/index.js",
+        "generate",
+        "--targets",
+        "codexcli",
+        "--features",
+        "rules,skills"
+      ],
+      "cwd": "/private/tmp/veritas-task001/rulesync-codex-only",
+      "exit": 0,
+      "stdout": "Written 1 skill\n    .agents/skills/sample/SKILL.md\n    .agents/skills/sample/assets/data.bin\n    .agents/skills/sample/references/note.md\n    .agents/skills/sample/scripts/do-not-execute.sh\nWritten 1 rule\n    AGENTS.md\n\ud83c\udf89 All done! Written 2 file(s) total (1 rules + 1 skills)\n",
+      "stderr": ""
+    },
+    "second": {
+      "argv": [
+        "/Users/dsteele/.nvm/versions/node/v24.18.0/bin/node",
+        "/private/tmp/veritas-task001/tools/node_modules/rulesync/dist/cli/index.js",
+        "generate",
+        "--targets",
+        "codexcli",
+        "--features",
+        "rules,skills"
+      ],
+      "cwd": "/private/tmp/veritas-task001/rulesync-codex-only",
+      "exit": 0,
+      "stdout": "\u2713 All files are up to date (rules, skills)\n",
+      "stderr": ""
+    },
+    "firstInventory": {
+      ".agents/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".agents/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".agents/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".agents/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      "AGENTS.md": "12338d1e7e91cbf99bb21b61e87ecf9c41e2aa2b5ff94f2caab6f033c1aa9e94"
+    },
+    "secondInventory": {
+      ".agents/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".agents/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".agents/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".agents/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      "AGENTS.md": "12338d1e7e91cbf99bb21b61e87ecf9c41e2aa2b5ff94f2caab6f033c1aa9e94"
+    },
+    "nonbackupRepeatEqual": true,
+    "AGENTS": "# Baseline\n\nAlways fixture instruction.\n\n# TypeScript\n\nFile-scoped fixture instruction.\n"
+  },
+  "rulesync-reverse-order": {
+    "first": {
+      "argv": [
+        "/Users/dsteele/.nvm/versions/node/v24.18.0/bin/node",
+        "/private/tmp/veritas-task001/tools/node_modules/rulesync/dist/cli/index.js",
+        "generate",
+        "--targets",
+        "kiro-ide,claudecode,codexcli",
+        "--features",
+        "rules,skills"
+      ],
+      "cwd": "/private/tmp/veritas-task001/rulesync-reverse-order",
+      "exit": 0,
+      "stdout": "Written 3 skills\n    .kiro/skills/sample/SKILL.md\n    .kiro/skills/sample/assets/data.bin\n    .kiro/skills/sample/references/note.md\n    .kiro/skills/sample/scripts/do-not-execute.sh\n    .claude/skills/sample/SKILL.md\n    .claude/skills/sample/assets/data.bin\n    .claude/skills/sample/references/note.md\n    .claude/skills/sample/scripts/do-not-execute.sh\n    .agents/skills/sample/SKILL.md\n    .agents/skills/sample/assets/data.bin\n    .agents/skills/sample/references/note.md\n    .agents/skills/sample/scripts/do-not-execute.sh\nWritten 5 rules\n    AGENTS.md\n    .kiro/steering/files.md\n    CLAUDE.md\n    .claude/rules/files.md\n    AGENTS.md\n\ud83c\udf89 All done! Written 8 file(s) total (5 rules + 3 skills)\n",
+      "stderr": ""
+    },
+    "second": {
+      "argv": [
+        "/Users/dsteele/.nvm/versions/node/v24.18.0/bin/node",
+        "/private/tmp/veritas-task001/tools/node_modules/rulesync/dist/cli/index.js",
+        "generate",
+        "--targets",
+        "kiro-ide,claudecode,codexcli",
+        "--features",
+        "rules,skills"
+      ],
+      "cwd": "/private/tmp/veritas-task001/rulesync-reverse-order",
+      "exit": 0,
+      "stdout": "Written 2 rules\n    AGENTS.md\n    AGENTS.md\n\ud83c\udf89 All done! Written 2 file(s) total (2 rules)\n",
+      "stderr": ""
+    },
+    "firstInventory": {
+      ".agents/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".agents/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".agents/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".agents/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".claude/rules/files.md": "c4f71c1cf9e4bd72c5618af27bff46df5631dbad2c3906b5ed6e1ddb5876b24b",
+      ".claude/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".claude/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".claude/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".claude/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".kiro/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".kiro/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".kiro/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".kiro/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".kiro/steering/files.md": "e27a6a511f4ada44ea1bd91efdf9ea6ce01df0290c4ce76d4832d2b6293e2eb5",
+      "AGENTS.md": "12338d1e7e91cbf99bb21b61e87ecf9c41e2aa2b5ff94f2caab6f033c1aa9e94",
+      "CLAUDE.md": "6a29d940398d1a903a7bbb966fb885ddb136f1952c81a87decdb37e87f21bbd6"
+    },
+    "secondInventory": {
+      ".agents/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".agents/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".agents/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".agents/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".claude/rules/files.md": "c4f71c1cf9e4bd72c5618af27bff46df5631dbad2c3906b5ed6e1ddb5876b24b",
+      ".claude/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".claude/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".claude/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".claude/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".kiro/skills/sample/SKILL.md": "196df102c6fc85461c77aa4c8dadf86a8d8b47bcf8aefac91a09d3095d537181",
+      ".kiro/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".kiro/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".kiro/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".kiro/steering/files.md": "e27a6a511f4ada44ea1bd91efdf9ea6ce01df0290c4ce76d4832d2b6293e2eb5",
+      "AGENTS.md": "12338d1e7e91cbf99bb21b61e87ecf9c41e2aa2b5ff94f2caab6f033c1aa9e94",
+      "CLAUDE.md": "6a29d940398d1a903a7bbb966fb885ddb136f1952c81a87decdb37e87f21bbd6"
+    },
+    "nonbackupRepeatEqual": true,
+    "AGENTS": "# Baseline\n\nAlways fixture instruction.\n\n# TypeScript\n\nFile-scoped fixture instruction.\n"
+  },
+  "ruler-empty": {
+    "first": {
+      "argv": [
+        "/Users/dsteele/.nvm/versions/node/v24.18.0/bin/node",
+        "/private/tmp/veritas-task001/tools/node_modules/@intellectronica/ruler/dist/cli/index.js",
+        "apply",
+        "--agents",
+        "codex,claude,kiro",
+        "--no-mcp",
+        "--no-gitignore",
+        "--local-only",
+        "--skills"
+      ],
+      "cwd": "/private/tmp/veritas-task001/ruler-empty",
+      "exit": 0,
+      "stdout": "[ruler] Applying rules for Claude Code...\n[ruler] Applying rules for OpenAI Codex CLI...\n[ruler] Applying rules for Kiro...\nRuler apply completed successfully.\n",
+      "stderr": "[ruler] Skills are configured, but the following agents do not support native skills and will be skipped: Kiro\n[ruler] Skills support is experimental and behavior may change in future releases.\n"
+    },
+    "second": {
+      "argv": [
+        "/Users/dsteele/.nvm/versions/node/v24.18.0/bin/node",
+        "/private/tmp/veritas-task001/tools/node_modules/@intellectronica/ruler/dist/cli/index.js",
+        "apply",
+        "--agents",
+        "codex,claude,kiro",
+        "--no-mcp",
+        "--no-gitignore",
+        "--local-only",
+        "--skills"
+      ],
+      "cwd": "/private/tmp/veritas-task001/ruler-empty",
+      "exit": 0,
+      "stdout": "[ruler] Applying rules for Claude Code...\n[ruler] Applying rules for OpenAI Codex CLI...\n[ruler] Applying rules for Kiro...\nRuler apply completed successfully.\n",
+      "stderr": "[ruler] Skills are configured, but the following agents do not support native skills and will be skipped: Kiro\n[ruler] Skills support is experimental and behavior may change in future releases.\n"
+    },
+    "firstInventory": {
+      ".agents/skills/sample/SKILL.md": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      ".agents/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".agents/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".agents/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".claude/skills/sample/SKILL.md": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      ".claude/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".claude/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".claude/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".kiro/steering/ruler_kiro_instructions.md": "6dfbfb79b8a4486cdc1e52186cfcce8ae97933d5227105aacf7f969076fb419e",
+      "AGENTS.md": "358992db61e4732e94fc716061948b6a8dda8434255460ece7ade9f934656ac7",
+      "CLAUDE.md": "6dfbfb79b8a4486cdc1e52186cfcce8ae97933d5227105aacf7f969076fb419e"
+    },
+    "secondInventory": {
+      ".agents/skills/sample/SKILL.md": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      ".agents/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".agents/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".agents/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".claude/skills/sample/SKILL.md": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      ".claude/skills/sample/assets/data.bin": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      ".claude/skills/sample/references/note.md": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      ".claude/skills/sample/scripts/do-not-execute.sh": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      ".kiro/steering/ruler_kiro_instructions.md": "6dfbfb79b8a4486cdc1e52186cfcce8ae97933d5227105aacf7f969076fb419e",
+      "AGENTS.md": "358992db61e4732e94fc716061948b6a8dda8434255460ece7ade9f934656ac7",
+      "CLAUDE.md": "6dfbfb79b8a4486cdc1e52186cfcce8ae97933d5227105aacf7f969076fb419e"
+    },
+    "nonbackupRepeatEqual": true,
+    "AGENTS": "<!-- Generated by Ruler -->\n\n\n<!-- Source: .ruler/AGENTS.md -->\n\n# Baseline\n\nAlways fixture instruction.\n\n\n\n<!-- Source: .ruler/files.md -->\n\n---\npaths:\n  - \"src/**/*.ts\"\n---\n\n# TypeScript\n\nFile-scoped fixture instruction.\n"
+  }
+}

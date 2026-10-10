@@ -1,0 +1,36 @@
+{
+  "observedAtUtc": "2026-10-10T03:43:37.306304+00:00",
+  "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+  "node": "24.18.0",
+  "npm": "11.16.0",
+  "toolInstallScriptsExecuted": false,
+  "packages": {
+    "rulesync": {
+      "version": "29.0.0",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/rulesync/-/rulesync-29.0.0.tgz",
+      "integrity": "sha512-KmV/X6RFInZCUP3YZkB4NxyrzsdHRqN2wpVr/hWYbkSik4k4ZxiULAl09sy6rGdgm6/jn3oq7f7BpqpeaOlUSA==",
+      "gitHead": null,
+      "files": {
+        "package.json": "d808ab87660ff924eb95b47c880a9ea5e1451dc36ff5784fcc80ae78636a6969",
+        "dist/cli/index.js": "7fd77898c4ab9fbc42b0bfcb5fdc618a0543ba6a3edab55d7e0a6b085eb93154",
+        "dist/index.cjs": "e7351b16c0d50573def830f20acb06634eae81ccc966acb15bfd443d70846f71",
+        "dist/index.d.ts": "ce19f228c8101821e2e459d0b3f4bd5c9e329f82a8226be9599d8f4077cc0a51"
+      }
+    },
+    "@intellectronica/ruler": {
+      "version": "0.3.44",
+      "license": "MIT",
+      "resolved": "https://registry.npmjs.org/@intellectronica/ruler/-/ruler-0.3.44.tgz",
+      "integrity": "sha512-OjJCdZleUQSLapy2HuLdDNpbyneArwYT9i9QP7mskrREPqBEB3JoDiZ8xded3Q7oA7/s5Pgn8Qo6UiGEsYZIVQ==",
+      "gitHead": "658d1bc168e3496015aa5c262361cce818fabcf9",
+      "files": {
+        "package.json": "d4e1fd44e23cf9f14a3810dcf9bf7e5be92b6c64753dc4502752443cc6e9d08f",
+        "dist/cli/index.js": "6368282ade67dbab3b7770ba69117186d0942fbc742f8b81231cccb2fa175a48",
+        "dist/lib.js": "8033ea0fa713deb4211452b3bdf59c45a9b116f0739237a4efad9d221905c76c",
+        "dist/lib.d.ts": "2565babeaa5e5c7d5edfe29fa3b5a3c8356ba10632ca6e7ef7bde58a7e39af27",
+        "dist/agents/IAgent.d.ts": "d0b1f92ce52fe5935ceb839dcaae39688a3aa9856a6e98c5a9597a5074c3868a"
+      }
+    }
+  }
+}

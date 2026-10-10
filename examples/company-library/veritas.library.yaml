@@ -1,0 +1,21 @@
+schemaVersion: 1
+steering:
+  - id: baseline
+    path: steering/baseline.md
+  - id: typescript
+    path: steering/typescript.md
+  - id: typescript-native
+    path: steering/typescript-native.md
+skills:
+  - name: review-repository
+    path: skills/review-repository
+profiles:
+  baseline:
+    steering: [baseline]
+    skills: [review-repository]
+  typescript:
+    steering: [baseline, typescript]
+    skills: [review-repository]
+  native-typescript:
+    steering: [baseline, typescript-native]
+    skills: [review-repository]

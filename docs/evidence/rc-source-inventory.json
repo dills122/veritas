@@ -1,0 +1,550 @@
+{
+  "boundary": "Uncommitted product source/tests/scripts/config on unborn feature/veritas-v01; excludes docs, dist, dependencies and machine-local tools",
+  "files": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "4bd270d3e9d256b8cf64f0e31d6904350c2871ad5f26ac42d6989ac6b73c627f",
+      "executable": false
+    },
+    {
+      "path": ".nvmrc",
+      "sha256": "99d924cba0f1108bda49db624f2532cdd75ecba5a5f151dff62b32878179e037",
+      "executable": false
+    },
+    {
+      "path": ".prettierignore",
+      "sha256": "9a1097c4422c191ff73108ff5d8e900cc24efa1ee279cc1baf12965136b87e48",
+      "executable": false
+    },
+    {
+      "path": ".prettierrc.json",
+      "sha256": "e51419e8206a0a5493e85ef1f4dea080982dc9187992bb253220a93d0784f6b2",
+      "executable": false
+    },
+    {
+      "path": "eslint.config.mjs",
+      "sha256": "ccfeb57354ca296d6d76b16c9b50492903607bddf540a37bddc2402e465523ca",
+      "executable": false
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "6198574a2917a45e1079b3300dce2caf26c21e817f14ae3063a7035e010570f7",
+      "executable": false
+    },
+    {
+      "path": "package.json",
+      "sha256": "713560cbc177a48f9f026063727c1021706d8854a58a574434867c44b32f2c9f",
+      "executable": false
+    },
+    {
+      "path": "scripts/check-planning.py",
+      "sha256": "9b52e9577df03b29219cf310c09067301bbd8d9996af850ede4f57dc5860267b",
+      "executable": false
+    },
+    {
+      "path": "scripts/clean-build.mjs",
+      "sha256": "5847e44c49e8c90797708df28440e59d7b49da1d93815ef4b5eb59eb1335a8ec",
+      "executable": false
+    },
+    {
+      "path": "scripts/finish-build.mjs",
+      "sha256": "da920413ebbc890d50e8a71cf1149a21c1f0c141a945121142381255d5ce5358",
+      "executable": false
+    },
+    {
+      "path": "scripts/test-package.mjs",
+      "sha256": "33c11828a274dc66566e5c4c1f06392a5b7c062c43a67ee11f27c548b3d23792",
+      "executable": false
+    },
+    {
+      "path": "scripts/verify-bootstrap.py",
+      "sha256": "8d8fcbd0f3d5de9bd741c55bd7fda09dd70612943e1821acc15a6b7b146aee9e",
+      "executable": false
+    },
+    {
+      "path": "src/adapters/claude/index.ts",
+      "sha256": "7ffaefd987fb1e801aa1c7c348e0706d84578311666b75c83b91c6113d699d65",
+      "executable": false
+    },
+    {
+      "path": "src/adapters/codex/index.ts",
+      "sha256": "28502552d608e48647cad50d15f514b358ed2ad1de2420878182fb4a253f04f4",
+      "executable": false
+    },
+    {
+      "path": "src/adapters/kiro/index.ts",
+      "sha256": "78174f67b17fec14afc8ce4be5502c1965c2212c891d2f343b169cc815a57b5d",
+      "executable": false
+    },
+    {
+      "path": "src/adapters/profiles/index.ts",
+      "sha256": "318ec1726d4e8a38dd5fe586d5c7e2d630cf60fd01145d138e1d1fb71b4202da",
+      "executable": false
+    },
+    {
+      "path": "src/bin.ts",
+      "sha256": "60ec31ca8d68344503bbb0daaefe584ba3cdf398e99b0e929e58523eb1e2dbea",
+      "executable": false
+    },
+    {
+      "path": "src/cli/pipeline.ts",
+      "sha256": "f1ac71743485a54398ea0f7ef5c8c52753bad8a456df73a0d700ef8c53908c26",
+      "executable": false
+    },
+    {
+      "path": "src/cli/run.ts",
+      "sha256": "32ae67312f8ec685f72e7457f5786170eed8c2d15bfa472b6b6a9c118af0a523",
+      "executable": false
+    },
+    {
+      "path": "src/compiler/index.ts",
+      "sha256": "7b139a112e8347bd2383cf5082ab30f1ae44fba608ad6e4ed8f93bfa68345505",
+      "executable": false
+    },
+    {
+      "path": "src/config/parse.ts",
+      "sha256": "beff963eea451536a98f6155ad2a99c0bed887a62d9a788c64e2abf638d9b824",
+      "executable": false
+    },
+    {
+      "path": "src/config/schemas.ts",
+      "sha256": "b20c457a67a6c70174fcebc6efd7b1a9df6b7a63889dec0453184873c9cb96d3",
+      "executable": false
+    },
+    {
+      "path": "src/diagnostics/index.ts",
+      "sha256": "55d8532f2d587f16537e9fa7e125b0a2c46ae2779579de5994a5f988f07289ae",
+      "executable": false
+    },
+    {
+      "path": "src/index.ts",
+      "sha256": "a982e3b7a5228de7b279c24866d98d3539b67f2fdd0b4ba3757b135ff581ab71",
+      "executable": false
+    },
+    {
+      "path": "src/model/hash.ts",
+      "sha256": "d3075f5bb248382f5ca77385374b6c90fed34ae773a35524e631fe63a91c1c58",
+      "executable": false
+    },
+    {
+      "path": "src/model/paths.ts",
+      "sha256": "4b75ff9d4fd9d0e8d36ce2cb971e3dfe7c222e7c65e9f91c1833d0e7332e484e",
+      "executable": false
+    },
+    {
+      "path": "src/model/types.ts",
+      "sha256": "b919bac3f2a20bab040653fcc0523ef5db18660ece14f7e12b686e7a010d1d2b",
+      "executable": false
+    },
+    {
+      "path": "src/parsing/library.ts",
+      "sha256": "69e6ca017a86f9ee470b535b7b018d3ffc93a97924b5c5ca99dcd5d376bb9911",
+      "executable": false
+    },
+    {
+      "path": "src/parsing/markdown.ts",
+      "sha256": "86501971bec151449a8f7b1216090ce0c9e55962f011c4cc5b2156872ae6e720",
+      "executable": false
+    },
+    {
+      "path": "src/sources/cache.ts",
+      "sha256": "a15acef0f1d225e2e16b77c163f72c21d839b704835aae42b4dc019d3e346ae9",
+      "executable": false
+    },
+    {
+      "path": "src/sources/git-runner.ts",
+      "sha256": "b25ea107116b30c7492ad5945e9b88269280f462cd62f8e9f1ec3cdad84360bf",
+      "executable": false
+    },
+    {
+      "path": "src/sources/git.ts",
+      "sha256": "8e5dc542f875018f0aa2e3c18e5f2cda47a69d3329eaa58f4d75599cc2dda91a",
+      "executable": false
+    },
+    {
+      "path": "src/sources/local.ts",
+      "sha256": "af6405478daf1e13f1db8af5e2f7ebe6cb743144737a31f3af4940171a252ec3",
+      "executable": false
+    },
+    {
+      "path": "src/sources/snapshot.ts",
+      "sha256": "25b81a2d3788b94478476c865f032233cb8e6128017c72490f283bacbec04594",
+      "executable": false
+    },
+    {
+      "path": "src/sync/apply.ts",
+      "sha256": "5186a816dd764a2609cac8a97f143c2adb663f197fd728a8484900e635971050",
+      "executable": false
+    },
+    {
+      "path": "src/sync/control.ts",
+      "sha256": "21d4ddd7c991a5ee0248eec77dfa8ffd8d28008420ce72899e5a209a28422d5f",
+      "executable": false
+    },
+    {
+      "path": "src/sync/journal.ts",
+      "sha256": "adb62e13446c6ee683d61418b0e19acb9eb74adf8b4010f279a2c39144e7ab6a",
+      "executable": false
+    },
+    {
+      "path": "src/sync/lock.ts",
+      "sha256": "96a99f2eb77450ee5455d68c4c9f706fab2f57781fe9c3b1bf33aaf2df2076f4",
+      "executable": false
+    },
+    {
+      "path": "src/sync/manifest.ts",
+      "sha256": "3333334a0b939a15a160eabbe15846777a852c72133c492ef6fa59faa65e0608",
+      "executable": false
+    },
+    {
+      "path": "src/sync/observe.ts",
+      "sha256": "6694c4e12d69240c3e955a638c67b6521ee7682a0a60697f9f6122b991dfee99",
+      "executable": false
+    },
+    {
+      "path": "src/sync/plan.ts",
+      "sha256": "b289158fa02e89c482f9a75bdcd950aa06499c4331a296b0542ce1d9a540fb29",
+      "executable": false
+    },
+    {
+      "path": "src/sync/recover.ts",
+      "sha256": "a76439004dae24a82515c0334aeb217ab1a323b53498b90f60b87e5d9215954e",
+      "executable": false
+    },
+    {
+      "path": "src/validation/packages.ts",
+      "sha256": "1b3d165d5edfb930c8eecbd8257eddd90c6d260620de9f8f51eab1c18ccd740e",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/README.md",
+      "sha256": "0f9c37afb3c6deac22a063117b0380f4293514c1869ba60a4220c71dae8fcdd6",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/skills/sample/SKILL.md",
+      "sha256": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/skills/sample/assets/data.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/skills/sample/references/note.md",
+      "sha256": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/skills/sample/scripts/do-not-execute.sh",
+      "sha256": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      "executable": true
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/steering/always.md",
+      "sha256": "bfd391c06a9cb3af1f6aa2b41295de3417e2a796975f2c2778c9b68658b337e0",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/steering/auto.md",
+      "sha256": "415d33b43c1ec3bdc95a00d17c6403d6da6b56d6759a2dcc165c3fb96e208321",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/steering/files.md",
+      "sha256": "5b3dba94a767bf4f0c851e510fefee520c5c16db93f1bafe8be68f6b8f18c5ad",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/steering/manual.md",
+      "sha256": "015211e12c996d6a61559e23f248f6e611afe885884e1b1a4db4a792c8f10bb7",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/steering/restricted.md",
+      "sha256": "e4670d3d7daa583df90f3c8abc8571c330b1335484125da7ead0dd7504182466",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/canonical-library/veritas.library.yaml",
+      "sha256": "aec8338adbbf13d70c994d7d76cc8a17266ef21598112f14046d30a05398dcd3",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/catalogue.json",
+      "sha256": "0fe4440f0a38ca12e2131b72c8821b92e71682d11217b016769d0b3e6ccb5070",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/ruler/.ruler/AGENTS.md",
+      "sha256": "6a29d940398d1a903a7bbb966fb885ddb136f1952c81a87decdb37e87f21bbd6",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/ruler/.ruler/files.md",
+      "sha256": "92c0f8a75bc961e941dccae87b8093e630b0b55c763a94e7f8bd8b6d378ca37c",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/ruler/.ruler/skills/sample/SKILL.md",
+      "sha256": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/ruler/.ruler/skills/sample/assets/data.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/ruler/.ruler/skills/sample/references/note.md",
+      "sha256": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/ruler/.ruler/skills/sample/scripts/do-not-execute.sh",
+      "sha256": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      "executable": true
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/rulesync/.rulesync/rules/always.md",
+      "sha256": "4450cc4a733fdf0de7e86d8bbba9b0e34e9a29061ef083db3cd43abf557a9b79",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/rulesync/.rulesync/rules/files.md",
+      "sha256": "4b964c42e36b1d2fb116d72036bef67f0066eccecd5db8c5a35361353adab9aa",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/rulesync/.rulesync/skills/sample/SKILL.md",
+      "sha256": "20f4fe485f52ccc4a86087579bff726df8d68e7091e11c063e5893abcc9254eb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/rulesync/.rulesync/skills/sample/assets/data.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/rulesync/.rulesync/skills/sample/references/note.md",
+      "sha256": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/competitor-inputs/rulesync/.rulesync/skills/sample/scripts/do-not-execute.sh",
+      "sha256": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      "executable": true
+    },
+    {
+      "path": "tests/fixtures/compatibility/restricted-skill/sample/SKILL.md",
+      "sha256": "16d25849a0da449f8195d2562fafc057f5cd61229e68e97f3120c12958af771a",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/restricted-skill/sample/agents/openai.yaml",
+      "sha256": "a1499d95abd8447558c535fe5554adcc3c9b988a0a39264a6283d430effe1e94",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/restricted-skill/sample/assets/data.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/restricted-skill/sample/references/note.md",
+      "sha256": "67cfecad8f5b79f6cb2487bd199d104ee5b9395a2cbbed38235dc37f5e658a58",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/restricted-skill/sample/scripts/do-not-execute.sh",
+      "sha256": "3bcae699d697bdff9d7e3f15c2835391ed211dce89e6225ab5986ab93113b4ab",
+      "executable": true
+    },
+    {
+      "path": "tests/fixtures/compatibility/results.json",
+      "sha256": "8e642fa18a4d2b50d70fb973d2f3847fdd48140d098b7fe6adb791ed75236cbf",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/retests.json",
+      "sha256": "a87d523b2570728aa30e29289e0f6bd54631c35edad89441c25e1cd3f2e30579",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/retests.py",
+      "sha256": "632e3e5310ec9fd9c80535d506b1ae2caa4852ea0b3b40fae255d26ec8127f21",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/run-probes.py",
+      "sha256": "402d2d0d55b79cd284bd577246cb9bc0731fe70c8e1ee9f52efc5a0045263bfa",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/compatibility/tool-pins.json",
+      "sha256": "3625d9f8562418d167b43c4bc2a7a632f347422896b7ee7ccbae4763b5d770e7",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/README.md",
+      "sha256": "41d2b5981b0eef6791bbc61f6229fc6f528c9be8142bcd8e97cbb190733b8106",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/skills/sample/LICENSE",
+      "sha256": "9c639d0a33a34efeaf01a09f49ca8c271db4cc4af357db71b799d1cf96de8cb1",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/skills/sample/README.md",
+      "sha256": "6ad5b9f2e813d0c1bad5808d6a6dfd6e34f65d1b9da0e29f363434911de6d864",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/skills/sample/SKILL.md",
+      "sha256": "1b1cb2f4a499b8a4f3173fd186a1a70164eb1906bb98659bc5b9eba72ae3689f",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/skills/sample/assets/data.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/skills/sample/references/note.md",
+      "sha256": "5147d39ffa7806cc323390cf1c759d4eb2eac7e6561fa93e8897e26dc11657a4",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/skills/sample/scripts/inert.sh",
+      "sha256": "96c01a3809e55c40086a9a35641eaca615bab1dad7bd50701ae613e3e40bbdf2",
+      "executable": true
+    },
+    {
+      "path": "tests/fixtures/packages/portable/steering/baseline.md",
+      "sha256": "c42c1870325d454955a61a1399d16431eba214b5d28a88442249c3c0f61225bf",
+      "executable": false
+    },
+    {
+      "path": "tests/fixtures/packages/portable/veritas.library.yaml",
+      "sha256": "b676cc4dc106e9eec1010d8fc62a8c35e924c414729ca93537e70711efd69b5b",
+      "executable": false
+    },
+    {
+      "path": "tests/integration/cli/workflow.test.ts",
+      "sha256": "c3e1d1848b8f777c067f91f02fa2541b0dbe714fe3fde92f12ad112f37434d45",
+      "executable": false
+    },
+    {
+      "path": "tests/integration/git-source/git-runner.test.ts",
+      "sha256": "c9753ff1092ea1c0cfbf42e1e8ddd74f7ae1d0d65add89baf6c4728da8d540c3",
+      "executable": false
+    },
+    {
+      "path": "tests/integration/git-source/git.test.ts",
+      "sha256": "51982eee8e70aaa1e2afc86b7630f9abfb9703e1da7d441812412f188b86acb9",
+      "executable": false
+    },
+    {
+      "path": "tests/integration/local-source/cache.test.ts",
+      "sha256": "27efff92399231e37934bed1809307588bdbec79f5c4a8c93d66dbcd4a15ae8b",
+      "executable": false
+    },
+    {
+      "path": "tests/integration/scaffold/cli.test.ts",
+      "sha256": "0bac28789b8cf53875b8d88ff1e0478f31fe071dfcae2c35eb6a42dca75bf6c5",
+      "executable": false
+    },
+    {
+      "path": "tests/integration/sync/transactions.test.ts",
+      "sha256": "90717e49c5243c93b029ae792b87738eab5357bd9113793e7b5ed15cb8ff45f7",
+      "executable": false
+    },
+    {
+      "path": "tests/package/consumer.test.mjs",
+      "sha256": "15bbff7577f12c34333a80b9a79e78f892986d947a1198aba64f3933a49e751d",
+      "executable": false
+    },
+    {
+      "path": "tests/package/consumer.ts.txt",
+      "sha256": "0c6e7392681e1e3faa8a7cfee28ddea9418f5ca21020b3b81404ef60d0d7db35",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/adapters/claude/render.test.ts",
+      "sha256": "ee94d327f3a116dad8eb7743907280366bd57c444fb6b170be524525f51aa7a5",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/adapters/codex/render.test.ts",
+      "sha256": "8791efdc209fcd10902533f5b93154c2e7fd9987ad6cd407756c20ec3edf38d2",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/adapters/kiro/render.test.ts",
+      "sha256": "5f2f692acc4d41bda09d57be1f9eb27ab274ad52687a24a5d7d7a3f3ba54b049",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/compiler/compile.test.ts",
+      "sha256": "53d3e8fc23423d9aec32eaf6c24733766ea751440cdf03d40d5d48e71af26b0e",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/config/schemas.test.ts",
+      "sha256": "fb2975732feebf6425bb7d7496cb8a6fd35eb7b68ac573960c1fd9388f540f20",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/model/primitives.test.ts",
+      "sha256": "26e005766770a0ec5c98854cba3d98f433424ba7e10541fb366897dcdec3702b",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/parsing/library.test.ts",
+      "sha256": "2eef70c36232d952f6ac10a146353687017ac1a68d51a5bd3c17d5142d812bfc",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/scaffold/version.test.ts",
+      "sha256": "af086e6e2f65040616f7142efb345fd7755980afec8ce92e75e1935bbe1cfc8d",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/sources/local/local.test.ts",
+      "sha256": "3443ca543adb6fc21bc33f5d1c578554cb9d45f4da744ff5dae23e5f25094dab",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/sync/plan/plan.test.ts",
+      "sha256": "476b209ec79f68d137deb23e043f76e822b28e0bfd24de9756d433b8057e5877",
+      "executable": false
+    },
+    {
+      "path": "tests/unit/validation/packages.test.ts",
+      "sha256": "cac8c43fa05aa20de8480fa0ecc796b6d6cd8a0b9fc44a345f78e2f5924126d1",
+      "executable": false
+    },
+    {
+      "path": "tsconfig.build.json",
+      "sha256": "a28d7fe45c351ffd3ecaf2160d8f95d09fe1323032500179eee795fbfbc2fba3",
+      "executable": false
+    },
+    {
+      "path": "tsconfig.json",
+      "sha256": "143164973972a0c9afdff08deffba177e829e21c588ce665c6af9648fe85bd6f",
+      "executable": false
+    },
+    {
+      "path": "vitest.config.ts",
+      "sha256": "baf97e73233329ba67e1569806c967b20bd6fc096233608326abe0def44f2aac",
+      "executable": false
+    },
+    {
+      "path": "vitest.integration.config.ts",
+      "sha256": "ca480fab34772696af5faeff0a59aac4c02a0d124c64ce7e9963c564fe759c7a",
+      "executable": false
+    }
+  ]
+}

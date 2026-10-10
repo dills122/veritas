@@ -1,0 +1,11 @@
+import { VERSION, compile, plan, parseProjectConfig, type CompileInput, type CompileResult, type WritePlan } from 'veritas';
+
+const version: string = VERSION;
+const input: CompileInput = {
+  rules: [], skills: [], targets: [{id: 'codex', profile: 'codex-repo-v1'}],
+  adaptations: [], inputDigest: 'a'.repeat(64),
+};
+const result: CompileResult = compile(input);
+const planned: Promise<WritePlan> = plan('/unused', result);
+const config = parseProjectConfig('schemaVersion: 1');
+void [version, planned, config];

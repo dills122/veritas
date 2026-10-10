@@ -1,0 +1,25 @@
+schemaVersion: 1
+steering:
+  - id: always
+    path: steering/always.md
+  - id: files
+    path: steering/files.md
+  - id: manual
+    path: steering/manual.md
+  - id: auto
+    path: steering/auto.md
+  - id: restricted
+    path: steering/restricted.md
+skills:
+  - name: sample
+    path: skills/sample
+profiles:
+  baseline:
+    steering: [always]
+    skills: [sample]
+  files:
+    steering: [always, files]
+    skills: [sample]
+  all-modes:
+    steering: [always, files, manual, auto, restricted]
+    skills: [sample]

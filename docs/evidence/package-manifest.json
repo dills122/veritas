@@ -1,0 +1,336 @@
+[
+  {
+    "id": "veritas@0.1.0-rc.0",
+    "name": "veritas",
+    "version": "0.1.0-rc.0",
+    "size": 43620,
+    "unpackedSize": 188643,
+    "shasum": "44c39646248c64fd57bd64cb63a5eed934e9e748",
+    "integrity": "sha512-wZuE3QWBGwXGy4qFS6uynXFzgrksanRW6fdd/EmU7OTNEsAt9w1YGXJVH2+0ozrbOdJ5RP5xj9sZ+kpersI1nQ==",
+    "filename": "veritas-0.1.0-rc.0.tgz",
+    "files": [
+      {
+        "path": "README.md",
+        "size": 2601,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/claude/index.d.ts",
+        "size": 147,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/claude/index.js",
+        "size": 2524,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/codex/index.d.ts",
+        "size": 146,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/codex/index.js",
+        "size": 2332,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/kiro/index.d.ts",
+        "size": 145,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/kiro/index.js",
+        "size": 1868,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/profiles/index.d.ts",
+        "size": 332,
+        "mode": 420
+      },
+      {
+        "path": "dist/adapters/profiles/index.js",
+        "size": 873,
+        "mode": 420
+      },
+      {
+        "path": "dist/bin.d.ts",
+        "size": 31,
+        "mode": 420
+      },
+      {
+        "path": "dist/bin.js",
+        "size": 109,
+        "mode": 493
+      },
+      {
+        "path": "dist/cli/pipeline.d.ts",
+        "size": 3047,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli/pipeline.js",
+        "size": 11175,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli/run.d.ts",
+        "size": 71,
+        "mode": 420
+      },
+      {
+        "path": "dist/cli/run.js",
+        "size": 12965,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler/index.d.ts",
+        "size": 139,
+        "mode": 420
+      },
+      {
+        "path": "dist/compiler/index.js",
+        "size": 10414,
+        "mode": 420
+      },
+      {
+        "path": "dist/config/parse.d.ts",
+        "size": 551,
+        "mode": 420
+      },
+      {
+        "path": "dist/config/parse.js",
+        "size": 2986,
+        "mode": 420
+      },
+      {
+        "path": "dist/config/schemas.d.ts",
+        "size": 11151,
+        "mode": 420
+      },
+      {
+        "path": "dist/config/schemas.js",
+        "size": 11625,
+        "mode": 420
+      },
+      {
+        "path": "dist/diagnostics/index.d.ts",
+        "size": 646,
+        "mode": 420
+      },
+      {
+        "path": "dist/diagnostics/index.js",
+        "size": 1209,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.d.ts",
+        "size": 861,
+        "mode": 420
+      },
+      {
+        "path": "dist/index.js",
+        "size": 720,
+        "mode": 420
+      },
+      {
+        "path": "dist/model/hash.d.ts",
+        "size": 319,
+        "mode": 420
+      },
+      {
+        "path": "dist/model/hash.js",
+        "size": 915,
+        "mode": 420
+      },
+      {
+        "path": "dist/model/paths.d.ts",
+        "size": 372,
+        "mode": 420
+      },
+      {
+        "path": "dist/model/paths.js",
+        "size": 3207,
+        "mode": 420
+      },
+      {
+        "path": "dist/model/types.d.ts",
+        "size": 5272,
+        "mode": 420
+      },
+      {
+        "path": "dist/model/types.js",
+        "size": 322,
+        "mode": 420
+      },
+      {
+        "path": "dist/parsing/library.d.ts",
+        "size": 199,
+        "mode": 420
+      },
+      {
+        "path": "dist/parsing/library.js",
+        "size": 7525,
+        "mode": 420
+      },
+      {
+        "path": "dist/parsing/markdown.d.ts",
+        "size": 538,
+        "mode": 420
+      },
+      {
+        "path": "dist/parsing/markdown.js",
+        "size": 2781,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/cache.d.ts",
+        "size": 407,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/cache.js",
+        "size": 7678,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/git-runner.d.ts",
+        "size": 399,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/git-runner.js",
+        "size": 4219,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/git.d.ts",
+        "size": 417,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/git.js",
+        "size": 11942,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/local.d.ts",
+        "size": 129,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/local.js",
+        "size": 371,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/snapshot.d.ts",
+        "size": 1094,
+        "mode": 420
+      },
+      {
+        "path": "dist/sources/snapshot.js",
+        "size": 9408,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/apply.d.ts",
+        "size": 243,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/apply.js",
+        "size": 2026,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/control.d.ts",
+        "size": 417,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/control.js",
+        "size": 1310,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/journal.d.ts",
+        "size": 1874,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/journal.js",
+        "size": 10190,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/lock.d.ts",
+        "size": 1154,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/lock.js",
+        "size": 3797,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/manifest.d.ts",
+        "size": 229,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/manifest.js",
+        "size": 1050,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/observe.d.ts",
+        "size": 711,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/observe.js",
+        "size": 5986,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/plan.d.ts",
+        "size": 403,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/plan.js",
+        "size": 8770,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/recover.d.ts",
+        "size": 318,
+        "mode": 420
+      },
+      {
+        "path": "dist/sync/recover.js",
+        "size": 5309,
+        "mode": 420
+      },
+      {
+        "path": "dist/validation/packages.d.ts",
+        "size": 509,
+        "mode": 420
+      },
+      {
+        "path": "dist/validation/packages.js",
+        "size": 6457,
+        "mode": 420
+      },
+      {
+        "path": "package.json",
+        "size": 1708,
+        "mode": 420
+      }
+    ],
+    "entryCount": 64,
+    "bundled": []
+  }
+]

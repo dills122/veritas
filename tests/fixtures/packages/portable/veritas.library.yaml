@@ -1,0 +1,11 @@
+schemaVersion: 1
+steering:
+  - id: baseline
+    path: steering/baseline.md
+skills:
+  - name: sample
+    path: skills/sample
+profiles:
+  default:
+    steering: [baseline]
+    skills: [sample]

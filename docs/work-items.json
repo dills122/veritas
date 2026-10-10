@@ -1,0 +1,855 @@
+{
+  "schemaVersion": 1,
+  "objective": "Veritas 0.1.0 local release candidate with bounded scope",
+  "status": "completed",
+  "requirements_document": "docs/specification.md",
+  "decisions_document": "docs/decisions.md",
+  "evidence_directory": "docs/evidence",
+  "items": [
+    {
+      "id": "TASK-001",
+      "title": "Compatibility fixtures and build versus reuse decision",
+      "priority": "P0",
+      "wave": 0,
+      "depends_on": [],
+      "delivery_unit": "research",
+      "owner": "compatibility_research",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "tests/fixtures/compatibility/",
+        "docs/research/build-vs-reuse.md"
+      ],
+      "requirements": [
+        "REQ-004",
+        "REQ-005",
+        "REQ-014"
+      ],
+      "decisions": [
+        "DEC-002",
+        "DEC-005",
+        "DEC-010"
+      ],
+      "deliverable": "A versioned fixture catalogue and one bounded empirical comparison of pinned Rulesync and Ruler versions; confirmed or revised DEC-002.",
+      "acceptance": [
+        "Represent always/files/manual/auto rules, complete skills, restricted controls, shared loading, unmanaged and edited files.",
+        "Within 30 minutes, record exact revisions, representative always/files/skill commands, deterministic deltas and edited-file behavior in disposable repos. Catalog other cases without indefinite investigation.",
+        "Compare deterministic pure API reuse and licensing against ownership/pinning/recovery needs. Never infer absence from README features.",
+        "Confirm standalone baseline or revise contracts and tasks before TASK-003; record unavailable network/tool execution as a decision limitation."
+      ],
+      "verification": [
+        "Recorded competitor commands and output hashes in docs/research/build-vs-reuse.md",
+        "python3 scripts/check-planning.py"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-001.md"
+      ],
+      "blockers": [],
+      "decision_gate": "DEC-002 must be explicitly resolved before broad compiler implementation.",
+      "budget_minutes": 30
+    },
+    {
+      "id": "TASK-002",
+      "title": "Package scaffold and real verification commands",
+      "priority": "P0",
+      "wave": 0,
+      "depends_on": [],
+      "delivery_unit": "internal-subagent",
+      "owner": "package_scaffold",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "package.json",
+        "package-lock.json",
+        "tsconfig*.json",
+        "eslint.config.*",
+        ".prettier*",
+        "vitest.config.*",
+        "src/bin.ts",
+        "src/index.ts",
+        "tests/package/",
+        "scripts/",
+        "tests/unit/scaffold/",
+        "tests/integration/scaffold/"
+      ],
+      "requirements": [
+        "REQ-013"
+      ],
+      "decisions": [
+        "DEC-001"
+      ],
+      "deliverable": "A strict ESM npm package with clean build/test/lint/typecheck scripts and an executable version/help skeleton.",
+      "acceptance": [
+        "Select Node 24, inspect current dependency APIs, pin compatible versions and retain a reproducible npm lock.",
+        "Define all planned scripts, including verify and test:package; a core import has no CLI/FS side effects.",
+        "Run a clean npm ci/build and install the packed CLI into a temporary consumer; verify help/version and declaration exports.",
+        "Reject a vacuous green suite: record that only scaffold/package behavior is implemented; keep product requirements pending."
+      ],
+      "verification": [
+        "npm ci",
+        "npm run verify",
+        "npm run test:package"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-002.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 40
+    },
+    {
+      "id": "TASK-003",
+      "title": "Freeze schemas normalized model and profile contracts",
+      "priority": "P0",
+      "wave": 1,
+      "depends_on": [
+        "TASK-001",
+        "TASK-002"
+      ],
+      "delivery_unit": "lead",
+      "owner": "lead",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/model/",
+        "src/config/",
+        "src/adapters/profiles/",
+        "src/diagnostics/",
+        "tests/unit/config/",
+        "tests/unit/model/",
+        "docs/technical-design.md",
+        "docs/decisions.md"
+      ],
+      "requirements": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-006",
+        "REQ-011",
+        "REQ-012"
+      ],
+      "decisions": [
+        "DEC-003",
+        "DEC-005",
+        "DEC-006",
+        "DEC-008",
+        "DEC-011"
+      ],
+      "deliverable": "Strict version-1 schemas, normalized unions, adapter interface, deterministic serialization and hashes, profile capability records.",
+      "acceptance": [
+        "Model config/library/frontmatter/lock/manifest/journal tagged unions and command outcome envelopes; reject unknown fields and YAML alias/duplicate-key forms.",
+        "Define source positions, outputVersion, consumers, executable intent, and exact adaptation validation.",
+        "Test namespace/profile selection, duplicate IDs/skill names, path portability, bounded sizes and version mismatch.",
+        "Publish contract fixtures for parallel owners; lead alone changes shared contracts afterward."
+      ],
+      "verification": [
+        "npm test -- tests/unit/config tests/unit/model",
+        "npm run typecheck",
+        "npm run lint"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-003.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 40
+    },
+    {
+      "id": "TASK-004",
+      "title": "Parse and validate canonical steering and complete skill packages",
+      "priority": "P0",
+      "wave": 2,
+      "depends_on": [
+        "TASK-003"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "compatibility_research",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/parsing/",
+        "src/validation/",
+        "tests/unit/parsing/",
+        "tests/unit/validation/",
+        "tests/fixtures/packages/"
+      ],
+      "requirements": [
+        "REQ-001",
+        "REQ-003",
+        "REQ-006",
+        "REQ-012"
+      ],
+      "decisions": [
+        "DEC-003",
+        "DEC-009",
+        "DEC-011"
+      ],
+      "deliverable": "Canonical packages with precise errors, preserved bodies/assets, safe references and validated selection.",
+      "acceptance": [
+        "Test frontmatter boundaries, code fences/BOM policy, CRLF normalization, UTF-8 errors and duplicate metadata.",
+        "Validate standard skill name/directory identity, licenses, parsed relative links, binary assets and executable intent.",
+        "Reject unsafe package entries, reserved native imports in canonical steering, unknown controls, traversal and size/depth excess.",
+        "Separate activation-pattern semantics from source discovery; unmatched future-file patterns remain visible warnings."
+      ],
+      "verification": [
+        "npm test -- tests/unit/parsing tests/unit/validation",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-004.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 60
+    },
+    {
+      "id": "TASK-005",
+      "title": "Local immutable snapshots and verified source cache",
+      "priority": "P0",
+      "wave": 2,
+      "depends_on": [
+        "TASK-003"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "package_scaffold",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "src/sources/local.ts",
+        "src/sources/cache.ts",
+        "src/sources/snapshot.ts",
+        "tests/unit/sources/local/",
+        "tests/integration/local-source/"
+      ],
+      "requirements": [
+        "REQ-002",
+        "REQ-006",
+        "REQ-009",
+        "REQ-010",
+        "REQ-012"
+      ],
+      "decisions": [
+        "DEC-006",
+        "DEC-011",
+        "DEC-012"
+      ],
+      "deliverable": "Content-addressed local upstream snapshots and a live project-overlay reader with integrity checks.",
+      "acceptance": [
+        "Pin local upstream bytes independently of subsequent directory edits; overlay edits change effective input digest without repinning upstream.",
+        "Tree digest is stable across traversal order and extraction umask; reject symlinks/hardlinks and unsafe file types.",
+        "Cache corruption/miss fails read-only commands, which perform no writes or source refresh.",
+        "Exact local restore succeeds only for the locked digest; changed local source requires intentional update."
+      ],
+      "verification": [
+        "npm test -- tests/unit/sources/local",
+        "npm run test:integration -- tests/integration/local-source"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-005.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 45
+    },
+    {
+      "id": "TASK-006",
+      "title": "Codex pure adapter",
+      "priority": "P0",
+      "wave": 2,
+      "depends_on": [
+        "TASK-003"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "lead",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "src/adapters/codex/",
+        "tests/unit/adapters/codex/",
+        "tests/fixtures/adapters/codex/"
+      ],
+      "requirements": [
+        "REQ-003",
+        "REQ-004",
+        "REQ-006"
+      ],
+      "decisions": [
+        "DEC-005",
+        "DEC-008",
+        "DEC-009"
+      ],
+      "deliverable": "Pure rendering of a compiler-selected AGENTS baseline and .agents skill packages.",
+      "acceptance": [
+        "Render exact stable baseline bytes with provenance; preserve package assets and supported sidecars.",
+        "Unsupported steering modes and unmapped restrictions yield structured errors; exact files-to-always adaptation remains labeled adapted.",
+        "No nested AGENTS, override, implicit fetch, filesystem read/write or baseline selection inside the adapter."
+      ],
+      "verification": [
+        "npm test -- tests/unit/adapters/codex",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-006.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 35
+    },
+    {
+      "id": "TASK-007",
+      "title": "Claude pure adapter",
+      "priority": "P0",
+      "wave": 2,
+      "depends_on": [
+        "TASK-003"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "lead",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "src/adapters/claude/",
+        "tests/unit/adapters/claude/",
+        "tests/fixtures/adapters/claude/"
+      ],
+      "requirements": [
+        "REQ-003",
+        "REQ-004",
+        "REQ-006"
+      ],
+      "decisions": [
+        "DEC-005",
+        "DEC-008",
+        "DEC-009"
+      ],
+      "deliverable": "Pure CLAUDE import, native rules and skill rendering for the tested profile.",
+      "acceptance": [
+        "Shared baseline is imported once; native rules exclude duplicate shared text.",
+        "Paths metadata round-trips for supported patterns; malformed/unsupported metadata never becomes unconditional content.",
+        "Manual/auto steering and unsupported skill restrictions fail; supported typed native controls have explicit fixtures."
+      ],
+      "verification": [
+        "npm test -- tests/unit/adapters/claude",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-007.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 35
+    },
+    {
+      "id": "TASK-008",
+      "title": "Kiro IDE and CLI pure adapter profiles",
+      "priority": "P0",
+      "wave": 2,
+      "depends_on": [
+        "TASK-003"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "lead",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "src/adapters/kiro/",
+        "tests/unit/adapters/kiro/",
+        "tests/fixtures/adapters/kiro/"
+      ],
+      "requirements": [
+        "REQ-003",
+        "REQ-004",
+        "REQ-006",
+        "REQ-014"
+      ],
+      "decisions": [
+        "DEC-005",
+        "DEC-008",
+        "DEC-010"
+      ],
+      "deliverable": "Pure always/fileMatch/manual/auto steering and native skills, with separate surface identities.",
+      "acceptance": [
+        "Auto emits required name/description; fileMatch arrays and manual discovery metadata have fixtures.",
+        "Shared baseline is not duplicated; both surface profiles can coalesce only identical bytes and compatible loading declarations.",
+        "Unsupported release/surface/controls fail honestly; no custom-agent resources or CLI argument templating generated in v0.1."
+      ],
+      "verification": [
+        "npm test -- tests/unit/adapters/kiro",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-008.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 35
+    },
+    {
+      "id": "TASK-009",
+      "title": "Compiler selection and combined target loading analysis",
+      "priority": "P0",
+      "wave": 3,
+      "depends_on": [
+        "TASK-004",
+        "TASK-005",
+        "TASK-006",
+        "TASK-007",
+        "TASK-008"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "lead",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/compiler/",
+        "tests/unit/compiler/",
+        "tests/fixtures/compiler/"
+      ],
+      "requirements": [
+        "REQ-001",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006"
+      ],
+      "decisions": [
+        "DEC-003",
+        "DEC-005",
+        "DEC-008"
+      ],
+      "deliverable": "A deterministic compile API with per-rule compatibility and validated loading routes for the whole selected target set.",
+      "acceptance": [
+        "Test all family subsets plus both Kiro surfaces, restricted consumers, one baseline route, and shadowed root instruction files.",
+        "Codex-only text beside an unintended AGENTS consumer fails before artifact creation.",
+        "Detect case/path/output collisions and stale adaptation declarations; include stable accepted adaptations in identity.",
+        "Repeated compilation yields identical bytes, diagnostics and manifest inputs under randomized input order."
+      ],
+      "verification": [
+        "npm test -- tests/unit/compiler",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-009.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 50
+    },
+    {
+      "id": "TASK-010",
+      "title": "Ownership observation drift comparison and full write planning",
+      "priority": "P0",
+      "wave": 2,
+      "depends_on": [
+        "TASK-003"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "sync_planner",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/sync/observe.ts",
+        "src/sync/plan.ts",
+        "src/sync/manifest.ts",
+        "tests/unit/sync/plan/"
+      ],
+      "requirements": [
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-009",
+        "REQ-011",
+        "REQ-012"
+      ],
+      "decisions": [
+        "DEC-004",
+        "DEC-011",
+        "DEC-012"
+      ],
+      "deliverable": "A read-only complete operation plan with observed preconditions and deterministic manifest drift.",
+      "acceptance": [
+        "Cover every row of the ownership table; identical unmanaged files still conflict.",
+        "Protect edited bytes/modes, malformed manifests, unsafe output kinds/ancestors, Git/control paths, and unlisted skill assets.",
+        "Check detects missing outputs and manifest-only provenance drift; plan/check leave repository bytes unchanged.",
+        "Inventory existing guidance with shadow errors versus qualification warnings; no implicit adoption or broad directory deletion."
+      ],
+      "verification": [
+        "npm test -- tests/unit/sync/plan",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-010.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 50
+    },
+    {
+      "id": "TASK-011",
+      "title": "Lock journal writer and restartable recovery",
+      "priority": "P0",
+      "wave": 3,
+      "depends_on": [
+        "TASK-010"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "sync_planner",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/sync/lock.ts",
+        "src/sync/journal.ts",
+        "src/sync/apply.ts",
+        "src/sync/recover.ts",
+        "src/sync/control.ts",
+        "tests/integration/sync/"
+      ],
+      "requirements": [
+        "REQ-007",
+        "REQ-008",
+        "REQ-012"
+      ],
+      "decisions": [
+        "DEC-004",
+        "DEC-007",
+        "DEC-012"
+      ],
+      "deliverable": "Safe generated-output and config/lock transactions with exclusive locking and interruption recovery.",
+      "acceptance": [
+        "Replan/recheck preconditions under the lock; never apply a conflict-free subset of a conflicted plan.",
+        "Exercise representative failures before/after replacement, manifest commit and cleanup, plus repeated recovery and external-edit conflicts. Exhaustive permutations follow after RC.",
+        "Concurrent mutators cannot interleave; nonce-safe release preserves another owner. Do not auto-remove stale locks in the RC.",
+        "External edits after interruption block rollback; malformed or forged journals cannot expand allowed writes.",
+        "Second sync preserves managed mtimes/bytes/modes/manifest; test init between config/lock writes and update commit boundaries."
+      ],
+      "verification": [
+        "npm run test:integration -- tests/integration/sync",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-011.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 80
+    },
+    {
+      "id": "TASK-012",
+      "title": "Local CLI vertical slice and JSON exit contracts",
+      "priority": "P0",
+      "wave": 4,
+      "depends_on": [
+        "TASK-009",
+        "TASK-011"
+      ],
+      "delivery_unit": "lead",
+      "owner": "lead",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/cli/",
+        "src/bin.ts",
+        "src/index.ts",
+        "tests/integration/cli/"
+      ],
+      "requirements": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-004",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-015"
+      ],
+      "decisions": [
+        "DEC-004",
+        "DEC-006",
+        "DEC-007",
+        "DEC-012"
+      ],
+      "deliverable": "End-to-end init/validate/plan/sync/check/update/recover against local libraries.",
+      "acceptance": [
+        "A clean temp repo gets config/lock, always rule and full skill, then a no-op sync/check.",
+        "Use stable stdout JSON envelopes and documented exit precedence; help/core import has no filesystem side effects.",
+        "Read-only commands neither fetch nor create caches; local update changes lock but not outputs.",
+        "CLI conflicts leave files intact, precise diagnostics identify sources and recovery is explicit.",
+        "Export the reusable compile/plan APIs without importing bin side effects."
+      ],
+      "verification": [
+        "npm run test:integration -- tests/integration/cli",
+        "npm run verify",
+        "npm run test:package"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-012.md"
+      ],
+      "blockers": [],
+      "decision_gate": "Local vertical slice must pass before claiming product readiness.",
+      "budget_minutes": 60
+    },
+    {
+      "id": "TASK-013",
+      "title": "Git pinning offline restore and intentional update",
+      "priority": "P0",
+      "wave": 4,
+      "depends_on": [
+        "TASK-005"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "package_scaffold",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "src/sources/git.ts",
+        "src/sources/git-runner.ts",
+        "tests/integration/git-source/"
+      ],
+      "requirements": [
+        "REQ-002",
+        "REQ-009",
+        "REQ-010",
+        "REQ-012"
+      ],
+      "decisions": [
+        "DEC-006",
+        "DEC-009",
+        "DEC-012"
+      ],
+      "deliverable": "Pinned Git snapshots and exact restore, using injected transport behind the source contract.",
+      "acceptance": [
+        "Use local bare Git fixtures for branch/tag/commit, moved refs, missing/auth errors, object modes, unsupported submodules/LFS and corrupt trees.",
+        "Routine regeneration remains offline and unchanged after refs move; update reports new provenance without writing outputs.",
+        "Git argv never invokes a shell; imported scripts/hooks/filters are not run by extraction; credential values never appear in diagnostics.",
+        "Restore uses the locked commit/digest and leaves the lock unchanged; ensure cache is worktree-local.",
+        "Lead wires the source provider into CLI after TASK-012 without changing the public command contract."
+      ],
+      "verification": [
+        "npm run test:integration -- tests/integration/git-source",
+        "npm run typecheck"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-013.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 50
+    },
+    {
+      "id": "TASK-014",
+      "title": "Package and verify the initial macOS release candidate",
+      "priority": "P1",
+      "wave": 5,
+      "depends_on": [
+        "TASK-012",
+        "TASK-013"
+      ],
+      "delivery_unit": "lead",
+      "owner": "lead",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "package.json",
+        "package-lock.json",
+        ".github/workflows/",
+        "tests/package/",
+        "tests/integration/platform/",
+        "scripts/"
+      ],
+      "requirements": [
+        "REQ-013"
+      ],
+      "decisions": [
+        "DEC-001",
+        "DEC-011"
+      ],
+      "deliverable": "Clean package consumer and Node 24 macOS verification; retain a portable CI recipe without claiming unexecuted OS results.",
+      "acceptance": [
+        "Packed CLI runs outside the source checkout, imports core declarations, and includes only required runtime files.",
+        "Exercise path collisions, executable mode semantics, locks, renames and Git on macOS; Linux/Windows certification is explicitly deferred.",
+        "npm ci from the committed lock succeeds; real verify and package checks do not hide skipped product suites.",
+        "Do not publish or create a remote/registry project as part of this task."
+      ],
+      "verification": [
+        "npm ci",
+        "npm run verify",
+        "npm run test:package",
+        "Recorded macOS Node 24 results; Linux/Windows follow-up gaps labeled"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-014.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 30
+    },
+    {
+      "id": "TASK-015",
+      "title": "Examples authoring adoption and operator documentation",
+      "priority": "P1",
+      "wave": 5,
+      "depends_on": [
+        "TASK-012",
+        "TASK-013"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "compatibility_research",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "examples/",
+        "README.md",
+        "docs/user-guide.md"
+      ],
+      "requirements": [
+        "REQ-015",
+        "REQ-011"
+      ],
+      "decisions": [
+        "DEC-003",
+        "DEC-004",
+        "DEC-007"
+      ],
+      "deliverable": "Runnable example library/project and user docs covering every supported command and conflict/recovery outcome.",
+      "acceptance": [
+        "Test documented examples in temp copies; never sync into this repo root or its bootstrap guidance.",
+        "Show local overlay editing, Git source updates, cache restore, unsupported steering and exact adaptation.",
+        "Describe manual migration of existing files without auto-adoption/force overwrite and explain ownership manifest.",
+        "Explain recovery after interruption and honest compatibility limits; validate copy-paste commands against built package."
+      ],
+      "verification": [
+        "node examples/verify.mjs",
+        "Installed package walkthrough recorded in docs/evidence/TASK-015.md",
+        "python3 scripts/check-planning.py"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-015.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 30
+    },
+    {
+      "id": "TASK-016",
+      "title": "Audit documentation-based compatibility labels",
+      "priority": "P1",
+      "wave": 6,
+      "depends_on": [
+        "TASK-014",
+        "TASK-015"
+      ],
+      "delivery_unit": "internal-subagent",
+      "owner": "compatibility_research",
+      "status": "completed",
+      "size": "M",
+      "scope": [
+        "docs/research/compatibility.md",
+        "docs/compatibility.md",
+        "docs/evidence/harnesses/",
+        "tests/integration/harnesses/"
+      ],
+      "requirements": [
+        "REQ-004",
+        "REQ-005",
+        "REQ-014"
+      ],
+      "decisions": [
+        "DEC-005",
+        "DEC-010"
+      ],
+      "deliverable": "Versioned support matrix with compiler fixture evidence; live harness certification is follow-up.",
+      "acceptance": [
+        "Record profile/source references and fixture evidence for supported family combinations.",
+        "Clearly label all live loading behavior unverified unless actual evidence is available.",
+        "Unsupported or advanced controls fail instead of being stripped; retain follow-up certification checklist."
+      ],
+      "verification": [
+        "npm test -- tests/unit/compiler tests/unit/adapters",
+        "Review docs/compatibility.md against implemented profiles"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-016.md"
+      ],
+      "blockers": [],
+      "decision_gate": "No runtime-certified claim without observed loading evidence; lack of access does not erase the gap.",
+      "budget_minutes": 15
+    },
+    {
+      "id": "TASK-017",
+      "title": "Integrated review traceability and release candidate closure",
+      "priority": "P1",
+      "wave": 7,
+      "depends_on": [
+        "TASK-014",
+        "TASK-015",
+        "TASK-016"
+      ],
+      "delivery_unit": "lead",
+      "owner": "lead",
+      "status": "completed",
+      "size": "L",
+      "scope": [
+        "docs/work-items.json",
+        "docs/implementation-plan.md",
+        "docs/test-strategy.md",
+        "docs/evidence/",
+        "docs/release-checklist.md",
+        "docs/decisions.md"
+      ],
+      "requirements": [
+        "REQ-001",
+        "REQ-002",
+        "REQ-003",
+        "REQ-004",
+        "REQ-005",
+        "REQ-006",
+        "REQ-007",
+        "REQ-008",
+        "REQ-009",
+        "REQ-010",
+        "REQ-011",
+        "REQ-012",
+        "REQ-013",
+        "REQ-014",
+        "REQ-015"
+      ],
+      "decisions": [
+        "DEC-001",
+        "DEC-002",
+        "DEC-003",
+        "DEC-004",
+        "DEC-005",
+        "DEC-006",
+        "DEC-007",
+        "DEC-008",
+        "DEC-009",
+        "DEC-010",
+        "DEC-011",
+        "DEC-012"
+      ],
+      "deliverable": "A reviewed local release candidate with requirement evidence, resolved regressions, and explicit certification/publication limits.",
+      "acceptance": [
+        "Fresh-context reviewer assesses retained code and implementation plan; fix actionable findings and rerun affected checks.",
+        "Every requirement has executed test evidence; every task is complete or explicitly blocked/deferred with parent implications.",
+        "Run clean install/full verify/package/examples and fault-recovery suite on integrated state; record exact SHA/diff identity or uncommitted state.",
+        "No publication, push, merge or live certification claims without actual authorization/evidence; final handoff states completed/blocked/deferred accurately."
+      ],
+      "verification": [
+        "npm ci",
+        "npm run verify",
+        "npm run test:package",
+        "python3 scripts/check-planning.py",
+        "python3 scripts/verify-bootstrap.py",
+        "serena memories check",
+        "Fresh-context review and recorded CI evidence"
+      ],
+      "evidence": [
+        "docs/evidence/TASK-017.md",
+        "docs/evidence/review-3.md"
+      ],
+      "blockers": [],
+      "decision_gate": null,
+      "budget_minutes": 40
+    }
+  ],
+  "execution_budget": "docs/execution-budget.json"
+}

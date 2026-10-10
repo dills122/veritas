@@ -1,0 +1,8 @@
+.agents/
+.codex/skills/
+.codex/steering/
+.serena/
+.codebase-memory/
+node_modules/
+dist/
+coverage/

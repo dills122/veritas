@@ -1,0 +1,14 @@
+schemaVersion: 1
+sources:
+  company:
+    path: ../company-library
+profile: company/native-typescript
+targets:
+  - id: codex
+    profile: codex-repo-v1
+  - id: claude
+    profile: claude-repo-v1
+  - id: kiro-ide
+    profile: kiro-ide-repo-v1
+compatibility:
+  adaptations: []

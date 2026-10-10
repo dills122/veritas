@@ -1,0 +1,155 @@
+{
+  "examples": "passed",
+  "checks": [
+    "baseline",
+    "repeat-determinism",
+    "complete-skill-assets",
+    "native-conditional-selection",
+    "unsupported-codex-files",
+    "explicit-adaptation",
+    "shared-scope-leak",
+    "local-overlay"
+  ],
+  "artifacts": [
+    {
+      "path": ".agents/skills/review-repository/LICENSE",
+      "sha256": "c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["codex"]
+    },
+    {
+      "path": ".agents/skills/review-repository/README.md",
+      "sha256": "147e05bba4c6982ce861075891fb63fe5995e17f2e20dbee2040dae50ca83460",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["codex"]
+    },
+    {
+      "path": ".agents/skills/review-repository/SKILL.md",
+      "sha256": "17da66895a8ff754baa60d1400216699b86e2b78920987a01312fb99d2eae83a",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["codex"]
+    },
+    {
+      "path": ".agents/skills/review-repository/assets/bytes.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["codex"]
+    },
+    {
+      "path": ".agents/skills/review-repository/references/questions.md",
+      "sha256": "2e5b49b39bc2fcbde2f716b5b8af462156dfe6ef415d728b624eda5fc6e9c8fa",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["codex"]
+    },
+    {
+      "path": ".agents/skills/review-repository/scripts/inert.sh",
+      "sha256": "2bbb82c2a5fe81f9cf554eeebcfd6426f2d5f3ff15e0a0ecbb3f3bdb1fc68c41",
+      "executable": true,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["codex"]
+    },
+    {
+      "path": ".claude/skills/review-repository/LICENSE",
+      "sha256": "c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["claude"]
+    },
+    {
+      "path": ".claude/skills/review-repository/README.md",
+      "sha256": "147e05bba4c6982ce861075891fb63fe5995e17f2e20dbee2040dae50ca83460",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["claude"]
+    },
+    {
+      "path": ".claude/skills/review-repository/SKILL.md",
+      "sha256": "17da66895a8ff754baa60d1400216699b86e2b78920987a01312fb99d2eae83a",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["claude"]
+    },
+    {
+      "path": ".claude/skills/review-repository/assets/bytes.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["claude"]
+    },
+    {
+      "path": ".claude/skills/review-repository/references/questions.md",
+      "sha256": "2e5b49b39bc2fcbde2f716b5b8af462156dfe6ef415d728b624eda5fc6e9c8fa",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["claude"]
+    },
+    {
+      "path": ".claude/skills/review-repository/scripts/inert.sh",
+      "sha256": "2bbb82c2a5fe81f9cf554eeebcfd6426f2d5f3ff15e0a0ecbb3f3bdb1fc68c41",
+      "executable": true,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["claude"]
+    },
+    {
+      "path": ".kiro/skills/review-repository/LICENSE",
+      "sha256": "c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["kiro-ide"]
+    },
+    {
+      "path": ".kiro/skills/review-repository/README.md",
+      "sha256": "147e05bba4c6982ce861075891fb63fe5995e17f2e20dbee2040dae50ca83460",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["kiro-ide"]
+    },
+    {
+      "path": ".kiro/skills/review-repository/SKILL.md",
+      "sha256": "17da66895a8ff754baa60d1400216699b86e2b78920987a01312fb99d2eae83a",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["kiro-ide"]
+    },
+    {
+      "path": ".kiro/skills/review-repository/assets/bytes.bin",
+      "sha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["kiro-ide"]
+    },
+    {
+      "path": ".kiro/skills/review-repository/references/questions.md",
+      "sha256": "2e5b49b39bc2fcbde2f716b5b8af462156dfe6ef415d728b624eda5fc6e9c8fa",
+      "executable": false,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["kiro-ide"]
+    },
+    {
+      "path": ".kiro/skills/review-repository/scripts/inert.sh",
+      "sha256": "2bbb82c2a5fe81f9cf554eeebcfd6426f2d5f3ff15e0a0ecbb3f3bdb1fc68c41",
+      "executable": true,
+      "sourceIds": ["company/review-repository"],
+      "consumers": ["kiro-ide"]
+    },
+    {
+      "path": "AGENTS.md",
+      "sha256": "6f00d9d35848421f88499701cab762d0eb9cd369125cafb13c2c4a3992e8dd66",
+      "executable": false,
+      "sourceIds": ["company/baseline"],
+      "consumers": ["claude", "codex", "kiro-ide"]
+    },
+    {
+      "path": "CLAUDE.md",
+      "sha256": "333036748e66c6c00cb5a9be1b3bac3b6d59ccde56802f09f0c61bf913342d54",
+      "executable": false,
+      "sourceIds": ["company/baseline"],
+      "consumers": ["claude"]
+    }
+  ]
+}

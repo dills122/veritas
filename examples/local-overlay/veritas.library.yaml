@@ -1,0 +1,8 @@
+schemaVersion: 1
+steering:
+  - id: project-context
+    path: steering/project-context.md
+profiles:
+  project:
+    steering: [project-context]
+    skills: []

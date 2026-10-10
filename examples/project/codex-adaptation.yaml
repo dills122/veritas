@@ -1,0 +1,13 @@
+schemaVersion: 1
+sources:
+  company:
+    path: ../company-library
+profile: company/typescript
+targets:
+  - id: codex
+    profile: codex-repo-v1
+compatibility:
+  adaptations:
+    - rule: company/typescript
+      target: codex
+      kind: files-to-always

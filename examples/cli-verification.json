@@ -1,0 +1,339 @@
+{
+  "status": "passed",
+  "packageVersion": "0.1.0-rc.0",
+  "node": "v24.18.0",
+  "platform": "darwin",
+  "executable": "/private/tmp/veritas-closure-TtGl5H/tools/node_modules/.bin/veritas",
+  "binarySha256": "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+  "lockRestoreSha256": "290bc4622ec5565c79a638c5f1e26ed44c13cf29bce41ba420d3c8b06019350e",
+  "commands": [
+    {
+      "args": [
+        "init",
+        "--project",
+        "<temporary-root>/project",
+        "--json",
+        "--source",
+        "../company-library",
+        "--profile",
+        "company/baseline",
+        "--targets",
+        "codex,claude,kiro-ide"
+      ],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["validate", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["plan", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 1,
+      "outcome": "drift",
+      "diagnostics": []
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["update", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["plan", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 1,
+      "outcome": "drift",
+      "diagnostics": []
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 4,
+      "outcome": "operational",
+      "diagnostics": ["CACHE_MISSING"]
+    },
+    {
+      "args": [
+        "update",
+        "--project",
+        "<temporary-root>/project",
+        "--json",
+        "--restore"
+      ],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["recover", "--project", "<temporary-root>/project", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/project", "--json"],
+      "exit": 5,
+      "outcome": "busy",
+      "diagnostics": ["SYNC_BUSY"]
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/project", "--json"],
+      "exit": 5,
+      "outcome": "busy",
+      "diagnostics": ["SYNC_BUSY"]
+    },
+    {
+      "args": ["recover", "--project", "<temporary-root>/project", "--json"],
+      "exit": 5,
+      "outcome": "busy",
+      "diagnostics": ["SYNC_BUSY"]
+    },
+    {
+      "args": [
+        "init",
+        "--project",
+        "<temporary-root>/with-local",
+        "--json",
+        "--source",
+        "../company-library",
+        "--profile",
+        "company/baseline",
+        "--targets",
+        "codex,claude,kiro-ide",
+        "--local",
+        ".veritas/local",
+        "--local-profile",
+        "project"
+      ],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["plan", "--project", "<temporary-root>/with-local", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/with-local", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/with-local", "--json"],
+      "exit": 1,
+      "outcome": "drift",
+      "diagnostics": []
+    },
+    {
+      "args": ["plan", "--project", "<temporary-root>/with-local", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/with-local", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/with-local", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": [
+        "init",
+        "--project",
+        "<temporary-root>/native",
+        "--json",
+        "--source",
+        "../company-library",
+        "--profile",
+        "company/native-typescript",
+        "--targets",
+        "codex,claude,kiro-ide"
+      ],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["PATTERN_NO_MATCH"]
+    },
+    {
+      "args": ["validate", "--project", "<temporary-root>/native", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["PATTERN_NO_MATCH"]
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/native", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["PATTERN_NO_MATCH"]
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/native", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["PATTERN_NO_MATCH"]
+    },
+    {
+      "args": [
+        "init",
+        "--project",
+        "<temporary-root>/unsupported",
+        "--json",
+        "--source",
+        "../company-library",
+        "--profile",
+        "company/typescript",
+        "--targets",
+        "codex"
+      ],
+      "exit": 2,
+      "outcome": "invalid",
+      "diagnostics": ["ACTIVATION_UNSUPPORTED", "PATTERN_NO_MATCH"]
+    },
+    {
+      "args": [
+        "init",
+        "--project",
+        "<temporary-root>/adapted",
+        "--json",
+        "--source",
+        "../company-library",
+        "--profile",
+        "company/baseline",
+        "--targets",
+        "codex"
+      ],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["validate", "--project", "<temporary-root>/adapted", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["ACTIVATION_ADAPTED", "PATTERN_NO_MATCH"]
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/adapted", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["ACTIVATION_ADAPTED", "PATTERN_NO_MATCH"]
+    },
+    {
+      "args": ["check", "--project", "<temporary-root>/adapted", "--json"],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": ["ACTIVATION_ADAPTED", "PATTERN_NO_MATCH"]
+    },
+    {
+      "args": [
+        "init",
+        "--project",
+        "<temporary-root>/unmanaged",
+        "--json",
+        "--source",
+        "../company-library",
+        "--profile",
+        "company/baseline",
+        "--targets",
+        "codex,claude,kiro-ide"
+      ],
+      "exit": 0,
+      "outcome": "success",
+      "diagnostics": []
+    },
+    {
+      "args": ["plan", "--project", "<temporary-root>/unmanaged", "--json"],
+      "exit": 3,
+      "outcome": "conflict",
+      "diagnostics": ["OUTPUT_CONFLICT"]
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/unmanaged", "--json"],
+      "exit": 3,
+      "outcome": "conflict",
+      "diagnostics": ["PLAN_CONFLICT"]
+    },
+    {
+      "args": ["plan", "--project", "<temporary-root>/project", "--json"],
+      "exit": 3,
+      "outcome": "conflict",
+      "diagnostics": ["OUTPUT_CONFLICT"]
+    },
+    {
+      "args": ["sync", "--project", "<temporary-root>/project", "--json"],
+      "exit": 3,
+      "outcome": "conflict",
+      "diagnostics": ["PLAN_CONFLICT"]
+    }
+  ]
+}

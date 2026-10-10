@@ -1,0 +1,15 @@
+# TASK-012: integrated local CLI
+
+Implemented init, validate, plan, sync, check, update (including exact restore), and recover, plus stable JSON envelopes and exits 0 success / 1 drift / 2 invalid / 3 conflict / 4 operational / 5 busy. CLI and pipeline own project discovery, explicit source/cache resolution, read-only locked compilation, and command reporting. Adapters remain pure and sync owns all managed writes.
+
+Init/update/restore hold the same project lease during resolution, compilation, cache population and control commit. Init refuses existing controls, commits lock last, and generates no outputs. Update verifies pre-resolution config and lock observations at commit. Routine commands load the pinned cache without fetching. Git provider is wired using requested ref for init/update and exact locked commit for restore; restore compares commit and tree digest before storing and leaves lock bytes unchanged.
+
+Executed on macOS Node 24.18.0: built dist then direct integration tests in tests/integration/cli, sync and git-source: 52 tests passed (6 CLI, 31 transactions, 15 Git). CLI cases exercise actual spawned built commands, complete skills and binary assets, combined Codex/Claude/Kiro loading, no-op mtimes, upstream pin/update separation, unmanaged and edited files, cache miss/exact restore/mismatch, live overlay, invalid JSON diagnostics and held locks. Core exports compile/plan/parser/cache contracts without bin side effects. Additional package and complete verification evidence is retained in TASK-014/017.
+
+Transport boundary limitation: Git extraction and moved refs use injected local bare fixture transport; live HTTPS/SSH authentication and remote service behavior are not certified. No implementation source can enable test faults or local Git transport. CLI end-to-end currently uses local source fixtures; the Git command wiring is reviewed alongside resolver tests.
+
+Lead only owns dist builds because concurrent clean builds caused temporary missing modules in spawned CLI tests; serialization resolved that tooling race. No commits, push or publication.
+
+## Independent review remediation
+
+Accepted review1 source-containment and init-inventory findings. Added root and ancestor local-upstream guards before caching/controls; local overlay dot already rejected through schema and now has explicit CLI coverage. Init now reports all existing guidance and a full read-only generation preview, including collisions and shadows; control-only init succeeds with warning when later generation is blocked. Four CLI regressions initially failed against old build; after fixes, 41 CLI/transaction tests passed (10 CLI,31 sync). A prior run failed one new root-guidance inventory assertion (planner deliberately excludes desired paths from additional-guidance inventory); init now invokes a complete guidance inventory separately. One unrelated CLI test hit a900-second wall-time suspension/timeout; subsequent complete focused run passed in6.93sec without changing timeout or behavior.
