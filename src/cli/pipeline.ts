@@ -1,6 +1,6 @@
 import { execFile } from 'node:child_process';
 import { promisify } from 'node:util';
-import { lstat, readdir } from 'node:fs/promises';
+import { lstat, readdir, stat } from 'node:fs/promises';
 import { isAbsolute, relative, resolve, sep } from 'node:path';
 import {
   parseProjectConfig,
@@ -43,7 +43,21 @@ export function unwrap<T>(result: Result<T>): T {
   return result.value;
 }
 export async function projectRoot(explicit?: string): Promise<string> {
-  if (explicit) return resolve(explicit);
+  if (explicit) {
+    const root = resolve(explicit);
+    try {
+      if (!(await stat(root)).isDirectory()) throw new Error('not a directory');
+    } catch {
+      throw new CommandError(2, [
+        {
+          ...error('PROJECT_NOT_FOUND', `Project directory not found: ${root}`),
+          remediation:
+            'Pass an existing directory to --project, or run from inside the repository.',
+        },
+      ]);
+    }
+    return root;
+  }
   try {
     const { stdout } = await promisify(execFile)(
       'git',
@@ -192,10 +206,14 @@ export function assertLockMatches(
     ) !== canonicalJson(profiles)
   )
     throw new CommandError(2, [
-      error(
-        'LOCK_MISMATCH',
-        'Configuration source or compiler profiles differ from the lock; run explicit update',
-      ),
+      {
+        ...error(
+          'LOCK_MISMATCH',
+          'Configuration source or compiler profiles differ from the lock; run explicit update',
+        ),
+        remediation:
+          'You changed sources, profiles or targets in veritas.yaml. Run `veritas update`, then plan and sync. Undo the edit to keep the current lock.',
+      },
     ]);
 }
 export async function resolveSource(

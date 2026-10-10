@@ -22,8 +22,13 @@ function diagnostic(
   message: string,
   path: string,
   severity: Diagnostic['severity'] = 'error',
+  remediation?: string,
 ): Diagnostic {
-  return { ...error(code, message, { id: path, path }), severity };
+  return {
+    ...error(code, message, { id: path, path }),
+    severity,
+    ...(remediation ? { remediation } : {}),
+  };
 }
 function fileState(file: {
   sha256: string;
@@ -268,6 +273,12 @@ export async function plan(
               ? 'Managed output was modified outside Veritas'
               : 'Existing output is unmanaged; move its content into canonical sources before generating',
           path,
+          'error',
+          current.kind === 'unsafe'
+            ? 'Replace the link or special file with an ordinary file or remove it, then run plan.'
+            : owned
+              ? `Run \`git diff -- ${path}\` to see the edit. Move wanted changes into your library or local additions; then delete or \`git checkout -- ${path}\` the file and run sync.`
+              : `Copy wanted content into your library or local additions, then rename or remove ${path} and run sync. See docs/troubleshooting.md#output_conflict.`,
         ),
       );
   }

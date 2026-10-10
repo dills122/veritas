@@ -11,8 +11,15 @@ export function sourceError(
   code: string,
   path: string,
   message: string,
+  remediation?: string,
 ): VeritasError {
-  return new VeritasError(error(code, message, { id: 'source', path }), 4);
+  return new VeritasError(
+    {
+      ...error(code, message, { id: 'source', path }),
+      ...(remediation ? { remediation } : {}),
+    },
+    4,
+  );
 }
 
 export function filesystemFailure(
@@ -21,6 +28,31 @@ export function filesystemFailure(
   code = 'SOURCE_READ_FAILED',
 ): VeritasError {
   if (cause instanceof VeritasError) return cause;
+  const errno =
+    typeof cause === 'object' && cause !== null && 'code' in cause
+      ? cause.code
+      : undefined;
+  if (errno === 'ENOENT')
+    return sourceError(
+      code,
+      path,
+      'Source directory does not exist',
+      'Local source paths resolve from the project directory; check --source (or sources in veritas.yaml).',
+    );
+  if (errno === 'ENOTDIR')
+    return sourceError(
+      code,
+      path,
+      'Source path is not a directory',
+      'Point --source at the library directory that contains veritas.library.yaml.',
+    );
+  if (errno === 'EACCES' || errno === 'EPERM')
+    return sourceError(
+      code,
+      path,
+      'Source directory is not readable',
+      'Check file permissions on the library directory.',
+    );
   return sourceError(code, path, 'Source filesystem operation failed');
 }
 

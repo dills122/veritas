@@ -20,7 +20,14 @@
   },
   "types": "./dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "docs/user-guide.md",
+    "docs/compatibility.md",
+    "docs/troubleshooting.md",
+    "examples/README.md",
+    "examples/company-library",
+    "examples/local-overlay",
+    "examples/project"
   ],
   "scripts": {
     "lint": "eslint src tests *.ts *.mjs scripts/*.mjs",

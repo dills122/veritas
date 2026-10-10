@@ -53,4 +53,30 @@ describe('standalone scaffold CLI', () => {
       execute(process.execPath, [binary, 'unknown-command']),
     ).rejects.toMatchObject({ code: 2 });
   });
+  it('explains the workflow, targets and inherited options in help', async () => {
+    const root = await execute(process.execPath, [binary, '--help']);
+    expect(root.stdout).toContain('Initialize');
+    expect(root.stdout).toContain('init');
+    expect(root.stdout).toContain('validate');
+    expect(root.stdout).toContain('sync');
+    expect(root.stdout).toContain('kiro-cli');
+    for (const command of [
+      'init',
+      'validate',
+      'plan',
+      'sync',
+      'check',
+      'update',
+      'recover',
+    ]) {
+      const help = await execute(process.execPath, [binary, command, '--help']);
+      expect(help.stderr).toBe('');
+      expect(help.stdout).toContain('--project');
+      expect(help.stdout).toContain('--json');
+    }
+    const init = await execute(process.execPath, [binary, 'init', '--help']);
+    expect(init.stdout).toContain('codex');
+    expect(init.stdout).toContain('kiro-cli');
+    expect(init.stdout).toContain('no default');
+  });
 });
