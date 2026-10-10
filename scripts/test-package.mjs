@@ -1,6 +1,13 @@
 import assert from 'node:assert/strict';
 import { execFile } from 'node:child_process';
-import { copyFile, mkdtemp, readFile, rm, writeFile } from 'node:fs/promises';
+import {
+  copyFile,
+  mkdir,
+  mkdtemp,
+  readFile,
+  rm,
+  writeFile,
+} from 'node:fs/promises';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -54,7 +61,7 @@ try {
   );
   await run(npm, [
     'install',
-    '--offline',
+    '--prefer-offline',
     '--ignore-scripts',
     '--no-audit',
     '--no-fund',
@@ -95,6 +102,15 @@ try {
   ]);
   console.log(
     'Packed CLI, quiet core import, clean consumer and public declarations verified.',
+  );
+  const cliResult = await run(process.execPath, [
+    join(root, 'examples/verify-cli.mjs'),
+    join(consumer, 'node_modules/.bin/veritas'),
+  ]);
+  await mkdir(join(root, 'artifacts'), { recursive: true });
+  await writeFile(
+    join(root, 'artifacts/cli-verification.json'),
+    `${JSON.stringify(JSON.parse(cliResult.stdout), null, 2)}\n`,
   );
 } finally {
   await rm(consumer, { recursive: true, force: true });

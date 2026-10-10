@@ -1,25 +1,76 @@
 name: Verify
+
 on:
   push:
   pull_request:
   workflow_dispatch:
+
 permissions:
   contents: read
+
+concurrency:
+  group: verify-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
-  macos-candidate:
-    runs-on: macos-latest
-    timeout-minutes: 15
+  quality:
+    name: Quality and unit tests
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
         with:
           persist-credentials: false
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
           node-version: '24.18.0'
           cache: npm
       - run: npm install --global npm@11.16.0
       - run: npm ci
-      - run: npm run verify
-      - run: node examples/verify.mjs
+      - run: npm run lint
+      - run: npm run format:check
+      - run: npm run typecheck
+      - run: npm test
       - run: python3 scripts/check-planning.py
-      - run: npm audit --audit-level=high
+
+  candidate:
+    name: Candidate (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 15
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [macos-latest, ubuntu-latest]
+    steps:
+      - uses: actions/checkout@d23441a48e516b6c34aea4fa41551a30e30af803 # v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
+        with:
+          node-version: '24.18.0'
+          cache: npm
+      - run: npm install --global npm@11.16.0
+      - run: npm ci
+      - name: Check candidate tag against package version
+        if: github.ref_type == 'tag'
+        run: node -e 'if (process.env.GITHUB_REF_NAME !== "v" + require("./package.json").version) process.exit(1)'
+      - run: npm run test:integration
+      - name: Verify installed package, declarations and full CLI examples
+        run: npm run test:package
+      - run: node examples/verify.mjs > artifacts/core-verification.json
+      - name: Pack verified candidate and checksum
+        run: |
+          mkdir -p artifacts
+          npm pack --ignore-scripts --pack-destination artifacts
+          cd artifacts
+          shasum -a 256 *.tgz > SHA256SUMS
+      - uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6
+        with:
+          name: candidate-${{ matrix.os }}-${{ github.sha }}
+          path: |
+            artifacts/*.tgz
+            artifacts/SHA256SUMS
+            artifacts/core-verification.json
+            artifacts/cli-verification.json
+          if-no-files-found: error
+          retention-days: 30

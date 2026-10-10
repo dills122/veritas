@@ -1,6 +1,6 @@
 # Veritas 0.1 compatibility
 
-All bundled profiles are **documentation-based**. Renderer/compiler fixtures and the installed CLI are verified on macOS with Node 24.18.0. Live Codex, Claude Code, Kiro IDE and Kiro CLI loading or enforcement is **unverified**; no harness runtime version or settings have been certified. Linux/Windows execution and power-loss durability are also unverified.
+All bundled profiles are **documentation-based**. Renderer/compiler fixtures and the installed CLI are verified on macOS with Node 24.18.0. Hosted macOS/Linux CI also passes integration, installed-package/public-declaration and full CLI example checks; see [repository setup evidence](github-setup.md). Live Codex, Claude Code, Kiro IDE and Kiro CLI loading or enforcement is **unverified**; no harness runtime version or settings have been certified. Windows execution and power-loss durability are also unverified.
 
 Profile IDs are Veritas contract versions, not harness release numbers. [Implemented profiles](../src/adapters/profiles/index.ts), [source research](research/compatibility.md) and [TASK-016 evidence](evidence/TASK-016.md) distinguish the intended native mapping from observed generation.
 
