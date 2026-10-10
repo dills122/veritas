@@ -12,15 +12,14 @@ import {
   writeFile,
 } from 'node:fs/promises';
 import { tmpdir } from 'node:os';
-import { join, resolve } from 'node:path';
-import { fileURLToPath } from 'node:url';
+import { dirname, join, resolve } from 'node:path';
 
 const executable = resolve(process.argv[2] ?? '');
 assert.ok(process.argv[2], 'Pass the installed node_modules/.bin/veritas path');
 const root = await mkdtemp(
   join(await realpath(tmpdir()), 'veritas-example-cli-'),
 );
-const examples = fileURLToPath(new URL('./', import.meta.url));
+const examples = join(dirname(dirname(await realpath(executable))), 'examples');
 const commands = [];
 const hash = (bytes) => createHash('sha256').update(bytes).digest('hex');
 function run(project, command, expected = 0, extra = []) {
@@ -45,6 +44,27 @@ function run(project, command, expected = 0, extra = []) {
     diagnostics: envelope.diagnostics.map((item) => item.code),
   });
   return envelope;
+}
+function runHuman(project, command, expected = 0, extra = []) {
+  const args = [command, '--project', project, ...extra];
+  const result = spawnSync(executable, args, {
+    encoding: 'utf8',
+    timeout: 30_000,
+  });
+  assert.ifError(result.error);
+  assert.equal(
+    result.status,
+    expected,
+    `${args.join(' ')}\n${result.stdout}\n${result.stderr}`,
+  );
+  commands.push({
+    args: args.map((arg) => arg.replace(root, '<temporary-root>')),
+    exit: result.status,
+    mode: 'human',
+    stdout: result.stdout,
+    stderr: result.stderr,
+  });
+  return result;
 }
 async function initialize(
   name,
@@ -80,6 +100,15 @@ try {
   run(project, 'check', 1);
   run(project, 'sync');
   run(project, 'check');
+  const humanCheck = runHuman(project, 'check');
+  assert.match(humanCheck.stdout, /up to date/u);
+  assert.equal(humanCheck.stdout.trim().split('\n').length, 2);
+  assert.equal(humanCheck.stderr, '');
+  const humanValidate = runHuman(project, 'validate');
+  assert.match(humanValidate.stdout, /Validated/u);
+  assert.equal(humanValidate.stdout.trim().split('\n').length, 2);
+  const humanSync = runHuman(project, 'sync');
+  assert.match(humanSync.stdout, /up to date/u);
   const agentsBefore = await readFile(join(project, 'AGENTS.md'));
   const mtime = (await stat(join(project, 'AGENTS.md'))).mtimeMs;
   run(project, 'sync');
@@ -203,6 +232,12 @@ try {
     join(adapted, 'veritas.yaml'),
   );
   run(adapted, 'validate');
+  const adaptedPlan = run(adapted, 'plan');
+  assert.ok(
+    adaptedPlan.diagnostics.some(
+      (diagnostic) => diagnostic.code === 'ACTIVATION_ADAPTED',
+    ),
+  );
   run(adapted, 'sync');
   run(adapted, 'check');
   const unmanaged = await initialize('unmanaged');
@@ -211,7 +246,14 @@ try {
     'Keep this unmanaged guidance.\n',
   );
   run(unmanaged, 'plan', 3);
-  run(unmanaged, 'sync', 3);
+  const unmanagedSync = run(unmanaged, 'sync', 3);
+  assert.ok(
+    unmanagedSync.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'OUTPUT_CONFLICT' &&
+        diagnostic.source?.path === 'AGENTS.md',
+    ),
+  );
   assert.equal(
     await readFile(join(unmanaged, 'AGENTS.md'), 'utf8'),
     'Keep this unmanaged guidance.\n',
@@ -221,7 +263,17 @@ try {
     'Keep this edited managed guidance.\n',
   );
   run(project, 'plan', 3);
-  run(project, 'sync', 3);
+  const editedSync = run(project, 'sync', 3);
+  assert.ok(
+    editedSync.diagnostics.some(
+      (diagnostic) =>
+        diagnostic.code === 'OUTPUT_CONFLICT' &&
+        diagnostic.source?.path === 'AGENTS.md',
+    ),
+  );
+  const humanConflict = runHuman(project, 'sync', 3);
+  assert.match(humanConflict.stderr, /OUTPUT_CONFLICT AGENTS.md/u);
+  assert.match(humanConflict.stderr, /veritas plan/u);
   assert.equal(
     await readFile(join(project, 'AGENTS.md'), 'utf8'),
     'Keep this edited managed guidance.\n',

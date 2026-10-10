@@ -2,6 +2,7 @@
 import { z } from 'zod';
 import { PROFILES } from '../adapters/profiles/index.js';
 import {
+  expandBraces,
   isManagedPath,
   pathProblem,
   pathsProblem,
@@ -205,18 +206,24 @@ export const activationSchema = z.discriminatedUnion('mode', [
   z.strictObject({
     mode: z.literal('files'),
     patterns: z
-      .array(
-        z
-          .string()
-          .max(1024)
-          .refine(
-            (pattern) => !patternProblem(pattern),
-            'Unsupported activation pattern',
-          ),
-      )
+      .array(z.string().max(1024))
       .min(1)
       .max(100)
-      .refine(uniqueStrings, 'Duplicate pattern'),
+      .refine(uniqueStrings, 'Duplicate pattern')
+      // Braces are authoring sugar: `*.{ts,tsx}` becomes the equivalent plain patterns.
+      .transform((patterns) => [...new Set(patterns.flatMap(expandBraces))])
+      .pipe(
+        z
+          .array(
+            z
+              .string()
+              .refine(
+                (pattern) => !patternProblem(pattern),
+                'Unsupported activation pattern: negation, brackets, absolute paths and partial-segment ** are not supported; list each pattern separately',
+              ),
+          )
+          .max(100),
+      ),
   }),
   z.strictObject({ mode: z.literal('manual') }),
   z.strictObject({ mode: z.literal('auto') }),

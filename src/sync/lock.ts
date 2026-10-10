@@ -13,7 +13,18 @@ export function syncError(
   message: string,
   exitCode: 3 | 4 | 5 = 3,
 ): VeritasError {
-  return new VeritasError(error(code, message), exitCode);
+  return new VeritasError(
+    {
+      ...error(code, message),
+      ...(exitCode === 5
+        ? {
+            remediation:
+              'Make sure no other veritas process is running, then run `veritas recover`. A lock that remains needs manual inspection: see docs/troubleshooting.md.',
+          }
+        : {}),
+    },
+    exitCode,
+  );
 }
 export function isCode(cause: unknown, code: string): boolean {
   return cause instanceof Error && 'code' in cause && cause.code === code;

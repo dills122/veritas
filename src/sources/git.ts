@@ -110,6 +110,7 @@ function selectRef(
       'GIT_REF_MISSING',
       'refs',
       'Requested Git reference is unavailable',
+      'Check --ref names an existing branch, tag or complete commit ID. List them with `git ls-remote <url>`.',
     );
   if (widths.size !== 1)
     throw sourceError(

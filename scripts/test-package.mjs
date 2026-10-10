@@ -42,9 +42,32 @@ try {
   assert.equal(typeof archive.filename, 'string');
   assert.ok(archive.files.some((file) => file.path === 'dist/bin.js'));
   assert.ok(archive.files.some((file) => file.path === 'dist/index.d.ts'));
+  const packagedGuides = new Set([
+    'docs/user-guide.md',
+    'docs/compatibility.md',
+    'docs/troubleshooting.md',
+    'docs/glossary.md',
+    'examples/README.md',
+  ]);
+  for (const path of [
+    ...packagedGuides,
+    'examples/company-library/veritas.library.yaml',
+    'examples/project/codex-adaptation.yaml',
+    'examples/local-overlay/veritas.library.yaml',
+  ])
+    assert.ok(
+      archive.files.some((file) => file.path === path),
+      `Missing packaged guide/example: ${path}`,
+    );
   for (const file of archive.files) {
     assert.ok(
       file.path.startsWith('dist/') ||
+        packagedGuides.has(file.path) ||
+        [
+          'examples/company-library/',
+          'examples/local-overlay/',
+          'examples/project/',
+        ].some((prefix) => file.path.startsWith(prefix)) ||
         ['package.json', 'README.md', 'LICENSE', 'LICENSE.md'].includes(
           file.path,
         ),

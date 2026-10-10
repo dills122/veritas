@@ -64,6 +64,15 @@ export function parseYamlStrict(text: string, path: string): Result<unknown> {
   });
   if (diagnostics.length) return failure(diagnostics);
   const value: unknown = document.toJS({ maxAliasCount: 0 });
+  if (value === null || value === undefined)
+    return failure([
+      {
+        ...error('YAML_EMPTY', `${path} is empty`, source),
+        remediation: path.endsWith('veritas.library.yaml')
+          ? 'Declare schemaVersion: 1 with steering, skills and profiles (docs/user-guide.md#author-a-library), or run `veritas init --scaffold` in a new project for a starter library.'
+          : 'Restore the file from version control, or recreate it with `veritas init`.',
+      },
+    ]);
   return success(value);
 }
 export function parseWithSchema<T>(

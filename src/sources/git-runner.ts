@@ -13,6 +13,38 @@ export type GitRunner = (
   options: GitRunOptions,
 ) => Promise<Uint8Array>;
 
+/**
+ * Maps Git stderr to a fixed hint. Raw stderr is never echoed: it can carry
+ * credentials or remote-controlled text.
+ */
+export function gitFailureHint(stderr: string): string {
+  if (
+    /permission denied|authentication failed|could not read username|publickey|host key verification|terminal prompts disabled/iu.test(
+      stderr,
+    )
+  )
+    return 'Authentication failed. Veritas never prompts: configure a Git credential helper or SSH agent, and confirm with `git ls-remote <url>` in your shell.';
+  if (
+    /could not resolve host|unable to access|connection (?:refused|timed out)|network is unreachable|timed out/iu.test(
+      stderr,
+    )
+  )
+    return 'The remote is unreachable. Check the network, VPN or proxy, and the host name in the source URL.';
+  if (
+    /not found|does not appear to be a git repository|repository .* not/iu.test(
+      stderr,
+    )
+  )
+    return 'The repository was not found or you lack access. Check the URL and your permissions.';
+  if (
+    /couldn't find remote ref|invalid refspec|not our ref|unadvertised/iu.test(
+      stderr,
+    )
+  )
+    return 'The requested ref could not be fetched. Check --ref names an existing branch, tag or commit.';
+  return 'Run `git ls-remote <url>` in your shell to see the underlying Git error.';
+}
+
 function gitEnvironment(): NodeJS.ProcessEnv {
   const blocked = new Set([
     'GIT_DIR',
@@ -67,11 +99,21 @@ export function createGitRunner(executable = 'git'): GitRunner {
         stdio: ['pipe', 'pipe', 'pipe'],
       });
       const output: Uint8Array[] = [];
+      let stderrText = '';
       let bytes = 0,
         outputBytes = 0,
         failure: VeritasError | undefined;
       function fail(code: string, message: string): void {
-        failure ??= sourceError(code, options.cwd, message);
+        failure ??= sourceError(
+          code,
+          options.cwd,
+          message,
+          code === 'GIT_UNAVAILABLE'
+            ? 'Install Git and make sure it is on PATH.'
+            : code === 'GIT_TIMEOUT'
+              ? 'The remote did not answer within 30 seconds. Check the network and retry.'
+              : undefined,
+        );
         if (child.pid !== undefined) {
           try {
             if (process.platform === 'win32') child.kill('SIGKILL');
@@ -112,6 +154,7 @@ export function createGitRunner(executable = 'git'): GitRunner {
         output.push(Uint8Array.from(chunk));
       });
       child.stderr.on('data', (chunk: Buffer) => {
+        if (stderrText.length < 8192) stderrText += chunk.toString('utf8');
         bytes += chunk.byteLength;
         if (bytes > options.maxOutputBytes)
           fail(
@@ -126,7 +169,14 @@ export function createGitRunner(executable = 'git'): GitRunner {
           return;
         }
         if (code !== 0) {
-          reject(sourceError('GIT_FAILED', options.cwd, 'Git command failed'));
+          reject(
+            sourceError(
+              'GIT_FAILED',
+              'git',
+              'Git command failed',
+              gitFailureHint(stderrText),
+            ),
+          );
           return;
         }
         const result = new Uint8Array(outputBytes);

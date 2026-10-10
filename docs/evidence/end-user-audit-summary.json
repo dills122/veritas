@@ -1,0 +1,2976 @@
+[
+  {
+    "label": "version",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' --version",
+    "exit": 0,
+    "seconds": 0.431,
+    "stdoutBytes": 11,
+    "stderr": "",
+    "stdoutExcerpt": "0.1.0-rc.0\n"
+  },
+  {
+    "label": "help",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' --help",
+    "exit": 0,
+    "seconds": 0.121,
+    "stdoutBytes": 422,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas [options] [command]\n\nCompile and synchronize versioned agent steering and skills\n\nOptions:\n  -V, --version     output the version number\n  --project <path>  Explicit project root\n  --json            Emit one stable JSON result\n  -h, --help        display help for command\n\nCommands:\n  init [options]\n  validate\n  plan\n  sync\n  check\n  update [options]\n  recover\n  help [command]    display help for command\n"
+  },
+  {
+    "label": "init-help",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --help",
+    "exit": 0,
+    "seconds": 0.125,
+    "stdoutBytes": 445,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas init [options]\n\nOptions:\n  --source <locator>     Relative local library or HTTPS/SSH Git locator\n  --profile <selection>  Qualified namespace/profile selection\n  --targets <ids>        Comma-separated target IDs\n  --ref <ref>            Explicit Git branch, tag or commit\n  --local <path>         Project local library\n  --local-profile <id>   Local profile (default: \"project\")\n  -h, --help             display help for command\n"
+  },
+  {
+    "label": "plan-help",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --help",
+    "exit": 0,
+    "seconds": 0.119,
+    "stdoutBytes": 79,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas plan [options]\n\nOptions:\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "first-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex,claude,kiro-ide --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.261,
+    "stdoutBytes": 24806,
+    "stderr": "",
+    "stdoutExcerpt": "init: success\n{\n  \"adaptations\": [],\n  \"artifacts\": [\n    {\n      \"consumers\": [\n        \"codex\"\n      ],\n      \"executable\": false,\n      \"path\": \".agents/skills/review-repository/LICENSE\",\n      \"sha256\": \"c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454\",\n      \"size\": 176,\n      \"sourceIds\": [\n        \"company/review-repository\"\n      ]\n    },\n    {\n      \"consumers\": [\n        \"codex\"\n      ],\n      \"executable\": false,\n      \"path\": \".agents/skills/review-repository/README."
+  },
+  {
+    "label": "first-validate",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.163,
+    "stdoutBytes": 7520,
+    "stderr": "",
+    "stdoutExcerpt": "validate: success\n{\n  \"adaptations\": [],\n  \"artifacts\": [\n    {\n      \"consumers\": [\n        \"codex\"\n      ],\n      \"executable\": false,\n      \"path\": \".agents/skills/review-repository/LICENSE\",\n      \"sha256\": \"c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454\",\n      \"size\": 176,\n      \"sourceIds\": [\n        \"company/review-repository\"\n      ]\n    },\n    {\n      \"consumers\": [\n        \"codex\"\n      ],\n      \"executable\": false,\n      \"path\": \".agents/skills/review-repository/REA"
+  },
+  {
+    "label": "first-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.165,
+    "stdoutBytes": 15417,
+    "stderr": "",
+    "stdoutExcerpt": "plan: success\n{\n  \"hasConflicts\": false,\n  \"hasDrift\": true,\n  \"manifest\": {\n    \"adaptations\": [],\n    \"artifacts\": [\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n        \"executable\": false,\n        \"path\": \".agents/skills/review-repository/LICENSE\",\n        \"sha256\": \"c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454\",\n        \"sourceIds\": [\n          \"company/review-repository\"\n        ]\n      },\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n      "
+  },
+  {
+    "label": "first-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.503,
+    "stdoutBytes": 15417,
+    "stderr": "",
+    "stdoutExcerpt": "sync: success\n{\n  \"hasConflicts\": false,\n  \"hasDrift\": true,\n  \"manifest\": {\n    \"adaptations\": [],\n    \"artifacts\": [\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n        \"executable\": false,\n        \"path\": \".agents/skills/review-repository/LICENSE\",\n        \"sha256\": \"c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454\",\n        \"sourceIds\": [\n          \"company/review-repository\"\n        ]\n      },\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n      "
+  },
+  {
+    "label": "first-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.18,
+    "stdoutBytes": 17717,
+    "stderr": "",
+    "stdoutExcerpt": "check: success\n{\n  \"hasConflicts\": false,\n  \"hasDrift\": false,\n  \"manifest\": {\n    \"adaptations\": [],\n    \"artifacts\": [\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n        \"executable\": false,\n        \"path\": \".agents/skills/review-repository/LICENSE\",\n        \"sha256\": \"c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454\",\n        \"sourceIds\": [\n          \"company/review-repository\"\n        ]\n      },\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n    "
+  },
+  {
+    "label": "first-output-tree",
+    "observation": {
+      ".agents/skills/review-repository/LICENSE": [
+        "c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454",
+        "0o644"
+      ],
+      ".agents/skills/review-repository/README.md": [
+        "147e05bba4c6982ce861075891fb63fe5995e17f2e20dbee2040dae50ca83460",
+        "0o644"
+      ],
+      ".agents/skills/review-repository/SKILL.md": [
+        "17da66895a8ff754baa60d1400216699b86e2b78920987a01312fb99d2eae83a",
+        "0o644"
+      ],
+      ".agents/skills/review-repository/assets/bytes.bin": [
+        "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+        "0o644"
+      ],
+      ".agents/skills/review-repository/references/questions.md": [
+        "2e5b49b39bc2fcbde2f716b5b8af462156dfe6ef415d728b624eda5fc6e9c8fa",
+        "0o644"
+      ],
+      ".agents/skills/review-repository/scripts/inert.sh": [
+        "2bbb82c2a5fe81f9cf554eeebcfd6426f2d5f3ff15e0a0ecbb3f3bdb1fc68c41",
+        "0o755"
+      ],
+      ".claude/skills/review-repository/LICENSE": [
+        "c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454",
+        "0o644"
+      ],
+      ".claude/skills/review-repository/README.md": [
+        "147e05bba4c6982ce861075891fb63fe5995e17f2e20dbee2040dae50ca83460",
+        "0o644"
+      ],
+      ".claude/skills/review-repository/SKILL.md": [
+        "17da66895a8ff754baa60d1400216699b86e2b78920987a01312fb99d2eae83a",
+        "0o644"
+      ],
+      ".claude/skills/review-repository/assets/bytes.bin": [
+        "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+        "0o644"
+      ],
+      ".claude/skills/review-repository/references/questions.md": [
+        "2e5b49b39bc2fcbde2f716b5b8af462156dfe6ef415d728b624eda5fc6e9c8fa",
+        "0o644"
+      ],
+      ".claude/skills/review-repository/scripts/inert.sh": [
+        "2bbb82c2a5fe81f9cf554eeebcfd6426f2d5f3ff15e0a0ecbb3f3bdb1fc68c41",
+        "0o755"
+      ],
+      ".kiro/skills/review-repository/LICENSE": [
+        "c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454",
+        "0o644"
+      ],
+      ".kiro/skills/review-repository/README.md": [
+        "147e05bba4c6982ce861075891fb63fe5995e17f2e20dbee2040dae50ca83460",
+        "0o644"
+      ],
+      ".kiro/skills/review-repository/SKILL.md": [
+        "17da66895a8ff754baa60d1400216699b86e2b78920987a01312fb99d2eae83a",
+        "0o644"
+      ],
+      ".kiro/skills/review-repository/assets/bytes.bin": [
+        "896a425d1fade64e368ccca61003182138e59b7050bca9a7ec8f4ca99646f9fb",
+        "0o644"
+      ],
+      ".kiro/skills/review-repository/references/questions.md": [
+        "2e5b49b39bc2fcbde2f716b5b8af462156dfe6ef415d728b624eda5fc6e9c8fa",
+        "0o644"
+      ],
+      ".kiro/skills/review-repository/scripts/inert.sh": [
+        "2bbb82c2a5fe81f9cf554eeebcfd6426f2d5f3ff15e0a0ecbb3f3bdb1fc68c41",
+        "0o755"
+      ],
+      ".veritas/manifest.json": [
+        "d6fa9967235132199732b0c657f861cb1cefe33a15a9ad4d2fbc3fdb30258e54",
+        "0o644"
+      ],
+      "AGENTS.md": [
+        "6f00d9d35848421f88499701cab762d0eb9cd369125cafb13c2c4a3992e8dd66",
+        "0o644"
+      ],
+      "CLAUDE.md": [
+        "333036748e66c6c00cb5a9be1b3bac3b6d59ccde56802f09f0c61bf913342d54",
+        "0o644"
+      ],
+      "veritas.lock.json": [
+        "a3d0bfa7c3be6c2f21d6e388265233008120c58c998f6b0d0ee7050e80057487",
+        "0o644"
+      ],
+      "veritas.yaml": [
+        "cfa632a755e5ed095a19fb07742bff32d1d30212042f0ae19a9cf1ff0d40687b",
+        "0o644"
+      ]
+    }
+  },
+  {
+    "label": "first-run-friction",
+    "observation": {
+      "docs": "Installed README links docs/user-guide.md and examples/README.md, both absent; checkout supplied these. Checkout build commands cannot run within installed package (scripts absent).",
+      "help": "No command descriptions, subcommand help omits inherited --project/--json and does not explain output location, default targets or next action.",
+      "humanOutput": {
+        "first-init": {
+          "bytes": 24806,
+          "lines": 930,
+          "seconds": 0.261
+        },
+        "first-validate": {
+          "bytes": 7520,
+          "lines": 307,
+          "seconds": 0.163
+        },
+        "first-plan": {
+          "bytes": 15417,
+          "lines": 594,
+          "seconds": 0.165
+        },
+        "first-sync": {
+          "bytes": 15417,
+          "lines": 594,
+          "seconds": 0.503
+        },
+        "first-check": {
+          "bytes": 17717,
+          "lines": 634,
+          "seconds": 0.18
+        },
+        "first-output-tree": {
+          "bytes": 0,
+          "lines": 0,
+          "seconds": null
+        }
+      },
+      "firstJourney": "5 explicit CLI commands succeeded, path with spaces; no insider workaround to config needed after using checkout examples."
+    }
+  },
+  {
+    "label": "help-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --help",
+    "exit": 0,
+    "seconds": 0.125,
+    "stdoutBytes": 445,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas init [options]\n\nOptions:\n  --source <locator>     Relative local library or HTTPS/SSH Git locator\n  --profile <selection>  Qualified namespace/profile selection\n  --targets <ids>        Comma-separated target IDs\n  --ref <ref>            Explicit Git branch, tag or commit\n  --local <path>         Project local library\n  --local-profile <id>   Local profile (default: \"project\")\n  -h, --help             display help for command\n"
+  },
+  {
+    "label": "help-validate",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --help",
+    "exit": 0,
+    "seconds": 0.122,
+    "stdoutBytes": 83,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas validate [options]\n\nOptions:\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "help-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --help",
+    "exit": 0,
+    "seconds": 0.126,
+    "stdoutBytes": 79,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas plan [options]\n\nOptions:\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "help-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --help",
+    "exit": 0,
+    "seconds": 0.123,
+    "stdoutBytes": 79,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas sync [options]\n\nOptions:\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "help-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --help",
+    "exit": 0,
+    "seconds": 0.118,
+    "stdoutBytes": 80,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas check [options]\n\nOptions:\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "help-update",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --help",
+    "exit": 0,
+    "seconds": 0.12,
+    "stdoutBytes": 144,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas update [options]\n\nOptions:\n  --restore   Restore exact locked cache without changing lock\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "help-recover",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --help",
+    "exit": 0,
+    "seconds": 0.128,
+    "stdoutBytes": 82,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas recover [options]\n\nOptions:\n  -h, --help  display help for command\n"
+  },
+  {
+    "label": "no-args",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas'",
+    "exit": 0,
+    "seconds": 0.122,
+    "stdoutBytes": 422,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas [options] [command]\n\nCompile and synchronize versioned agent steering and skills\n\nOptions:\n  -V, --version     output the version number\n  --project <path>  Explicit project root\n  --json            Emit one stable JSON result\n  -h, --help        display help for command\n\nCommands:\n  init [options]\n  validate\n  plan\n  sync\n  check\n  update [options]\n  recover\n  help [command]    display help for command\n"
+  },
+  {
+    "label": "init-no-args",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --project /private/tmp/veritas-end-user-audit/empty-default",
+    "exit": 2,
+    "seconds": 0.119,
+    "stdoutBytes": 17,
+    "stderr": "error: required option '--source <locator>' not specified\nerror CLI_ARGUMENT_INVALID: error: required option '--source <locator>' not specified\n",
+    "stdoutExcerpt": "unknown: invalid\n"
+  },
+  {
+    "label": "unknown-flag-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --wat --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 2,
+    "seconds": 0.119,
+    "stdoutBytes": 239,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: unknown option '--wat'",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "unknown-command-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plna --json",
+    "exit": 2,
+    "seconds": 0.119,
+    "stdoutBytes": 261,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: unknown command 'plna'\n(Did you mean plan?)",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "missing-project-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/not-existing",
+    "exit": 4,
+    "seconds": 0.123,
+    "stdoutBytes": 476,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "OBSERVATION_FAILED",
+        "message": "Cannot safely observe .veritas/runtime/journal.json: ENOENT: no such file or directory, lstat '/private/tmp/veritas-end-user-audit/not-existing'",
+        "severity": "error",
+        "source": {
+          "id": ".veritas/runtime/journal.json",
+          "path": ".veritas/runtime/journal.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "missing-config-human",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --project /private/tmp/veritas-end-user-audit/empty-default",
+    "exit": 4,
+    "seconds": 0.122,
+    "stdoutBytes": 19,
+    "stderr": "error OBSERVATION_FAILED .veritas/runtime/journal.json: Cannot safely observe .veritas/runtime/journal.json: ENOENT: no such file or directory, lstat '/private/tmp/veritas-end-user-audit/empty-default'\n",
+    "stdoutExcerpt": "check: operational\n"
+  },
+  {
+    "label": "missing-config-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/empty-default",
+    "exit": 4,
+    "seconds": 0.124,
+    "stdoutBytes": 477,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "OBSERVATION_FAILED",
+        "message": "Cannot safely observe .veritas/runtime/journal.json: ENOENT: no such file or directory, lstat '/private/tmp/veritas-end-user-audit/empty-default'",
+        "severity": "error",
+        "source": {
+          "id": ".veritas/runtime/journal.json",
+          "path": ".veritas/runtime/journal.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "init-unknown-target",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets cursor --json --project /private/tmp/veritas-end-user-audit/unknown-target",
+    "exit": 4,
+    "seconds": 0.124,
+    "stdoutBytes": 477,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "OBSERVATION_FAILED",
+        "message": "Cannot safely observe .veritas/runtime/journal.json: ENOENT: no such file or directory, lstat '/private/tmp/veritas-end-user-audit/unknown-target'",
+        "severity": "error",
+        "source": {
+          "id": ".veritas/runtime/journal.json",
+          "path": ".veritas/runtime/journal.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "init-unknown-profile",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/nope --targets codex --json --project /private/tmp/veritas-end-user-audit/unknown-profile",
+    "exit": 4,
+    "seconds": 0.126,
+    "stdoutBytes": 478,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "OBSERVATION_FAILED",
+        "message": "Cannot safely observe .veritas/runtime/journal.json: ENOENT: no such file or directory, lstat '/private/tmp/veritas-end-user-audit/unknown-profile'",
+        "severity": "error",
+        "source": {
+          "id": ".veritas/runtime/journal.json",
+          "path": ".veritas/runtime/journal.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "init-unqualified-profile",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/unqualified-profile",
+    "exit": 4,
+    "seconds": 0.124,
+    "stdoutBytes": 482,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "OBSERVATION_FAILED",
+        "message": "Cannot safely observe .veritas/runtime/journal.json: ENOENT: no such file or directory, lstat '/private/tmp/veritas-end-user-audit/unqualified-profile'",
+        "severity": "error",
+        "source": {
+          "id": ".veritas/runtime/journal.json",
+          "path": ".veritas/runtime/journal.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "init-default-targets",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --json --project /private/tmp/veritas-end-user-audit/default-targets",
+    "exit": 2,
+    "seconds": 0.122,
+    "stdoutBytes": 264,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: required option '--targets <ids>' not specified",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "re-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 2,
+    "seconds": 0.123,
+    "stdoutBytes": 264,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: required option '--targets <ids>' not specified",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "missing-config-human-existing",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --project /private/tmp/veritas-end-user-audit/empty-default",
+    "exit": 2,
+    "seconds": 0.124,
+    "stdoutBytes": 15,
+    "stderr": "error CONTROL_MISSING veritas.yaml: Missing veritas.yaml; initialize or restore the project\n",
+    "stdoutExcerpt": "check: invalid\n"
+  },
+  {
+    "label": "missing-config-json-existing",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/empty-default",
+    "exit": 2,
+    "seconds": 0.123,
+    "stdoutBytes": 346,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CONTROL_MISSING",
+        "message": "Missing veritas.yaml; initialize or restore the project",
+        "severity": "error",
+        "source": {
+          "id": "veritas.yaml",
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unknown-target-existing",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets cursor --json --project /private/tmp/veritas-end-user-audit/unknown-target",
+    "exit": 2,
+    "seconds": 0.153,
+    "stdoutBytes": 421,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "targets.0.id: Invalid option: expected one of \"codex\"|\"claude\"|\"kiro-ide\"|\"kiro-cli\"",
+        "severity": "error",
+        "source": {
+          "column": 9,
+          "id": "veritas.yaml",
+          "line": 7,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unknown-profile-existing",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/nope --targets codex --json --project /private/tmp/veritas-end-user-audit/unknown-profile",
+    "exit": 2,
+    "seconds": 0.152,
+    "stdoutBytes": 336,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "PROFILE_UNKNOWN",
+        "message": "Library profile company/nope does not exist",
+        "severity": "error",
+        "source": {
+          "id": "company",
+          "path": "veritas.library.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unqualified-profile-existing",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/unqualified-profile",
+    "exit": 2,
+    "seconds": 0.142,
+    "stdoutBytes": 430,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "profile: Invalid string: must match pattern /^[a-z0-9]+(?:-[a-z0-9]+)*\\/[a-z0-9]+(?:-[a-z0-9]+)*$/u",
+        "severity": "error",
+        "source": {
+          "column": 10,
+          "id": "veritas.yaml",
+          "line": 5,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "re-init-existing",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.135,
+    "stdoutBytes": 273,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "INIT_CONFLICT",
+        "message": "Init requires absent config and lock; existing controls remain untouched",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "invalid-yaml-human",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --project /private/tmp/veritas-end-user-audit/bad-config",
+    "exit": 2,
+    "seconds": 0.127,
+    "stdoutBytes": 18,
+    "stderr": "error YAML_INVALID veritas.yaml:3:1: Flow sequence in block collection must be sufficiently indented and end with a ] at line 3, column 1:\n\nprofile: [broken\n\n^\n\n",
+    "stdoutExcerpt": "validate: invalid\n"
+  },
+  {
+    "label": "invalid-yaml-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --json --project /private/tmp/veritas-end-user-audit/bad-config",
+    "exit": 2,
+    "seconds": 0.13,
+    "stdoutBytes": 459,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "YAML_INVALID",
+        "message": "Flow sequence in block collection must be sufficiently indented and end with a ] at line 3, column 1:\n\nprofile: [broken\n\n^\n",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "veritas.yaml",
+          "line": 3,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "invalid-library-human",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../bad-source --profile company/baseline --targets codex --project /private/tmp/veritas-end-user-audit/bad-library",
+    "exit": 2,
+    "seconds": 0.162,
+    "stdoutBytes": 14,
+    "stderr": "error SCHEMA_INVALID steering/baseline.md:2:1: description: Invalid input: expected string, received undefined\n",
+    "stdoutExcerpt": "init: invalid\n"
+  },
+  {
+    "label": "invalid-library-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../bad-source --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/bad-library",
+    "exit": 2,
+    "seconds": 0.156,
+    "stdoutBytes": 404,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "description: Invalid input: expected string, received undefined",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/baseline",
+          "line": 2,
+          "path": "steering/baseline.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "invalid-init-controls",
+    "observation": [
+      "/private/tmp/veritas-end-user-audit/bad-library/.veritas",
+      "/private/tmp/veritas-end-user-audit/bad-library/.veritas/runtime"
+    ]
+  },
+  {
+    "label": "repeat-sync-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.178,
+    "stdoutBytes": 19068,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "repeat-check-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.172,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "repeat-bytes-equal",
+    "observation": true
+  },
+  {
+    "label": "recover-no-transaction",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.129,
+    "stdoutBytes": 132,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "cwd-check",
+    "cwd": "/private/tmp/veritas-end-user-audit/consumer space",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json",
+    "exit": 0,
+    "seconds": 0.189,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "subdir-discovery",
+    "cwd": "/private/tmp/veritas-end-user-audit/consumer space/src",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json",
+    "exit": 2,
+    "seconds": 0.136,
+    "stdoutBytes": 346,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CONTROL_MISSING",
+        "message": "Missing veritas.yaml; initialize or restore the project",
+        "severity": "error",
+        "source": {
+          "id": "veritas.yaml",
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "global-options-before-command",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' --project '/private/tmp/veritas-end-user-audit/consumer space' --json check",
+    "exit": 0,
+    "seconds": 0.176,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "pinned-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.171,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "pinned-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.182,
+    "stdoutBytes": 19068,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "pinned-bytes-equal",
+    "observation": true
+  },
+  {
+    "label": "local-source-update",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.237,
+    "stdoutBytes": 465,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "update-leaves-outputs",
+    "observation": true
+  },
+  {
+    "label": "post-update-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 1,
+    "seconds": 0.179,
+    "stdoutBytes": 19063,
+    "stderr": "",
+    "outcome": "drift",
+    "diagnostics": []
+  },
+  {
+    "label": "post-update-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.175,
+    "stdoutBytes": 19064,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "post-update-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.524,
+    "stdoutBytes": 19064,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "post-update-clean",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.176,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "missing-cache-human",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 4,
+    "seconds": 0.132,
+    "stdoutBytes": 19,
+    "stderr": "error CACHE_MISSING /private/tmp/veritas-end-user-audit/consumer space/.veritas/runtime/cache/d52048846488ac6187dcfac86da5038aebbc3989788e1d46064488769af39828: Locked snapshot is unavailable; explicitly restore or update the source\n",
+    "stdoutExcerpt": "check: operational\n"
+  },
+  {
+    "label": "missing-cache-json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 4,
+    "seconds": 0.141,
+    "stdoutBytes": 483,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "CACHE_MISSING",
+        "message": "Locked snapshot is unavailable; explicitly restore or update the source",
+        "severity": "error",
+        "source": {
+          "id": "source",
+          "path": "/private/tmp/veritas-end-user-audit/consumer space/.veritas/runtime/cache/d52048846488ac6187dcfac86da5038aebbc3989788e1d46064488769af39828"
+        }
+      }
+    ]
+  },
+  {
+    "label": "cache-restore",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --restore --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.16,
+    "stdoutBytes": 294,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "restore-lock-equal",
+    "observation": true
+  },
+  {
+    "label": "restore-clean",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.182,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "edited-validate",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.155,
+    "stdoutBytes": 8218,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "edited-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.173,
+    "stdoutBytes": 19286,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "OUTPUT_CONFLICT",
+        "message": "Managed output was modified outside Veritas",
+        "severity": "error",
+        "source": {
+          "id": "AGENTS.md",
+          "path": "AGENTS.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "edited-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.192,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "edited-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.177,
+    "stdoutBytes": 19287,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "OUTPUT_CONFLICT",
+        "message": "Managed output was modified outside Veritas",
+        "severity": "error",
+        "source": {
+          "id": "AGENTS.md",
+          "path": "AGENTS.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "edited-preserved",
+    "observation": true
+  },
+  {
+    "label": "mode-drift-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.177,
+    "stdoutBytes": 19368,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "OUTPUT_CONFLICT",
+        "message": "Managed output was modified outside Veritas",
+        "severity": "error",
+        "source": {
+          "id": ".agents/skills/review-repository/scripts/inert.sh",
+          "path": ".agents/skills/review-repository/scripts/inert.sh"
+        }
+      }
+    ]
+  },
+  {
+    "label": "mode-drift-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.182,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "missing-managed-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 1,
+    "seconds": 0.175,
+    "stdoutBytes": 18947,
+    "stderr": "",
+    "outcome": "drift",
+    "diagnostics": []
+  },
+  {
+    "label": "missing-managed-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.526,
+    "stdoutBytes": 18948,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "unmanaged-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex,claude,kiro-ide --json --project /private/tmp/veritas-end-user-audit/unmanaged",
+    "exit": 0,
+    "seconds": 0.253,
+    "stdoutBytes": 29107,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "GUIDANCE_UNMANAGED",
+        "message": "Additional unmanaged guidance limits loading certification; this file remains untouched",
+        "outputCollision": true,
+        "severity": "warning",
+        "source": {
+          "id": "AGENTS.md",
+          "path": "AGENTS.md"
+        }
+      },
+      {
+        "code": "GUIDANCE_UNMANAGED",
+        "message": "Additional unmanaged guidance limits loading certification; this file remains untouched",
+        "outputCollision": true,
+        "severity": "warning",
+        "source": {
+          "id": "CLAUDE.md",
+          "path": "CLAUDE.md"
+        }
+      },
+      {
+        "code": "GUIDANCE_UNMANAGED",
+        "message": "Additional unmanaged guidance limits loading certification; this file remains untouched",
+        "outputCollision": false,
+        "severity": "warning",
+        "source": {
+          "id": "src/AGENTS.md",
+          "path": "src/AGENTS.md"
+        }
+      },
+      {
+        "code": "INIT_GENERATION_CONFLICT",
+        "message": "Initialized controls; review the inventory and generation preview before sync",
+        "severity": "warning"
+      }
+    ]
+  },
+  {
+    "label": "unmanaged-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project /private/tmp/veritas-end-user-audit/unmanaged",
+    "exit": 3,
+    "seconds": 0.162,
+    "stdoutBytes": 17726,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "OUTPUT_CONFLICT",
+        "message": "Existing output is unmanaged; move its content into canonical sources before generating",
+        "severity": "error",
+        "source": {
+          "id": "AGENTS.md",
+          "path": "AGENTS.md"
+        }
+      },
+      {
+        "code": "OUTPUT_CONFLICT",
+        "message": "Existing output is unmanaged; move its content into canonical sources before generating",
+        "severity": "error",
+        "source": {
+          "id": "CLAUDE.md",
+          "path": "CLAUDE.md"
+        }
+      },
+      {
+        "code": "GUIDANCE_UNMANAGED",
+        "message": "Additional unmanaged guidance limits loading certification; this file remains untouched",
+        "severity": "warning",
+        "source": {
+          "id": "src/AGENTS.md",
+          "path": "src/AGENTS.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unmanaged-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/unmanaged",
+    "exit": 3,
+    "seconds": 0.169,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "unmanaged-preserved",
+    "observation": true
+  },
+  {
+    "label": "shadow-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/shadow",
+    "exit": 0,
+    "seconds": 0.241,
+    "stdoutBytes": 10508,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "INIT_GENERATION_CONFLICT",
+        "message": "Initialized controls; review the inventory and generation preview before sync",
+        "severity": "warning"
+      }
+    ]
+  },
+  {
+    "label": "shadow-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/shadow",
+    "exit": 3,
+    "seconds": 0.171,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "native-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/native-typescript --targets codex,claude,kiro-ide,kiro-cli --json --project /private/tmp/veritas-end-user-audit/native",
+    "exit": 0,
+    "seconds": 0.247,
+    "stdoutBytes": 31647,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "PATTERN_NO_MATCH",
+        "message": "No current inventoried project file matches; future matching files retain the rule",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript-native",
+          "line": 1,
+          "path": "steering/typescript-native.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "native-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/native",
+    "exit": 0,
+    "seconds": 0.519,
+    "stdoutBytes": 19102,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "PATTERN_NO_MATCH",
+        "message": "No current inventoried project file matches; future matching files retain the rule",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript-native",
+          "line": 1,
+          "path": "steering/typescript-native.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "native-match-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/native",
+    "exit": 0,
+    "seconds": 0.183,
+    "stdoutBytes": 21382,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "unsupported-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/typescript --targets codex --json --project /private/tmp/veritas-end-user-audit/unsupported",
+    "exit": 2,
+    "seconds": 0.161,
+    "stdoutBytes": 736,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "ACTIVATION_UNSUPPORTED",
+        "message": "codex cannot preserve files steering",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "codex"
+      },
+      {
+        "code": "PATTERN_NO_MATCH",
+        "message": "No current inventoried project file matches; future matching files retain the rule",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unsupported-files",
+    "observation": {}
+  },
+  {
+    "label": "adapt-template-update",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --json --project /private/tmp/veritas-end-user-audit/adapt-template",
+    "exit": 4,
+    "seconds": 0.135,
+    "stdoutBytes": 366,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "CONTROL_MISSING",
+        "message": "Missing veritas.lock.json; initialize or restore the project",
+        "severity": "error",
+        "source": {
+          "id": "veritas.lock.json",
+          "path": "veritas.lock.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "adapt-template-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/typescript --targets codex --json --project /private/tmp/veritas-end-user-audit/adapt-template",
+    "exit": 3,
+    "seconds": 0.132,
+    "stdoutBytes": 273,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "INIT_CONFLICT",
+        "message": "Init requires absent config and lock; existing controls remain untouched",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "adapt-working-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/adapt-working",
+    "exit": 0,
+    "seconds": 0.238,
+    "stdoutBytes": 10004,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "adapt-working-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project /private/tmp/veritas-end-user-audit/adapt-working",
+    "exit": 0,
+    "seconds": 0.165,
+    "stdoutBytes": 6914,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "ACTIVATION_ADAPTED",
+        "message": "Explicitly broadened company/typescript from files to always",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "codex"
+      },
+      {
+        "code": "PATTERN_NO_MATCH",
+        "message": "No current inventoried project file matches; future matching files retain the rule",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "adapt-working-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/adapt-working",
+    "exit": 0,
+    "seconds": 0.314,
+    "stdoutBytes": 6914,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "ACTIVATION_ADAPTED",
+        "message": "Explicitly broadened company/typescript from files to always",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "codex"
+      },
+      {
+        "code": "PATTERN_NO_MATCH",
+        "message": "No current inventoried project file matches; future matching files retain the rule",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "adapt-working-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/adapt-working",
+    "exit": 0,
+    "seconds": 0.174,
+    "stdoutBytes": 7749,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "ACTIVATION_ADAPTED",
+        "message": "Explicitly broadened company/typescript from files to always",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "codex"
+      },
+      {
+        "code": "PATTERN_NO_MATCH",
+        "message": "No current inventoried project file matches; future matching files retain the rule",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "local-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex,claude,kiro-ide --local .veritas/local --local-profile project --json --project /private/tmp/veritas-end-user-audit/with-local",
+    "exit": 0,
+    "seconds": 0.255,
+    "stdoutBytes": 27482,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "local-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/with-local",
+    "exit": 0,
+    "seconds": 0.502,
+    "stdoutBytes": 16837,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "local-live-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project /private/tmp/veritas-end-user-audit/with-local",
+    "exit": 0,
+    "seconds": 0.179,
+    "stdoutBytes": 19212,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "local-live-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/with-local",
+    "exit": 0,
+    "seconds": 0.525,
+    "stdoutBytes": 19212,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "local-lock-and-text",
+    "observation": {
+      "lockUnchanged": true,
+      "textPresent": true
+    }
+  },
+  {
+    "label": "arg-plan---json---bad",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --bad",
+    "exit": 2,
+    "seconds": 0.124,
+    "stdoutBytes": 239,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: unknown option '--bad'",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "arg-init---json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --json",
+    "exit": 2,
+    "seconds": 0.122,
+    "stdoutBytes": 267,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: required option '--source <locator>' not specified",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "arg---json---help",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' --json --help",
+    "exit": 0,
+    "seconds": 0.121,
+    "stdoutBytes": 422,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas [options] [command]\n\nCompile and synchronize versioned agent steering and skills\n\nOptions:\n  -V, --version     output the version number\n  --project <path>  Explicit project root\n  --json            Emit one stable JSON result\n  -h, --help        display help for command\n\nCommands:\n  init [options]\n  validate\n  plan\n  sync\n  check\n  update [options]\n  recover\n  help [command]    display help for command\n"
+  },
+  {
+    "label": "arg---json---version",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' --json --version",
+    "exit": 0,
+    "seconds": 0.119,
+    "stdoutBytes": 11,
+    "stderr": "",
+    "stdoutExcerpt": "0.1.0-rc.0\n"
+  },
+  {
+    "label": "arg---json",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' --json",
+    "exit": 2,
+    "seconds": 0.117,
+    "stdoutBytes": 222,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "(outputHelp)",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "arg-plan---project",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --project",
+    "exit": 2,
+    "seconds": 0.124,
+    "stdoutBytes": 17,
+    "stderr": "error: option '--project <path>' argument missing\nerror CLI_ARGUMENT_INVALID: error: option '--project <path>' argument missing\n",
+    "stdoutExcerpt": "unknown: invalid\n"
+  },
+  {
+    "label": "symlink-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/symlink-consumer",
+    "exit": 0,
+    "seconds": 0.246,
+    "stdoutBytes": 11301,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": [
+      {
+        "code": "GUIDANCE_UNMANAGED",
+        "message": "Additional unmanaged guidance limits loading certification; this file remains untouched",
+        "outputCollision": false,
+        "severity": "warning",
+        "source": {
+          "id": ".agents",
+          "path": ".agents"
+        }
+      },
+      {
+        "code": "INIT_GENERATION_CONFLICT",
+        "message": "Initialized controls; review the inventory and generation preview before sync",
+        "severity": "warning"
+      }
+    ]
+  },
+  {
+    "label": "symlink-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/symlink-consumer",
+    "exit": 3,
+    "seconds": 0.165,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "outside-empty",
+    "observation": true
+  },
+  {
+    "label": "kiro-modes-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../modes-library --profile company/modes --targets kiro-ide,kiro-cli --json --project /private/tmp/veritas-end-user-audit/kiro-modes",
+    "exit": 0,
+    "seconds": 0.246,
+    "stdoutBytes": 14884,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "kiro-modes-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/kiro-modes",
+    "exit": 0,
+    "seconds": 0.349,
+    "stdoutBytes": 8172,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "kiro-mode-metadata",
+    "observation": {
+      ".kiro/steering/company--manual.md": "---\ninclusion: manual\n---\n<!-- Generated by Veritas; source: company/manual -->\n\n\nAudit manual body.\n",
+      ".kiro/steering/company--baseline.md": "---\ninclusion: always\n---\n<!-- Generated by Veritas; source: company/baseline -->\n\n\n# Repository practices\n\nPreserve user files. Inspect the relevant code before making changes. Verify observable behavior with focused tests and report any remaining limitations.\n\nAudit upstream revision.\n",
+      ".kiro/steering/company--auto.md": "---\ninclusion: auto\nname: company--auto\ndescription: Audit auto guidance\n---\n<!-- Generated by Veritas; source: company/auto -->\n\n\nAudit auto body.\n"
+    }
+  },
+  {
+    "label": "claude-modes-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../modes-library --profile company/modes --targets claude --json --project /private/tmp/veritas-end-user-audit/claude-modes",
+    "exit": 2,
+    "seconds": 0.166,
+    "stdoutBytes": 703,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "ACTIVATION_UNSUPPORTED",
+        "message": "claude cannot preserve auto steering",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/auto",
+          "line": 1,
+          "path": "steering/auto.md"
+        },
+        "target": "claude"
+      },
+      {
+        "code": "ACTIVATION_UNSUPPORTED",
+        "message": "claude cannot preserve manual steering",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/manual",
+          "line": 1,
+          "path": "steering/manual.md"
+        },
+        "target": "claude"
+      }
+    ]
+  },
+  {
+    "label": "codex-modes-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../modes-library --profile company/modes --targets codex --json --project /private/tmp/veritas-end-user-audit/codex-modes",
+    "exit": 2,
+    "seconds": 0.157,
+    "stdoutBytes": 699,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "ACTIVATION_UNSUPPORTED",
+        "message": "codex cannot preserve auto steering",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/auto",
+          "line": 1,
+          "path": "steering/auto.md"
+        },
+        "target": "codex"
+      },
+      {
+        "code": "ACTIVATION_UNSUPPORTED",
+        "message": "codex cannot preserve manual steering",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/manual",
+          "line": 1,
+          "path": "steering/manual.md"
+        },
+        "target": "codex"
+      }
+    ]
+  },
+  {
+    "label": "imported-script-not-run",
+    "observation": true
+  },
+  {
+    "label": "unsupported-metadata",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../modes-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/unsupported-metadata",
+    "exit": 2,
+    "seconds": 0.155,
+    "stdoutBytes": 408,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "document: Unrecognized key: \"allowed-tools\"",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/review-repository",
+          "line": 2,
+          "path": "skills/review-repository/SKILL.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "mixed-scope-leak",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/mixed-adapt",
+    "exit": 2,
+    "seconds": 0.166,
+    "stdoutBytes": 1440,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SHARED_SCOPE_LEAK",
+        "message": "AGENTS.md would expose company/typescript unconditionally to claude",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "claude"
+      },
+      {
+        "code": "SHARED_SCOPE_LEAK",
+        "message": "AGENTS.md would expose company/typescript unconditionally to kiro-cli",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "kiro-cli"
+      },
+      {
+        "code": "SHARED_SCOPE_LEAK",
+        "message": "AGENTS.md would expose company/typescript unconditionally to kiro-ide",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "kiro-ide"
+      },
+      {
+        "code": "ACTIVATION_ADAPTED",
+        "message": "Explicitly broadened company/typescript from files to always",
+        "severity": "warning",
+        "source": {
+          "column": 1,
+          "id": "company/typescript",
+          "line": 1,
+          "path": "steering/typescript.md"
+        },
+        "target": "codex"
+      }
+    ]
+  },
+  {
+    "label": "scope-leak-no-writes",
+    "observation": true
+  },
+  {
+    "label": "stale-update",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --json --project /private/tmp/veritas-end-user-audit/stale",
+    "exit": 0,
+    "seconds": 0.233,
+    "stdoutBytes": 465,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "stale-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project /private/tmp/veritas-end-user-audit/stale",
+    "exit": 0,
+    "seconds": 0.175,
+    "stdoutBytes": 7693,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "stale-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/stale",
+    "exit": 0,
+    "seconds": 0.517,
+    "stdoutBytes": 7693,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "stale-extra-preserved",
+    "observation": {
+      "extra": "Keep my notes.\n",
+      "managedSkillRemoved": true
+    }
+  },
+  {
+    "label": "restore-mismatch",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --restore --json --project /private/tmp/veritas-end-user-audit/restore-mismatch",
+    "exit": 4,
+    "seconds": 0.15,
+    "stdoutBytes": 288,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "RESTORE_MISMATCH",
+        "message": "Source does not match the exact locked snapshot; intentional update is required",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "restore-mismatch-controls-safe",
+    "observation": true
+  },
+  {
+    "label": "corrupt-cache-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 4,
+    "seconds": 0.143,
+    "stdoutBytes": 335,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "CACHE_INVALID",
+        "message": "Cached file does not match the inventory",
+        "severity": "error",
+        "source": {
+          "id": "source",
+          "path": "steering/baseline.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "corrupt-cache-restore",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --restore --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 4,
+    "seconds": 0.151,
+    "stdoutBytes": 288,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "RESTORE_MISMATCH",
+        "message": "Source does not match the exact locked snapshot; intentional update is required",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "consumer-git-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "git init '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.025,
+    "stdoutBytes": 93,
+    "stderr": "",
+    "stdoutExcerpt": "Initialized empty Git repository in /private/tmp/veritas-end-user-audit/consumer space/.git/\n"
+  },
+  {
+    "label": "git-subdir-check",
+    "cwd": "/private/tmp/veritas-end-user-audit/consumer space/src",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json",
+    "exit": 0,
+    "seconds": 0.192,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "unsupported-config-flag",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --config native-typescript.yaml --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 2,
+    "seconds": 0.125,
+    "stdoutBytes": 242,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "CLI_ARGUMENT_INVALID",
+        "message": "error: unknown option '--config'",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "unknown-target-profile",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 2,
+    "seconds": 0.139,
+    "stdoutBytes": 384,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "targets.0: Unknown or mismatched capability profile",
+        "severity": "error",
+        "source": {
+          "column": 5,
+          "id": "veritas.yaml",
+          "line": 7,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unknown-config-field",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 2,
+    "seconds": 0.132,
+    "stdoutBytes": 370,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "document: Unrecognized key: \"extra\"",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "veritas.yaml",
+          "line": 1,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "duplicate-target",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 2,
+    "seconds": 0.132,
+    "stdoutBytes": 368,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "targets: Duplicate target selection",
+        "severity": "error",
+        "source": {
+          "column": 3,
+          "id": "veritas.yaml",
+          "line": 7,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "corrupt-manifest-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.156,
+    "stdoutBytes": 7830,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "MANIFEST_INVALID",
+        "message": "Ownership manifest is corrupt, unsupported or unsafe; preserve it for manual resolution",
+        "severity": "error",
+        "source": {
+          "id": ".veritas/manifest.json",
+          "path": ".veritas/manifest.json"
+        }
+      }
+    ]
+  },
+  {
+    "label": "corrupt-manifest-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 3,
+    "seconds": 0.172,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "single-codex-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/single-codex",
+    "exit": 0,
+    "seconds": 0.244,
+    "stdoutBytes": 10004,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-codex-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/single-codex",
+    "exit": 0,
+    "seconds": 0.318,
+    "stdoutBytes": 6063,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-codex-paths",
+    "observation": [
+      ".agents/skills/review-repository/LICENSE",
+      ".agents/skills/review-repository/README.md",
+      ".agents/skills/review-repository/SKILL.md",
+      ".agents/skills/review-repository/assets/bytes.bin",
+      ".agents/skills/review-repository/references/questions.md",
+      ".agents/skills/review-repository/scripts/inert.sh",
+      "AGENTS.md",
+      "veritas.lock.json",
+      "veritas.yaml"
+    ]
+  },
+  {
+    "label": "single-claude-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets claude --json --project /private/tmp/veritas-end-user-audit/single-claude",
+    "exit": 0,
+    "seconds": 0.247,
+    "stdoutBytes": 10133,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-claude-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/single-claude",
+    "exit": 0,
+    "seconds": 0.313,
+    "stdoutBytes": 6129,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-claude-paths",
+    "observation": [
+      ".claude/rules/company--baseline.md",
+      ".claude/skills/review-repository/LICENSE",
+      ".claude/skills/review-repository/README.md",
+      ".claude/skills/review-repository/SKILL.md",
+      ".claude/skills/review-repository/assets/bytes.bin",
+      ".claude/skills/review-repository/references/questions.md",
+      ".claude/skills/review-repository/scripts/inert.sh",
+      "veritas.lock.json",
+      "veritas.yaml"
+    ]
+  },
+  {
+    "label": "single-kiro-ide-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets kiro-ide --json --project /private/tmp/veritas-end-user-audit/single-kiro-ide",
+    "exit": 0,
+    "seconds": 0.24,
+    "stdoutBytes": 10159,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-kiro-ide-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/single-kiro-ide",
+    "exit": 0,
+    "seconds": 0.316,
+    "stdoutBytes": 6139,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-kiro-ide-paths",
+    "observation": [
+      ".kiro/skills/review-repository/LICENSE",
+      ".kiro/skills/review-repository/README.md",
+      ".kiro/skills/review-repository/SKILL.md",
+      ".kiro/skills/review-repository/assets/bytes.bin",
+      ".kiro/skills/review-repository/references/questions.md",
+      ".kiro/skills/review-repository/scripts/inert.sh",
+      ".kiro/steering/company--baseline.md",
+      "veritas.lock.json",
+      "veritas.yaml"
+    ]
+  },
+  {
+    "label": "single-kiro-cli-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../company-library --profile company/baseline --targets kiro-cli --json --project /private/tmp/veritas-end-user-audit/single-kiro-cli",
+    "exit": 0,
+    "seconds": 0.249,
+    "stdoutBytes": 10159,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-kiro-cli-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/single-kiro-cli",
+    "exit": 0,
+    "seconds": 0.321,
+    "stdoutBytes": 6139,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "single-kiro-cli-paths",
+    "observation": [
+      ".kiro/skills/review-repository/LICENSE",
+      ".kiro/skills/review-repository/README.md",
+      ".kiro/skills/review-repository/SKILL.md",
+      ".kiro/skills/review-repository/assets/bytes.bin",
+      ".kiro/skills/review-repository/references/questions.md",
+      ".kiro/skills/review-repository/scripts/inert.sh",
+      ".kiro/steering/company--baseline.md",
+      "veritas.lock.json",
+      "veritas.yaml"
+    ]
+  },
+  {
+    "label": "git-no-ref",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source https://example.invalid/library.git --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/git-no-ref",
+    "exit": 2,
+    "seconds": 0.134,
+    "stdoutBytes": 251,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SOURCE_REF_REQUIRED",
+        "message": "Git initialization requires an explicit --ref",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "git-insecure",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source http://example.invalid/library.git --profile company/baseline --targets codex --ref main --json --project /private/tmp/veritas-end-user-audit/git-insecure",
+    "exit": 2,
+    "seconds": 0.136,
+    "stdoutBytes": 369,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "sources.company.git: Unsafe Git locator",
+        "severity": "error",
+        "source": {
+          "column": 10,
+          "id": "veritas.yaml",
+          "line": 4,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "git-executable",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source 'ext::echo bogus' --profile company/baseline --targets codex --ref main --json --project /private/tmp/veritas-end-user-audit/git-executable",
+    "exit": 2,
+    "seconds": 0.131,
+    "stdoutBytes": 238,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SOURCE_REF_INVALID",
+        "message": "--ref applies only to Git sources",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "git-file",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source file:///tmp/library.git --profile company/baseline --targets codex --ref main --json --project /private/tmp/veritas-end-user-audit/git-file",
+    "exit": 2,
+    "seconds": 0.142,
+    "stdoutBytes": 369,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "sources.company.git: Unsafe Git locator",
+        "severity": "error",
+        "source": {
+          "column": 10,
+          "id": "veritas.yaml",
+          "line": 4,
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "busy-fixture-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../large-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/busy",
+    "exit": 0,
+    "seconds": 1.625,
+    "stdoutBytes": 1487204,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "concurrent-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/busy",
+    "exit": 5,
+    "seconds": 0.126,
+    "stdoutBytes": 255,
+    "stderr": "",
+    "outcome": "busy",
+    "diagnostics": [
+      {
+        "code": "SYNC_BUSY",
+        "message": "Another mutator or an abandoned lock requires owner inspection",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "busy-first-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --project /private/tmp/veritas-end-user-audit/busy --json",
+    "exit": 0,
+    "seconds": 22.393,
+    "stdoutBytes": 992463,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "busy-clean-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/busy",
+    "exit": 0,
+    "seconds": 2.6,
+    "stdoutBytes": 1136098,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../large-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 0,
+    "seconds": 1.614,
+    "stdoutBytes": 1487204,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-terminated-child",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --project /private/tmp/veritas-end-user-audit/interrupted --json",
+    "exit": -15,
+    "seconds": 8.87,
+    "stdoutBytes": 0,
+    "stderr": "",
+    "stdoutExcerpt": ""
+  },
+  {
+    "label": "interrupted-interrupt-state",
+    "observation": {
+      "ownChildPid": 98297,
+      "waitReturncode": -15,
+      "journalPresent": true,
+      "lockPresent": true,
+      "generatedFiles": 7
+    }
+  },
+  {
+    "label": "interrupted-check-incomplete",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 5,
+    "seconds": 0.128,
+    "stdoutBytes": 261,
+    "stderr": "",
+    "outcome": "busy",
+    "diagnostics": [
+      {
+        "code": "SYNC_INCOMPLETE",
+        "message": "An interrupted transaction requires recover before new writes",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "interrupted-recover-locked",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 5,
+    "seconds": 0.123,
+    "stdoutBytes": 258,
+    "stderr": "",
+    "outcome": "busy",
+    "diagnostics": [
+      {
+        "code": "SYNC_BUSY",
+        "message": "Another mutator or an abandoned lock requires owner inspection",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "interrupted-lock-removal",
+    "observation": "Removed only unchanged sync.lock of the exact child spawned and reaped by this audit; journal/stage/backup preserved."
+  },
+  {
+    "label": "interrupted-recover",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 0,
+    "seconds": 0.77,
+    "stdoutBytes": 156,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-rollback",
+    "observation": {
+      "generatedOrdinaryFiles": 0,
+      "manifestPresent": false,
+      "journalPresent": false
+    }
+  },
+  {
+    "label": "interrupted-repeat-recover",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 0,
+    "seconds": 0.129,
+    "stdoutBytes": 132,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-resync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 0,
+    "seconds": 23.093,
+    "stdoutBytes": 992463,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-final-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/interrupted",
+    "exit": 0,
+    "seconds": 3.174,
+    "stdoutBytes": 1136098,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-edited-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../large-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/interrupted-edited",
+    "exit": 0,
+    "seconds": 2.22,
+    "stdoutBytes": 1487204,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "interrupted-edited-terminated-child",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --project /private/tmp/veritas-end-user-audit/interrupted-edited --json",
+    "exit": -15,
+    "seconds": 9.113,
+    "stdoutBytes": 0,
+    "stderr": "",
+    "stdoutExcerpt": ""
+  },
+  {
+    "label": "interrupted-edited-interrupt-state",
+    "observation": {
+      "ownChildPid": 1530,
+      "waitReturncode": -15,
+      "journalPresent": true,
+      "lockPresent": true,
+      "generatedFiles": 7
+    }
+  },
+  {
+    "label": "interrupted-edited-check-incomplete",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/interrupted-edited",
+    "exit": 5,
+    "seconds": 0.135,
+    "stdoutBytes": 261,
+    "stderr": "",
+    "outcome": "busy",
+    "diagnostics": [
+      {
+        "code": "SYNC_INCOMPLETE",
+        "message": "An interrupted transaction requires recover before new writes",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "interrupted-edited-recover-locked",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --json --project /private/tmp/veritas-end-user-audit/interrupted-edited",
+    "exit": 5,
+    "seconds": 0.125,
+    "stdoutBytes": 258,
+    "stderr": "",
+    "outcome": "busy",
+    "diagnostics": [
+      {
+        "code": "SYNC_BUSY",
+        "message": "Another mutator or an abandoned lock requires owner inspection",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "interrupted-edited-lock-removal",
+    "observation": "Removed only unchanged sync.lock of the exact child spawned and reaped by this audit; journal/stage/backup preserved."
+  },
+  {
+    "label": "interrupted-edited-recover",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' recover --json --project /private/tmp/veritas-end-user-audit/interrupted-edited",
+    "exit": 3,
+    "seconds": 0.236,
+    "stdoutBytes": 313,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "RECOVERY_CONFLICT",
+        "message": "Interrupted output was externally changed or is unsafe: .agents/skills/review-repository/assets/bytes.bin",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "interrupted-edited-edit-preserved",
+    "observation": {
+      "file": ".agents/skills/review-repository/assets/bytes.bin",
+      "fileEqual": true,
+      "journalEqual": true
+    }
+  },
+  {
+    "label": "complete-conflict-sync-human",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --project /private/tmp/veritas-end-user-audit/with-local",
+    "exit": 3,
+    "seconds": 0.252,
+    "stdoutBytes": 15,
+    "stderr": "error PLAN_CONFLICT: The complete plan has conflicts or errors; no output was written\n",
+    "stdoutExcerpt": "sync: conflict\n"
+  },
+  {
+    "label": "complete-conflict-plan-human",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --project /private/tmp/veritas-end-user-audit/with-local",
+    "exit": 3,
+    "seconds": 0.21,
+    "stdoutBytes": 17853,
+    "stderr": "error OUTPUT_CONFLICT AGENTS.md: Managed output was modified outside Veritas\n",
+    "stdoutExcerpt": "plan: conflict\n{\n  \"hasConflicts\": true,\n  \"hasDrift\": true,\n  \"manifest\": {\n    \"adaptations\": [],\n    \"artifacts\": [\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n        \"executable\": false,\n        \"path\": \".agents/skills/review-repository/LICENSE\",\n        \"sha256\": \"c19ecc2c2e328752cd2d011fef63fd3738fdeb26a7aa9cd9cd930b1cadbfe454\",\n        \"sourceIds\": [\n          \"company/review-repository\"\n        ]\n      },\n      {\n        \"consumers\": [\n          \"codex\"\n        ],\n      "
+  },
+  {
+    "label": "complete-conflict-preservation",
+    "observation": true
+  },
+  {
+    "label": "read-only-validate",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' validate --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.223,
+    "stdoutBytes": 8218,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "read-only-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.238,
+    "stdoutBytes": 19068,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "read-only-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.35,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "read-only-all-files-preserved",
+    "observation": true
+  },
+  {
+    "label": "asset-byte-mode-preservation",
+    "observation": {
+      ".agents/skills/review-repository": true,
+      ".claude/skills/review-repository": true,
+      ".kiro/skills/review-repository": true
+    }
+  },
+  {
+    "label": "sidecar-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../sidecar-library --profile company/native-typescript --targets claude --json --project /private/tmp/veritas-end-user-audit/sidecar",
+    "exit": 2,
+    "seconds": 0.317,
+    "stdoutBytes": 465,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SKILL_CONTROL_UNSUPPORTED",
+        "message": "Native skill sidecars are unsupported in this release; controls cannot be dropped",
+        "severity": "error",
+        "source": {
+          "column": 1,
+          "id": "company/review-repository",
+          "line": 1,
+          "path": "skills/review-repository/agents/openai.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "missing-reference-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../missing-reference-library --profile company/native-typescript --targets claude --json --project /private/tmp/veritas-end-user-audit/missing-reference",
+    "exit": 2,
+    "seconds": 0.35,
+    "stdoutBytes": 436,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "REFERENCE_MISSING",
+        "message": "Reference does not resolve to a package file: references/questions.md",
+        "severity": "error",
+        "source": {
+          "column": 10,
+          "id": "company/review-repository",
+          "line": 9,
+          "path": "skills/review-repository/SKILL.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "unsafe-pattern-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../unsafe-pattern-library --profile company/native-typescript --targets claude --json --project /private/tmp/veritas-end-user-audit/unsafe-pattern",
+    "exit": 2,
+    "seconds": 0.349,
+    "stdoutBytes": 413,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SCHEMA_INVALID",
+        "message": "activation.patterns.0: Unsupported activation pattern",
+        "severity": "error",
+        "source": {
+          "column": 14,
+          "id": "company/typescript-native",
+          "line": 6,
+          "path": "steering/typescript-native.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "source-symlink-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../source-symlink-library --profile company/native-typescript --targets claude --json --project /private/tmp/veritas-end-user-audit/source-symlink",
+    "exit": 4,
+    "seconds": 0.307,
+    "stdoutBytes": 361,
+    "stderr": "",
+    "outcome": "operational",
+    "diagnostics": [
+      {
+        "code": "SOURCE_UNSAFE_ENTRY",
+        "message": "Source entries must be ordinary directories or files without links",
+        "severity": "error",
+        "source": {
+          "id": "source",
+          "path": "unselected-link"
+        }
+      }
+    ]
+  },
+  {
+    "label": "source-containing-project",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source .. --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/source-containing-project",
+    "exit": 2,
+    "seconds": 0.354,
+    "stdoutBytes": 401,
+    "stderr": "",
+    "outcome": "invalid",
+    "diagnostics": [
+      {
+        "code": "SOURCE_ROOT_CONTAINS_PROJECT",
+        "message": "Use a dedicated library directory that does not contain the consuming project or its runtime state",
+        "severity": "error",
+        "source": {
+          "id": "veritas.yaml",
+          "path": "veritas.yaml"
+        }
+      }
+    ]
+  },
+  {
+    "label": "provenance-init",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' init --source ../provenance-library --profile company/baseline --targets codex --json --project /private/tmp/veritas-end-user-audit/provenance",
+    "exit": 0,
+    "seconds": 0.441,
+    "stdoutBytes": 10004,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "provenance-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/provenance",
+    "exit": 0,
+    "seconds": 0.748,
+    "stdoutBytes": 6063,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "provenance-check",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project /private/tmp/veritas-end-user-audit/provenance",
+    "exit": 1,
+    "seconds": 0.34,
+    "stdoutBytes": 6894,
+    "stderr": "",
+    "outcome": "drift",
+    "diagnostics": []
+  },
+  {
+    "label": "manifest-only-drift",
+    "observation": {
+      "manifestChanged": true,
+      "operations": [
+        "unchanged"
+      ]
+    }
+  },
+  {
+    "label": "normal-consumer-npm-init",
+    "cwd": "/private/tmp/veritas-end-user-audit/npm consumer",
+    "command": "npm init -y --cache /private/tmp/veritas-end-user-audit/npm-cache",
+    "exit": 0,
+    "seconds": 0.285,
+    "stdoutBytes": 323,
+    "stderr": "",
+    "stdoutExcerpt": "Wrote to /private/tmp/veritas-end-user-audit/npm consumer/package.json:\n\n{\n  \"name\": \"npm-consumer\",\n  \"version\": \"1.0.0\",\n  \"description\": \"\",\n  \"main\": \"index.js\",\n  \"scripts\": {\n    \"test\": \"echo \\\"Error: no test specified\\\" && exit 1\"\n  },\n  \"keywords\": [],\n  \"author\": \"\",\n  \"license\": \"ISC\",\n  \"type\": \"commonjs\"\n}\n\n\n"
+  },
+  {
+    "label": "normal-consumer-npm-install",
+    "cwd": "/private/tmp/veritas-end-user-audit/npm consumer",
+    "command": "npm install --save-dev --ignore-scripts --offline --no-audit --no-fund --cache /private/tmp/veritas-end-user-audit/npm-cache /private/tmp/veritas-tag-release/veritas-0.1.0-rc.0.tgz",
+    "exit": 0,
+    "seconds": 1.124,
+    "stdoutBytes": 25,
+    "stderr": "",
+    "stdoutExcerpt": "\nadded 61 packages in 1s\n"
+  },
+  {
+    "label": "normal-consumer-npx-version",
+    "cwd": "/private/tmp/veritas-end-user-audit/npm consumer",
+    "command": "npm exec --offline --cache /private/tmp/veritas-end-user-audit/npm-cache -- veritas --version",
+    "exit": 0,
+    "seconds": 0.863,
+    "stdoutBytes": 11,
+    "stderr": "",
+    "stdoutExcerpt": "0.1.0-rc.0\n"
+  },
+  {
+    "label": "normal-consumer-bin-help",
+    "cwd": "/private/tmp/veritas-end-user-audit/npm consumer",
+    "command": "'/private/tmp/veritas-end-user-audit/npm consumer/node_modules/.bin/veritas' --help",
+    "exit": 0,
+    "seconds": 0.189,
+    "stdoutBytes": 422,
+    "stderr": "",
+    "stdoutExcerpt": "Usage: veritas [options] [command]\n\nCompile and synchronize versioned agent steering and skills\n\nOptions:\n  -V, --version     output the version number\n  --project <path>  Explicit project root\n  --json            Emit one stable JSON result\n  -h, --help        display help for command\n\nCommands:\n  init [options]\n  validate\n  plan\n  sync\n  check\n  update [options]\n  recover\n  help [command]    display help for command\n"
+  },
+  {
+    "label": "package-doc-presence",
+    "observation": {
+      "README.md": true,
+      "docs/user-guide.md": false,
+      "examples/README.md": false,
+      "examples/company-library/veritas.library.yaml": false,
+      "scripts/clean-build.mjs": false,
+      "dist/bin.js": true
+    }
+  },
+  {
+    "label": "json-envelope-census",
+    "observation": {
+      "commands": 123,
+      "malformedOrExtraStderr": [
+        "interrupted-terminated-child",
+        "interrupted-edited-terminated-child"
+      ],
+      "observedExits": [
+        -15,
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "label": "checkpoint-head",
+    "cwd": "/Users/dsteele/repos/veritas",
+    "command": "git rev-parse HEAD",
+    "exit": 0,
+    "seconds": 0.022,
+    "stdoutBytes": 41,
+    "stderr": "",
+    "stdoutExcerpt": "5ad7cc272973f9c18fb6171ab24b6a3bb1ca82e8\n"
+  },
+  {
+    "label": "checkpoint-tag",
+    "cwd": "/Users/dsteele/repos/veritas",
+    "command": "git rev-parse 'v0.1.0-rc.0^{}'",
+    "exit": 0,
+    "seconds": 0.021,
+    "stdoutBytes": 41,
+    "stderr": "",
+    "stdoutExcerpt": "5ad7cc272973f9c18fb6171ab24b6a3bb1ca82e8\n"
+  },
+  {
+    "label": "archive-sha256",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "shasum -a 256 /private/tmp/veritas-tag-release/veritas-0.1.0-rc.0.tgz",
+    "exit": 0,
+    "seconds": 0.019,
+    "stdoutBytes": 122,
+    "stderr": "",
+    "stdoutExcerpt": "e279a10d40175c049b1eb7c99258e6b51fc2b0e74c2fa29ae92a7731133359a1  /private/tmp/veritas-tag-release/veritas-0.1.0-rc.0.tgz\n"
+  },
+  {
+    "label": "node-version",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "node --version",
+    "exit": 0,
+    "seconds": 0.021,
+    "stdoutBytes": 9,
+    "stderr": "",
+    "stdoutExcerpt": "v24.18.0\n"
+  },
+  {
+    "label": "npm-version",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "npm --version",
+    "exit": 0,
+    "seconds": 0.091,
+    "stdoutBytes": 8,
+    "stderr": "",
+    "stdoutExcerpt": "11.16.0\n"
+  },
+  {
+    "label": "json-completed-command-census",
+    "observation": {
+      "completedCommands": 121,
+      "allSingleEnvelopesWithEmptyStderr": true,
+      "observedExits": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ]
+    }
+  },
+  {
+    "label": "final-installed-clean",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' check --json --project '/private/tmp/veritas-end-user-audit/consumer space'",
+    "exit": 0,
+    "seconds": 0.342,
+    "stdoutBytes": 19069,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "safe-subset-update",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' update --json --project /private/tmp/veritas-end-user-audit/safe-subset-blocked",
+    "exit": 0,
+    "seconds": 0.684,
+    "stdoutBytes": 465,
+    "stderr": "",
+    "outcome": "success",
+    "diagnostics": []
+  },
+  {
+    "label": "safe-subset-plan",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' plan --json --project /private/tmp/veritas-end-user-audit/safe-subset-blocked",
+    "exit": 3,
+    "seconds": 0.476,
+    "stdoutBytes": 21737,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "OUTPUT_CONFLICT",
+        "message": "Managed output was modified outside Veritas",
+        "severity": "error",
+        "source": {
+          "id": "AGENTS.md",
+          "path": "AGENTS.md"
+        }
+      }
+    ]
+  },
+  {
+    "label": "safe-subset-operations",
+    "observation": {
+      "create": 3,
+      "replace": 0,
+      "unchanged": 19,
+      "conflict": 1
+    }
+  },
+  {
+    "label": "safe-subset-sync",
+    "cwd": "/private/tmp/veritas-end-user-audit",
+    "command": "'/private/tmp/veritas-end-user-audit/tools space/node_modules/.bin/veritas' sync --json --project /private/tmp/veritas-end-user-audit/safe-subset-blocked",
+    "exit": 3,
+    "seconds": 0.995,
+    "stdoutBytes": 265,
+    "stderr": "",
+    "outcome": "conflict",
+    "diagnostics": [
+      {
+        "code": "PLAN_CONFLICT",
+        "message": "The complete plan has conflicts or errors; no output was written",
+        "severity": "error"
+      }
+    ]
+  },
+  {
+    "label": "safe-subset-no-writes",
+    "observation": {
+      "allFilesEqual": true,
+      "newFilesAbsent": true
+    }
+  }
+]

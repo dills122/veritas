@@ -43,13 +43,16 @@ async function fixture() {
   return { base, project, library };
 }
 async function cli(project: string, ...args: string[]) {
+  return invoke(project, args, true);
+}
+async function invoke(project: string, args: string[], json: boolean) {
   let stdout: string,
     stderr: string,
     code = 0;
   try {
     const result = await execute(
       process.execPath,
-      [bin, ...args, '--project', project, '--json'],
+      [bin, ...args, '--project', project, ...(json ? ['--json'] : [])],
       { timeout: 30_000 },
     );
     stdout = result.stdout;
@@ -274,7 +277,17 @@ it('preserves unmanaged and edited outputs and returns ownership exit 3', async 
     ).code,
   ).toBe(0);
   await writeFile(join(project, 'AGENTS.md'), 'User-owned guidance\n');
-  expect((await cli(project, 'sync')).code).toBe(3);
+  const unmanaged = await cli(project, 'sync');
+  expect(unmanaged.code).toBe(3);
+  expect(unmanaged.value).toMatchObject({
+    diagnostics: [
+      {
+        code: 'OUTPUT_CONFLICT',
+        source: { id: 'AGENTS.md', path: 'AGENTS.md' },
+      },
+      { code: 'PLAN_CONFLICT' },
+    ],
+  });
   expect(await readFile(join(project, 'AGENTS.md'), 'utf8')).toBe(
     'User-owned guidance\n',
   );
@@ -282,9 +295,132 @@ it('preserves unmanaged and edited outputs and returns ownership exit 3', async 
   expect((await cli(project, 'sync')).code).toBe(0);
   await writeFile(join(project, 'AGENTS.md'), 'User edit\n');
   expect((await cli(project, 'check')).code).toBe(3);
-  expect((await cli(project, 'sync')).code).toBe(3);
+  const edited = await cli(project, 'sync');
+  expect(edited.code).toBe(3);
+  expect(edited.value).toMatchObject({
+    diagnostics: [
+      {
+        code: 'OUTPUT_CONFLICT',
+        source: { id: 'AGENTS.md', path: 'AGENTS.md' },
+      },
+      { code: 'PLAN_CONFLICT' },
+    ],
+  });
   expect(await readFile(join(project, 'AGENTS.md'), 'utf8')).toBe(
     'User edit\n',
+  );
+});
+it('identifies a corrupt manifest when sync refuses the plan', async () => {
+  const { project } = await fixture();
+  expect(
+    (
+      await cli(
+        project,
+        'init',
+        '--source',
+        '../library',
+        '--profile',
+        'company/baseline',
+        '--targets',
+        'codex',
+      )
+    ).code,
+  ).toBe(0);
+  expect((await cli(project, 'sync')).code).toBe(0);
+  const before = await readFile(join(project, 'AGENTS.md'));
+  await writeFile(join(project, '.veritas/manifest.json'), '{}\n');
+  const result = await cli(project, 'sync');
+  expect(result.code).toBe(3);
+  expect(result.stderr).toBe('');
+  expect(result.value).toMatchObject({
+    diagnostics: [
+      {
+        code: 'MANIFEST_INVALID',
+        source: {
+          id: '.veritas/manifest.json',
+          path: '.veritas/manifest.json',
+        },
+      },
+      { code: 'PLAN_CONFLICT' },
+    ],
+  });
+  expect(await readFile(join(project, 'AGENTS.md'))).toEqual(before);
+  expect(await readFile(join(project, '.veritas/manifest.json'), 'utf8')).toBe(
+    '{}\n',
+  );
+});
+it('summarizes human workflows while keeping structured output complete', async () => {
+  const { project, library } = await fixture();
+  const initialized = await invoke(
+    project,
+    [
+      'init',
+      '--source',
+      '../library',
+      '--profile',
+      'company/baseline',
+      '--targets',
+      'codex,claude,kiro-ide',
+    ],
+    false,
+  );
+  expect(initialized.code).toBe(0);
+  expect(initialized.stdout).toContain('veritas.yaml');
+  expect(initialized.stdout).toContain('veritas.lock.json');
+  expect(initialized.stdout.trim().split('\n').length).toBeLessThan(12);
+  const planned = await invoke(project, ['plan'], false);
+  expect(planned.stdout).toContain('create AGENTS.md');
+  expect(planned.stdout).not.toContain('sha256');
+  const drift = await invoke(project, ['check'], false);
+  expect(drift.code).toBe(1);
+  expect(drift.stdout).toContain('create AGENTS.md');
+  const synced = await invoke(project, ['sync'], false);
+  expect(synced.code).toBe(0);
+  expect(synced.stdout.trim().split('\n').length).toBeLessThan(8);
+  const clean = await invoke(project, ['check'], false);
+  expect(clean.code).toBe(0);
+  expect(clean.stdout).toContain('up to date');
+  expect(clean.stdout.trim().split('\n').length).toBe(2);
+  const structured = await cli(project, 'plan');
+  expect(structured.stderr).toBe('');
+  const expectedHash: unknown = expect.any(String);
+  const expectedArtifacts: unknown = expect.any(Array);
+  const expectedOperations: unknown = expect.arrayContaining([
+    expect.objectContaining({
+      path: 'AGENTS.md',
+      kind: 'unchanged',
+      expectedBefore: {
+        kind: 'file',
+        sha256: expectedHash,
+        executable: false,
+      },
+    }),
+  ]);
+  expect(structured.value).toMatchObject({
+    data: {
+      operations: expectedOperations,
+      manifest: { artifacts: expectedArtifacts },
+    },
+  });
+  await writeFile(
+    join(library, 'baseline.md'),
+    (await readFile(join(library, 'baseline.md'), 'utf8')) +
+      '\nUpdated source.\n',
+  );
+  const updated = await invoke(project, ['update'], false);
+  expect(updated.code).toBe(0);
+  expect(updated.stdout).toContain('plan');
+  expect(updated.stdout.trim().split('\n').length).toBeLessThan(8);
+  const recovered = await invoke(project, ['recover'], false);
+  expect(recovered.code).toBe(0);
+  expect(recovered.stdout).toContain('No interrupted transaction');
+  await writeFile(join(project, 'AGENTS.md'), 'Keep this external edit.\n');
+  const conflict = await invoke(project, ['sync'], false);
+  expect(conflict.code).toBe(3);
+  expect(conflict.stderr).toContain('OUTPUT_CONFLICT AGENTS.md');
+  expect(conflict.stderr).toContain('plan');
+  expect(await readFile(join(project, 'AGENTS.md'), 'utf8')).toBe(
+    'Keep this external edit.\n',
   );
 });
 it('keeps read-only cache failures offline and restores exact local pins without rewriting lock', async () => {

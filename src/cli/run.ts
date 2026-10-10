@@ -1,3 +1,6 @@
+import { execFile } from 'node:child_process';
+import { rmdir } from 'node:fs/promises';
+import { promisify } from 'node:util';
 import { Command, CommanderError } from 'commander';
 import { relative, resolve, sep } from 'node:path';
 import { stringify } from 'yaml';
@@ -17,7 +20,7 @@ import { apply } from '../sync/apply.js';
 import { writeControls } from '../sync/control.js';
 import { acquireLock, assertNoIncompleteTransaction } from '../sync/lock.js';
 import type { LockLease } from '../sync/lock.js';
-import { observe } from '../sync/observe.js';
+import { observe, readObservedFile } from '../sync/observe.js';
 import { inventoryGuidance, plan } from '../sync/plan.js';
 import { recover } from '../sync/recover.js';
 import {
@@ -32,6 +35,14 @@ import {
   resolveSource,
   unwrap,
 } from './pipeline.js';
+import { adopt, manifestOwnedPaths } from './adopt.js';
+import { unifiedDiff } from './diff.js';
+import {
+  checkInitArguments,
+  createScaffold,
+  SCAFFOLD_PROFILE,
+} from './scaffold.js';
+import { humanPlan, planSummary } from './human.js';
 
 type Options = {
   project?: string;
@@ -43,11 +54,17 @@ type Options = {
   local?: string;
   localProfile?: string;
   restore?: boolean;
+  diff?: boolean;
+  scaffold?: string | boolean;
+  adoptPath?: string;
+  id?: string;
+  description?: string;
 };
 type Outcome = {
   exitCode: number;
   diagnostics: readonly Diagnostic[];
   data: unknown;
+  human?: readonly string[];
 };
 const outcomes: Record<number, CommandEnvelope['outcome']> = {
   0: 'success',
@@ -74,7 +91,10 @@ function artifactData(result: CompileResult) {
     })),
   };
 }
-function planData(value: WritePlan) {
+function planData(
+  value: WritePlan,
+  diffs: ReadonlyMap<string, string> = new Map(),
+) {
   return {
     hasDrift: value.hasDrift,
     hasConflicts: value.hasConflicts,
@@ -84,6 +104,7 @@ function planData(value: WritePlan) {
       kind: operation.kind,
       path: operation.path,
       expectedBefore: operation.expectedBefore,
+      ...(diffs.has(operation.path) ? { diff: diffs.get(operation.path) } : {}),
       ...(operation.after
         ? {
             after: {
@@ -96,6 +117,67 @@ function planData(value: WritePlan) {
         : {}),
     })),
   };
+}
+/** Warn only when Git positively reports the machine-local runtime directory as not ignored. */
+async function runtimeIgnoreWarnings(project: string): Promise<Diagnostic[]> {
+  try {
+    await promisify(execFile)(
+      'git',
+      ['check-ignore', '-q', '--', '.veritas/runtime'],
+      { cwd: project, timeout: 5000 },
+    );
+    return [];
+  } catch (cause) {
+    if (
+      typeof cause !== 'object' ||
+      cause === null ||
+      !('code' in cause) ||
+      cause.code !== 1
+    )
+      return [];
+    return [
+      {
+        ...error(
+          'RUNTIME_NOT_IGNORED',
+          '.veritas/runtime/ is not ignored by Git; it holds machine-local cache and recovery state',
+        ),
+        severity: 'warning',
+        remediation:
+          "Add '.veritas/runtime/' to .gitignore. Commit veritas.yaml, veritas.lock.json, .veritas/manifest.json and generated files.",
+      },
+    ];
+  }
+}
+/** A failed init must not leave empty runtime directories; non-recursive so real state is never removed. */
+async function removeEmptyRuntime(project: string): Promise<void> {
+  for (const path of [
+    '.veritas/runtime/git',
+    '.veritas/runtime/cache',
+    '.veritas/runtime',
+    '.veritas',
+  ])
+    await rmdir(resolve(project, path)).catch(() => undefined);
+}
+/** Diff from disk to generated content for replace and conflicting operations that have a readable file. */
+async function planDiffs(
+  project: string,
+  value: WritePlan,
+): Promise<Map<string, string>> {
+  const diffs = new Map<string, string>();
+  for (const operation of value.operations) {
+    if (
+      (operation.kind !== 'replace' && operation.kind !== 'conflict') ||
+      !operation.after
+    )
+      continue;
+    const read = await readObservedFile(project, operation.path);
+    if (read.state.kind === 'file' && read.bytes)
+      diffs.set(
+        operation.path,
+        unifiedDiff(operation.path, read.bytes, operation.after.bytes),
+      );
+  }
+  return diffs;
 }
 async function initialize(
   project: string,
@@ -161,17 +243,22 @@ async function initialize(
     compiled = await compileSnapshot(project, config, resolved.snapshot);
   const lock = makeLock(config, resolved.snapshot, resolved.resolvedCommit);
   const preview = await plan(project, compiled);
-  const guidance = (await inventoryGuidance(project, new Set(), compiled)).map(
-    (diagnostic) => ({
-      ...diagnostic,
-      outputCollision: preview.operations.some(
-        (operation) =>
-          operation.kind === 'conflict' &&
-          operation.path === diagnostic.source?.path,
-      ),
-    }),
-  );
+  const guidance = (
+    await inventoryGuidance(
+      project,
+      await manifestOwnedPaths(project),
+      compiled,
+    )
+  ).map((diagnostic) => ({
+    ...diagnostic,
+    outputCollision: preview.operations.some(
+      (operation) =>
+        operation.kind === 'conflict' &&
+        operation.path === diagnostic.source?.path,
+    ),
+  }));
   await storeSnapshot(project, resolved.snapshot);
+  const ignoreWarnings = await runtimeIgnoreWarnings(project);
   await writeControls(
     project,
     'init',
@@ -194,6 +281,7 @@ async function initialize(
     diagnostics: [
       ...compiled.diagnostics,
       ...guidance.filter((diagnostic) => diagnostic.severity === 'warning'),
+      ...ignoreWarnings,
       ...(preview.hasConflicts
         ? [
             {
@@ -212,6 +300,17 @@ async function initialize(
       guidance: { entries: guidance, generationBlocked: preview.hasConflicts },
       generationPreview: planData(preview),
     },
+    human: [
+      'Initialized veritas.yaml and veritas.lock.json; guidance has not been generated.',
+      `Source: ${lock.source.namespace} (${lock.source.kind}), snapshot ${lock.source.treeDigest.slice(0, 12)}.`,
+      planSummary(preview),
+      ...(preview.hasConflicts
+        ? [
+            'Generation blocked: existing files collide with generated output. Run plan to list them.',
+            'Veritas never overwrites unmanaged files. Move wanted content into your library or local additions, then remove the original. See docs/troubleshooting.md#output_conflict.',
+          ]
+        : ['Next: run validate, then plan, sync and check.']),
+    ],
   };
 }
 async function update(
@@ -249,6 +348,9 @@ async function update(
       exitCode: 0,
       diagnostics: [],
       data: { restored: true, source: lock.source },
+      human: [
+        `Restored locked snapshot ${lock.source.treeDigest.slice(0, 12)} for ${lock.source.namespace}; veritas.lock.json is unchanged.`,
+      ],
     };
   }
   const compiled = await compileSnapshot(project, config, resolved.snapshot),
@@ -275,6 +377,10 @@ async function update(
     exitCode: 0,
     diagnostics: compiled.diagnostics,
     data: { before: lock.source, after: next.source, generationPending: true },
+    human: [
+      `Source ${next.source.namespace}: ${lock.source.treeDigest.slice(0, 12)} -> ${next.source.treeDigest.slice(0, 12)}.`,
+      'Generated files are unchanged. Next: run plan, then sync.',
+    ],
   };
 }
 async function execute(
@@ -282,39 +388,130 @@ async function execute(
   project: string,
   options: Options,
 ): Promise<Outcome> {
-  if (command === 'init' || command === 'update') {
+  if (command === 'init' || command === 'update' || command === 'adopt') {
     await assertNoIncompleteTransaction(project);
     const lease = await acquireLock(project);
+    let failed = false;
     try {
       await assertNoIncompleteTransaction(project, lease);
-      return command === 'init'
-        ? await initialize(project, options, lease)
-        : await update(project, options, lease);
+      if (command === 'update') return await update(project, options, lease);
+      if (command === 'adopt') {
+        const result = await adopt(project, {
+          path: options.adoptPath ?? '',
+          ...(options.id ? { id: options.id } : {}),
+          ...(options.description ? { description: options.description } : {}),
+          ...(options.targets ? { targets: options.targets } : {}),
+        });
+        return {
+          exitCode: 0,
+          diagnostics: result.diagnostics,
+          data: result.data,
+          human: result.human,
+        };
+      }
+      checkInitArguments(options);
+      if (options.scaffold === undefined)
+        return await initialize(project, options, lease);
+      const scaffold = await createScaffold(project, options.scaffold);
+      try {
+        const outcome = await initialize(
+          project,
+          {
+            ...options,
+            source: scaffold.directory,
+            profile: SCAFFOLD_PROFILE,
+          },
+          lease,
+        );
+        return {
+          ...outcome,
+          data: {
+            ...(outcome.data as object),
+            scaffold: { directory: scaffold.directory, files: scaffold.files },
+          },
+          human: [
+            `Created a starter library in ${scaffold.directory}. Edit ${scaffold.directory}/steering/project-guidance.md to set your guidance.`,
+            ...(outcome.human ?? []),
+          ],
+        };
+      } catch (cause) {
+        await scaffold.rollback();
+        throw cause;
+      }
+    } catch (cause) {
+      failed = true;
+      throw cause;
     } finally {
       await lease.release();
+      if (failed && command === 'init') await removeEmptyRuntime(project);
     }
   }
-  if (command === 'recover')
-    return { exitCode: 0, diagnostics: [], data: await recover(project) };
+  if (command === 'recover') {
+    const result = await recover(project);
+    return {
+      exitCode: 0,
+      diagnostics: [],
+      data: result,
+      human: [
+        result.action === 'none'
+          ? 'No interrupted transaction requires recovery.'
+          : result.action === 'rollback'
+            ? `Rolled back the interrupted ${result.kind ?? 'write'} transaction.`
+            : `Cleaned up the committed ${result.kind ?? 'write'} transaction.`,
+      ],
+    };
+  }
   if (command === 'validate') {
     const result = await loadCompilation(project);
     return {
       exitCode: 0,
       diagnostics: result.diagnostics,
       data: artifactData(result),
+      human: [
+        `Validated ${result.artifacts.length} artifacts for ${result.profiles.map((profile) => profile.id).join(', ')}.`,
+      ],
     };
   }
   if (command === 'sync') {
-    const value = await apply(project, async () =>
-      plan(project, await loadCompilation(project, true)),
-    );
-    return {
-      exitCode: 0,
-      diagnostics: value.diagnostics,
-      data: planData(value),
-    };
+    let attemptedPlan: WritePlan | undefined;
+    try {
+      const value = await apply(project, async () => {
+        attemptedPlan = await plan(
+          project,
+          await loadCompilation(project, true),
+        );
+        return attemptedPlan;
+      });
+      return {
+        exitCode: 0,
+        diagnostics: value.diagnostics,
+        data: planData(value),
+        human: humanPlan('sync', value),
+      };
+    } catch (cause) {
+      if (
+        cause instanceof VeritasError &&
+        cause.diagnostic.code === 'PLAN_CONFLICT' &&
+        attemptedPlan
+      )
+        return {
+          exitCode: cause.exitCode,
+          diagnostics: [
+            ...attemptedPlan.diagnostics,
+            {
+              ...cause.diagnostic,
+              remediation:
+                'Run veritas plan for this project to inspect and resolve the conflicts.',
+            },
+          ],
+          data: planData(attemptedPlan),
+          human: humanPlan('sync', attemptedPlan),
+        };
+      throw cause;
+    }
   }
   const value = await plan(project, await loadCompilation(project));
+  const diffs = options.diff ? await planDiffs(project, value) : new Map();
   return {
     exitCode: value.hasConflicts
       ? 3
@@ -322,7 +519,8 @@ async function execute(
         ? 1
         : 0,
     diagnostics: value.diagnostics,
-    data: planData(value),
+    data: planData(value, diffs),
+    human: humanPlan(command === 'check' ? 'check' : 'plan', value, diffs),
   };
 }
 export async function run(args: readonly string[]): Promise<number> {
@@ -335,37 +533,86 @@ export async function run(args: readonly string[]): Promise<number> {
     .version(VERSION)
     .option('--project <path>', 'Explicit project root')
     .option('--json', 'Emit one stable JSON result')
+    .configureHelp({ showGlobalOptions: true })
+    .addHelpText(
+      'after',
+      `
+Workflow: init -> validate -> plan -> sync -> check
+Example:
+  veritas init --project ./project --source ../library --profile company/baseline --targets codex,claude,kiro-ide
+  veritas plan --project ./project
+  veritas sync --project ./project
+  veritas check --project ./project
+
+No shared library yet? veritas init --scaffold --targets codex,claude. Existing AGENTS.md or rules? veritas adopt <path>.
+Target IDs: codex, claude, kiro-ide, kiro-cli.
+Init requires a source, qualified library profile and targets; there are no defaults.
+Project selection defaults to the current Git root, then cwd. Use an existing directory.
+Routine commands use the locked cache. Only init/update resolve upstream content.
+Exit codes: 0 success, 1 check drift, 2 invalid, 3 conflict, 4 operational, 5 busy/incomplete.
+Profiles are documentation-based; live harness loading remains unverified.
+Stuck? Every error carries a code and a fix hint; see docs/troubleshooting.md (also in the installed package).`,
+    )
     .exitOverride();
-  if (json)
-    program.configureOutput({
-      writeErr: () => {
-        /* Parse errors are included in JSON. */
-      },
-    });
-  for (const name of [
-    'init',
-    'validate',
-    'plan',
-    'sync',
-    'check',
-    'update',
-    'recover',
-  ]) {
-    const child = program.command(name);
+  program.configureOutput({
+    writeErr: () => {
+      /* Parse errors are rendered once below. */
+    },
+  });
+  for (const [name, description] of [
+    [
+      'init',
+      'Initialize config, source lock and cache without generating guidance',
+    ],
+    [
+      'validate',
+      'Validate locked content, capabilities and target composition',
+    ],
+    ['plan', 'Preview changed paths and ownership conflicts without writing'],
+    [
+      'sync',
+      'Apply a complete conflict-free plan, or leave all outputs untouched',
+    ],
+    [
+      'check',
+      'Check output and manifest drift without writing (exit 1 for drift)',
+    ],
+    [
+      'update',
+      'Resolve the configured upstream source; leave guidance for a later sync',
+    ],
+    ['recover', 'Safely roll back or clean up an interrupted transaction'],
+  ] as const) {
+    const child = program.command(name).description(description);
     if (name === 'init')
       child
-        .requiredOption(
+        .option(
           '--source <locator>',
-          'Relative local library or HTTPS/SSH Git locator',
+          'Local library directory (relative or absolute) or HTTPS/SSH Git URL',
         )
-        .requiredOption(
+        .option(
           '--profile <selection>',
           'Qualified namespace/profile selection',
         )
-        .requiredOption('--targets <ids>', 'Comma-separated target IDs')
-        .option('--ref <ref>', 'Explicit Git branch, tag or commit')
+        .option(
+          '--scaffold [dir]',
+          'Create a starter library (default .veritas/library) and use it as the source',
+        )
+        .requiredOption(
+          '--targets <ids>',
+          'Comma-separated codex, claude, kiro-ide, kiro-cli (required; no default)',
+        )
+        .option(
+          '--ref <ref>',
+          'Git branch, tag or commit (required for Git sources)',
+        )
         .option('--local <path>', 'Project local library')
         .option('--local-profile <id>', 'Local profile', 'project');
+    if (name === 'plan' || name === 'check')
+      child.option(
+        '--diff',
+        'Show a unified diff from each file on disk to the generated content',
+      );
     if (name === 'update')
       child.option(
         '--restore',
@@ -381,6 +628,30 @@ export async function run(args: readonly string[]): Promise<number> {
       );
     });
   }
+  program
+    .command('adopt')
+    .description(
+      'Copy existing guidance (file or skill directory) into the project library; never touches the original',
+    )
+    .argument(
+      '<path>',
+      'Existing steering file or skill directory in the project',
+    )
+    .option('--id <id>', 'Name for the new steering rule or skill')
+    .option('--description <text>', 'Rule description (default: from the file)')
+    .option(
+      '--targets <ids>',
+      'Restrict the rule to these targets (default: those that support its activation mode)',
+    )
+    .action(async (path: string, _options: unknown, parsed: Command) => {
+      command = 'adopt';
+      const options = { ...parsed.optsWithGlobals<Options>(), adoptPath: path };
+      outcome = await execute(
+        'adopt',
+        await projectRoot(options.project),
+        options,
+      );
+    });
   try {
     if (!args.length) {
       program.outputHelp();
@@ -434,11 +705,13 @@ export async function run(args: readonly string[]): Promise<number> {
   else {
     for (const item of diagnostics)
       process.stderr.write(
-        `${item.severity} ${item.code}${item.source ? ` ${item.source.path}${item.source.line ? `:${item.source.line}:${item.source.column ?? 1}` : ''}` : ''}: ${item.message}\n`,
+        `${item.severity} ${item.code}${item.source ? ` ${item.source.path}${item.source.line ? `:${item.source.line}:${item.source.column ?? 1}` : ''}` : ''}: ${item.message}\n${item.remediation ? `  ${item.remediation}\n` : ''}`,
       );
-    process.stdout.write(`${command}: ${envelope.outcome}\n`);
-    if (outcome.data !== null)
-      process.stdout.write(canonicalJson(outcome.data));
+    process.stdout.write(
+      `${command === 'unknown' ? 'veritas' : command}: ${envelope.outcome}\n`,
+    );
+    if (outcome.human?.length)
+      process.stdout.write(`${outcome.human.join('\n')}\n`);
   }
   return outcome.exitCode;
 }

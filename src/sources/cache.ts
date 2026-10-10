@@ -171,6 +171,7 @@ export async function loadSnapshot(
           'CACHE_MISSING',
           directory,
           'Locked snapshot is unavailable; explicitly restore or update the source',
+          'This is normal in a fresh clone or CI: the cache is machine-local. Run `veritas update --restore` to rebuild it from the pinned source, then retry.',
         );
       throw cause;
     }

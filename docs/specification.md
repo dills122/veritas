@@ -28,11 +28,11 @@ Defer hosted service, frontend, global/home-directory output, background monitor
 | REQ-008 | Recoverable synchronization | Lock, preconditions, staging, journal, backups, manifest commit, and recovery handle interruption without erasing later external edits |
 | REQ-009 | Read only planning and CI | validate/plan/check do not mutate project control files or outputs, fetch network sources, or create a source snapshot; check reports all managed drift |
 | REQ-010 | Intentional source update | init/update resolve explicit source selections; update changes lock only, reports old/new provenance, and leaves outputs for separate review |
-| REQ-011 | Clear command contracts | Stable exit codes and JSON envelopes; diagnostics carry codes and locations; sync refuses conflicts; no force overwrite option |
+| REQ-011 | Clear command contracts | Stable exit codes and full JSON envelopes; concise human summaries and discoverable help; refused sync retains conflict codes and locations; no force overwrite option |
 | REQ-012 | Safe library processing | No skill/config execution; traversal, symlinks, hardlinked local input files, unsafe modes, case collisions, and resource abuse fail |
 | REQ-013 | Initial distribution | One ESM CLI/core package; Node 24 and clean macOS consumer execution; Linux/Windows certification is follow-up |
 | REQ-014 | Evidence based compatibility | Versioned adapter profiles carry source URLs and status; release docs distinguish documentation-based output from observed harness loading |
-| REQ-015 | Usable adoption and authoring | Example library and project, collision inventory, local-edit workflow, update review, and recovery instructions work from a clean clone |
+| REQ-015 | Usable adoption and authoring | Packaged guide and example library/project, collision inventory, local-edit workflow, adaptation bootstrap, update review and recovery instructions work from a clean consumer or clone. `init --scaffold` creates a project-local starter library; `adopt` copies existing steering or skills into the project library as new files without modifying the original; `plan`/`check --diff` show exact content differences; actionable remediation and a troubleshooting index cover every user-correctable diagnostic |
 
 ## Behavior boundaries
 
